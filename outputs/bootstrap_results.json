@@ -1,0 +1,118 @@
+{
+  "n_bootstrap": 10000,
+  "ci_level": 0.95,
+  "properties": {
+    "height": {
+      "controllability_pct": 265.96,
+      "ci_low": 197.05,
+      "ci_high": 359.55,
+      "best_condition": "height=tower",
+      "regime": "CONTROLLABLE",
+      "regime_confident": true
+    },
+    "n_blocks": {
+      "controllability_pct": 632.04,
+      "ci_low": 394.39,
+      "ci_high": 1050.17,
+      "best_condition": "size=large",
+      "regime": "CONTROLLABLE",
+      "regime_confident": true
+    },
+    "symmetry_iou": {
+      "controllability_pct": 237.45,
+      "ci_low": 122.31,
+      "ci_high": 491.76,
+      "best_condition": "symmetry=1",
+      "regime": "CONTROLLABLE",
+      "regime_confident": true
+    },
+    "enclosed_ratio": {
+      "controllability_pct": 563.5,
+      "ci_low": 131.99,
+      "ci_high": 1141.26,
+      "best_condition": "enclosure=1",
+      "regime": "CONTROLLABLE",
+      "regime_confident": false
+    },
+    "elongation": {
+      "controllability_pct": 63.97,
+      "ci_low": 29.1,
+      "ci_high": 104.87,
+      "best_condition": "height=tower+size=tiny",
+      "regime": "APPROACHABLE",
+      "regime_confident": false
+    },
+    "floor_count": {
+      "controllability_pct": 182.38,
+      "ci_low": 116.15,
+      "ci_high": 269.35,
+      "best_condition": "size=large",
+      "regime": "CONTROLLABLE",
+      "regime_confident": true
+    },
+    "hollowness": {
+      "controllability_pct": 14.16,
+      "ci_low": 7.6,
+      "ci_high": 19.9,
+      "best_condition": "height=flat+size=large",
+      "regime": "UNRESPONSIVE",
+      "regime_confident": true
+    },
+    "bbox_volume": {
+      "controllability_pct": 421.94,
+      "ci_low": 250.92,
+      "ci_high": 725.48,
+      "best_condition": "enclosure=1",
+      "regime": "CONTROLLABLE",
+      "regime_confident": true
+    },
+    "surface_ratio": {
+      "controllability_pct": 32.28,
+      "ci_low": 26.84,
+      "ci_high": 37.47,
+      "best_condition": "size=large",
+      "regime": "APPROACHABLE",
+      "regime_confident": true
+    },
+    "connected_components": {
+      "controllability_pct": 128.43,
+      "ci_low": 57.93,
+      "ci_high": 233.33,
+      "best_condition": "enclosure=1",
+      "regime": "CONTROLLABLE",
+      "regime_confident": false
+    },
+    "vertical_aspect": {
+      "controllability_pct": 332.86,
+      "ci_low": 245.34,
+      "ci_high": 446.45,
+      "best_condition": "height=tower+size=tiny",
+      "regime": "CONTROLLABLE",
+      "regime_confident": true
+    },
+    "z_symmetry_iou": {
+      "controllability_pct": 324.03,
+      "ci_low": 161.36,
+      "ci_high": 752.65,
+      "best_condition": "symmetry=1",
+      "regime": "CONTROLLABLE",
+      "regime_confident": true
+    },
+    "layer_consistency": {
+      "controllability_pct": 44.28,
+      "ci_low": 29.14,
+      "ci_high": 61.95,
+      "best_condition": "size=large",
+      "regime": "APPROACHABLE",
+      "regime_confident": true
+    },
+    "footprint_convexity": {
+      "controllability_pct": 51.26,
+      "ci_low": 34.32,
+      "ci_high": 71.08,
+      "best_condition": "symmetry=1",
+      "regime": "APPROACHABLE",
+      "regime_confident": true
+    }
+  }
+}

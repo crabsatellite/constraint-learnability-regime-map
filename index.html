@@ -1,0 +1,665 @@
+<!DOCTYPE html>
+<html lang="en" id="htmlRoot">
+<head>
+<meta charset="UTF-8">
+<title>Which Building Features Can AI Control?</title>
+<style>
+*{margin:0;padding:0;box-sizing:border-box}
+body{font-family:-apple-system,'Segoe UI',sans-serif;background:#f8f9fa;color:#333}
+header{background:#1a1a2e;color:#fff;padding:14px 24px;display:flex;align-items:center;gap:16px;flex-wrap:wrap}
+header h1{font-size:17px;font-weight:600}
+.lang-sw{margin-left:auto;display:flex;gap:2px;background:rgba(255,255,255,.1);border-radius:6px;overflow:hidden}
+.lang-sw button{padding:4px 12px;background:transparent;border:none;color:rgba(255,255,255,.5);font-size:12px;cursor:pointer}
+.lang-sw button.active{background:rgba(255,255,255,.15);color:#ffd700}
+.progress-bar{display:flex;background:#fff;border-bottom:1px solid #e0e0e0;padding:0 16px;overflow-x:auto}
+.step-dot{padding:10px 14px;font-size:12px;color:#aaa;cursor:pointer;border-bottom:3px solid transparent;white-space:nowrap;transition:.2s}
+.step-dot:hover{color:#666}
+.step-dot.active{color:#1a1a2e;border-bottom-color:#ffd700;font-weight:600}
+.main{min-height:calc(100vh - 95px);display:flex;justify-content:center;padding:20px;overflow-y:auto}
+.card{background:#fff;border-radius:12px;box-shadow:0 2px 8px rgba(0,0,0,.06);padding:24px;max-width:860px;width:100%}
+.card h2{font-size:20px;margin-bottom:14px;color:#1a1a2e}
+.card p,.card li{font-size:14px;line-height:1.9;color:#555;margin-bottom:10px}
+.card .highlight{background:#fff8e1;border-left:4px solid #ffd700;padding:12px 16px;border-radius:0 8px 8px 0;margin:14px 0;font-size:14px;line-height:1.8}
+.card .try-it{background:#e8f5e9;border:1px solid #c8e6c9;border-radius:8px;padding:12px 16px;margin:14px 0;font-size:13px;line-height:1.7}
+.card .try-it b{color:#2e7d32}
+.card .warn{background:#fff3e0;border:1px solid #ffe0b2;border-radius:8px;padding:12px 16px;margin:14px 0;font-size:13px;line-height:1.7}
+.badge-c{background:#e8f5e9;color:#2e7d32;padding:2px 8px;border-radius:10px;font-size:12px;font-weight:600}
+.badge-a{background:#fff8e1;color:#f57f17;padding:2px 8px;border-radius:10px;font-size:12px;font-weight:600}
+.badge-u{background:#ffebee;color:#c62828;padding:2px 8px;border-radius:10px;font-size:12px;font-weight:600}
+.bar-row{display:flex;align-items:center;gap:8px;margin:6px 0;font-size:13px;cursor:pointer;padding:4px 8px;border-radius:6px;transition:background .15s}
+.bar-row:hover{background:#f5f5f5}
+.bar-row.selected{background:#e3f2fd}
+.bar-label{width:140px;text-align:right;font-size:12px;font-family:monospace;white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
+.bar-track{flex:1;height:24px;background:#f0f0f0;border-radius:4px;position:relative;overflow:hidden}
+.bar-fill{height:100%;border-radius:4px;transition:width .6s ease}
+.bar-val{width:60px;font-weight:700;color:#333;font-size:12px;text-align:right}
+.prop-detail{background:#fafafa;border:1px solid #e0e0e0;border-radius:8px;padding:16px;margin:12px 0;font-size:13px;line-height:1.8}
+.prop-detail h3{font-size:15px;margin-bottom:8px}
+.figure-container{margin:16px 0;text-align:center}
+.figure-container img{max-width:100%;border-radius:8px;border:1px solid #e0e0e0}
+.figure-caption{font-size:12px;color:#888;margin-top:6px;line-height:1.6}
+.prop-grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(180px,1fr));gap:10px;margin:14px 0}
+.prop-card{border:1px solid #e0e0e0;border-radius:8px;padding:12px;cursor:pointer;transition:all .2s;text-align:center}
+.prop-card:hover{box-shadow:0 2px 8px rgba(0,0,0,.1);transform:translateY(-2px)}
+.prop-card.active{border-color:#1a1a2e;box-shadow:0 2px 8px rgba(0,0,0,.15)}
+.prop-card .prop-icon{font-size:28px;margin-bottom:6px}
+.prop-card .prop-name{font-size:13px;font-weight:600;color:#1a1a2e}
+.prop-card .prop-desc{font-size:11px;color:#888;margin-top:4px}
+.scatter-wrap{text-align:center;margin:14px 0}
+.scatter-wrap canvas{border:1px solid #e0e0e0;border-radius:8px;background:#fff;max-width:100%}
+@keyframes fadeIn{from{opacity:0;transform:translateY(10px)}to{opacity:1;transform:translateY(0)}}
+.fade-in{animation:fadeIn .3s ease}
+@media(max-width:600px){
+  .bar-label{width:80px;font-size:10px}
+  .prop-grid{grid-template-columns:repeat(auto-fill,minmax(140px,1fr))}
+  header h1{font-size:14px}
+}
+</style>
+</head>
+<body>
+
+<header>
+  <h1 id="headerTitle">Which Building Features Can AI Control?</h1>
+  <div class="lang-sw">
+    <button data-lang="zh">中文</button>
+    <button class="active" data-lang="en">EN</button>
+  </div>
+</header>
+
+<div class="progress-bar" id="progressBar"></div>
+
+<div class="main">
+  <div id="vizArea"></div>
+</div>
+
+<script>
+let lang = 'en';
+
+const L = {
+en: {
+  html_title: 'Which Building Features Can AI Control?',
+  header_title: 'Which Building Features Can AI Control?',
+  steps: [
+    '① The Question',
+    '② 14 Building Features',
+    '③ Three Zones',
+    '④ Predicting the Zones',
+    '⑤ Why Some Features Fail',
+    '⑥ Takeaways',
+  ],
+
+  // Step 0
+  s0_title: 'Can AI Follow Building Instructions?',
+  s0_p1: 'Imagine telling an AI: <b>"Build me a tall, left-right-symmetric Minecraft house."</b>',
+  s0_p2: 'The AI makes it taller. The symmetry improves a bit. But the inside is completely solid, with no rooms at all.',
+  s0_p3: 'Some instructions work, others don\'t. We wanted to know which ones work, and what determines that.',
+  s0_p4: 'We trained a neural network (a computer program that learns patterns from examples) on <b>10,310 Minecraft buildings</b>. After training, we asked it to generate new buildings while following specific instructions. We then measured 14 building features to see which ones the AI responds to.',
+  s0_p5: 'The neural network has no special design for any particular feature. It has to pick up every pattern from the training data alone.',
+  s0_highlight: 'If you have an AI that generates buildings and a list of features you want to control, which features will the AI learn to follow? Can you predict this from the training data, without running experiments?',
+
+  // Step 1
+  s1_title: 'The 14 Building Features We Measured',
+  s1_p1: 'Every building the AI generates gets measured on 14 features. Four of them have a <b>direct instruction</b>: we can explicitly tell the AI "make this feature high" or "make this feature low." The other ten have <b>no direct instruction</b> and can only change indirectly, as a byproduct of changing some directly-instructed feature. Click each card to learn more:',
+  s1_click: 'Click a card above to see its description.',
+  s1_direct_label: 'Has direct instruction',
+  s1_indirect_label: 'No direct instruction',
+
+  // Step 2
+  s2_title: 'Three Zones: How Well Does the AI Respond?',
+  s2_p1: 'For each feature, we compared buildings generated <b>with</b> a targeted instruction to buildings generated <b>without</b> any instruction. The "controllability" percentage tells you how much the feature shifted relative to the no-instruction baseline:',
+  s2_formula: '<b>Controllability = (value with instruction − baseline) / baseline × 100%</b>',
+  s2_example: 'Example: buildings without instructions average 10 blocks tall. With a "tall" instruction, the average jumps to 36.6. That\'s (36.6 − 10) / 10 = <b>266%</b> shift.',
+  s2_p2: 'Based on how much they shift, the 14 features land in three zones:',
+  s2_zone_c: '<span style="color:#2e7d32;font-weight:700">Green zone (>100% shift):</span> Strong response. The feature moved substantially.',
+  s2_zone_a: '<span style="color:#f57f17;font-weight:700">Yellow zone (20~100%):</span> Weak but measurable response.',
+  s2_zone_u: '<span style="color:#c62828;font-weight:700">Red zone (<20%):</span> Near-zero response. The instruction had little effect.',
+  s2_p3: 'Click any bar to see details:',
+
+  // Step 3
+  s3_title: 'Predicting the Zones from Training Data',
+  s3_p1: 'All 4 features with direct instructions land in the green zone. The remaining 10 features have no direct instruction, yet some still reach the green zone through indirect effects. Can we predict which zone they land in?',
+  s3_p2: 'Yes, using two numbers you can calculate from the training data before any experiment:',
+  s3_signal: '<b>Connection strength</b>: how closely this feature correlates with any directly-instructed feature. For example, "floor count" correlates strongly with "height" (0.765 out of 1), so when you ask for tall buildings, you tend to get more floors as a side effect.',
+  s3_cv: '<b>Training variety</b>: how much this feature varies across the 10,310 training buildings. If almost all training buildings have similar hollowness, the AI never saw that feature change, so it never learned to control it.',
+  s3_p3: 'Neither number alone predicts well. But multiply them together and the prediction gets much stronger:',
+  s3_formula: 'Score = connection strength × min(training variety, 1)',
+  s3_p3b: 'The min(x, 1) caps variety at 1. Beyond that, more variation stops helping, and capping keeps one outlier from skewing the score.',
+  s3_p4: 'A feature needs <b>both</b> a connection to some instruction <b>and</b> enough training variation. If either is near zero, the product is near zero and the feature ends up poorly controlled. This multiplicative relationship is confirmed by the data:',
+  s3_result: 'The correlation between this score and actual controllability is <b>0.879</b> on a 0-to-1 scale (1 = perfect prediction). Statistical testing gives p = 0.002: there is only a 0.2% chance of seeing a pattern this strong by luck alone.',
+  s3_p5: 'The scatter plot below shows the 10 indirectly-controlled features. Each dot is one feature:',
+  s3_fig_caption: 'The product score (0.879) is a much stronger predictor than connection strength alone (0.624) or training variety alone (0.636).',
+  s3_example_title: 'Examples',
+  s3_hollowness: '<b>Hollowness</b>: moderate connection (0.31) but very low variety (0.23). The training buildings barely differed in hollowness, so the AI never learned to vary it.',
+  s3_connected: '<b>Connected parts</b>: high variety (1.44) but almost no connection (0.09). The training data varies widely here, but none of the available instructions affect this feature.',
+
+  // Step 4
+  s4_title: 'Why Some Features Fail',
+  s4_intro: 'We now know which features don\'t respond. The next step is figuring out <i>why</i>, because the fix depends on the cause.',
+  s4_p1: 'There are two different reasons:',
+  s4_type1_title: 'Not enough training examples',
+  s4_type1: 'The neural network\'s internal structure can handle this feature, but the training data did not show enough variation for it to learn.',
+  s4_type1_fix: 'What to do: collect more diverse training data, or raise the guidance scale when generating.',
+  s4_type2_title: 'The network\'s structure cannot express it',
+  s4_type2: 'The internal structure of the network is fundamentally unable to represent this feature. More training data will not help.',
+  s4_type2_fix: 'What to do: redesign the network, or add a checking step after generation that corrects the output.',
+  s4_p2: 'We can distinguish these by varying how strongly the AI follows instructions. The model has a parameter called <b>guidance scale</b> (labeled <b>s</b> in the buttons below) that controls instruction-following strength:',
+  s4_cfg0: '<b>s = 0</b> (off): Instructions are ignored. The AI just generates a random building based on what it learned.',
+  s4_cfg2: '<b>s = 2</b> (default): Standard instruction-following.',
+  s4_cfg4: '<b>s = 4</b> (amplified): Instructions are followed more aggressively, but the generated buildings become less varied.',
+  s4_p3: 'If a feature responds more strongly at higher guidance scales, the problem was training data. If the feature stays flat no matter the scale, the network\'s structure cannot handle it.',
+  s4_p4: 'The chart below groups properties by their response pattern. Use the buttons to switch between guidance scales and watch how the bars change:',
+  s4_pattern_strong: 'Already in green zone; stays green',
+  s4_pattern_amplify: 'Crosses from yellow to green (limited by training data)',
+  s4_pattern_amplify_nm: 'Responds, but drops at s=4 (too much guidance)',
+  s4_pattern_plateau: 'Stays in yellow zone across all scales',
+  s4_pattern_weak_up: 'Tiny steady increase; stays in red',
+  s4_pattern_flat: 'Flat; no response to amplification',
+  s4_fig_caption: 'Visual comparison at guidance scales 0, 2, and 4. "Enclosure" responds to amplification (data bottleneck). At scale 0, height outputs are scattered and uneven; at scale 4, height is tightly controlled but block-type diversity decreases.',
+  s4_note: 'Note: 3 green-zone features (bounding box, vertical aspect, front-back symmetry) were not included because they take too long to calculate. Surface ratio shows 15% here (red) but 32% in the full experiment (yellow), because this smaller experiment did not include the instruction that most affects surface ratio.',
+
+  // Step 5
+  s5_title: 'Takeaways',
+  s5_p1: 'For anyone building a system that generates structured content (game levels, 3D objects, floor plans):',
+  s5_green: '<b>Green-zone features</b> respond well to standard instruction-following. No special handling needed.',
+  s5_yellow: '<b>Yellow-zone features</b> are partially responsive. More diverse training data or a higher guidance scale may push them into the green zone.',
+  s5_red: '<b>Red-zone features</b> do not respond to instruction-following at all. You will need to redesign part of the network, or add a checking step after generation that corrects the output.',
+  s5_p2: 'The prediction score (connection strength × training variety) lets you estimate which zone a feature will land in <b>before training</b>. The guidance-scale experiment (Step ⑤) then tells you <b>why</b> a feature failed, so you know whether to collect more data or redesign the network.',
+  s5_conclusion: 'Before running experiments, compute the prediction score from your training data. It helps separate features that will respond from those that need more data or a different network design.',
+  s5_limit_title: 'Limitations',
+  s5_limit: 'These results come from one neural network on one dataset. The correlation (0.879) is based on 10 data points and hasn\'t been tested on other systems yet. The part we expect to carry over is the <b>testing method</b> itself: map features into zones, then vary the guidance scale to find what\'s blocking each feature.',
+},
+
+zh: {
+  html_title: 'AI能控制哪些建筑特征？',
+  header_title: 'AI能控制哪些建筑特征？',
+  steps: [
+    '① 问题',
+    '② 14个建筑特征',
+    '③ 三个区域',
+    '④ 预测区域',
+    '⑤ 为什么有些特征不行',
+    '⑥ 总结',
+  ],
+
+  s0_title: 'AI能按要求造房子吗？',
+  s0_p1: '想象你对AI说：<b>「给我造一个又高又左右对称的我的世界（Minecraft）房子。」</b>',
+  s0_p2: 'AI把房子造高了，对称也改善了一点点。但里面呢？完全是实心的，一间房间都没有。',
+  s0_p3: '有些要求管用，有些完全没效果。我们想搞清楚到底哪些管用，什么因素在起作用。',
+  s0_p4: '我们拿<b>10,310栋我的世界建筑</b>训练了一个神经网络。训练完以后，让它按不同的要求去造新建筑，再测量14种特征，看AI对哪些有反应、对哪些没反应。',
+  s0_p5: '这个神经网络不是为某种特征专门设计的，能力全靠从训练数据里学到。',
+  s0_highlight: '假如你有一个会造建筑的AI，还有一份你想让它控制的特征清单。哪些特征它能学会？不跑实验，光看训练数据能不能判断出来？',
+
+  s1_title: '我们测量的14种建筑特征',
+  s1_p1: 'AI造出来的每栋建筑，我们都测了14种特征。其中4种有<b>直接指令</b>，可以明确跟AI说「把这个调高」或「把这个调低」。另外10种<b>没有直接指令</b>，只有在某个有指令的特征变化时，才可能跟着间接变化。点击卡片查看详情：',
+  s1_click: '点击上方卡片查看说明。',
+  s1_direct_label: '有直接指令',
+  s1_indirect_label: '无直接指令',
+
+  s2_title: '三个区域：AI的反应有多大？',
+  s2_p1: '每个特征，我们都拿<b>带指令</b>造出来的建筑和<b>不带指令</b>造出来的建筑做对比，看特征变化了多少。「可控性」百分比就是变化幅度除以基准值：',
+  s2_formula: '<b>可控性 = (带指令时的值 − 基准值) / 基准值 × 100%</b>',
+  s2_example: '例子：不带指令时建筑平均10格高。带上「要高」的指令后平均36.6格。(36.6 − 10) / 10 = <b>266%</b>。',
+  s2_p2: '按变化幅度，14个特征落入三个区域：',
+  s2_zone_c: '<span style="color:#2e7d32;font-weight:700">绿色区（变化超过100%）：</span>反应明显，特征大幅变动。',
+  s2_zone_a: '<span style="color:#f57f17;font-weight:700">黄色区（20%~100%）：</span>有一定反应，但幅度不大。',
+  s2_zone_u: '<span style="color:#c62828;font-weight:700">红色区（不到20%）：</span>几乎没有反应。',
+  s2_p3: '点击任意一条查看详情：',
+
+  s3_title: '光看训练数据能预测区域吗',
+  s3_p1: '4个有直接指令的特征全在绿色区。剩下10个没有直接指令，但其中一些也通过间接影响到了绿色区。这10个的区域能提前预测吗？',
+  s3_p2: '可以。只需要训练数据里的两个数字：',
+  s3_signal: '<b>关联强度</b>：这个特征和某个有直接指令的特征有多大的统计相关性。比如「楼层数」和「高度」的相关性是0.765（很强），所以要求造高楼时，楼层数也跟着多了。',
+  s3_cv: '<b>训练多样性</b>：10,310栋训练建筑中，这个特征的差异有多大。如果训练建筑的空心度都差不多，AI就没见过空心度的变化，也就学不会控制它。',
+  s3_p3: '单看哪个数字都不太准。但两者相乘，预测效果就好多了：',
+  s3_formula: '预测分 = 关联强度 × min(训练多样性, 1)',
+  s3_p3b: 'min(x, 1)的意思是取x和1之间较小的那个，也就是把多样性的值封顶在1。多样性超过一定程度之后，再高也不会带来更多帮助，封顶是为了防止个别极端值干扰结果。',
+  s3_p4: '一个特征要能被控制，<b>两个条件缺一不可</b>：得跟某个指令有关联，训练数据里也得有足够的变化。只要有一个接近零，乘积就接近零，特征就很难控制。数据验证了这个乘法关系：',
+  s3_result: '预测分和实际可控性的相关系数是<b>0.879</b>（0到1的尺度，1代表完美预测）。统计检验的p值是0.002，也就是说这个规律纯属巧合的概率只有0.2%。',
+  s3_p5: '下面的散点图画的是这10个间接控制的特征。每个点是一个特征：',
+  s3_fig_caption: '乘积分数（0.879）的预测力远强于单看关联（0.624）或单看多样性（0.636）。括号里的数字都是相关系数。',
+  s3_example_title: '举两个例子',
+  s3_hollowness: '<b>空心度</b>：关联中等（0.31），但训练多样性很低（0.23）。训练建筑的空心度都差不多，AI没学过怎么改变它。',
+  s3_connected: '<b>连通部分数</b>：训练多样性很高（1.44），但关联极低（0.09）。数据里变化很多，但跟任何指令都没什么关系。',
+
+  s4_title: '为什么有些特征不行',
+  s4_intro: '现在我们知道了哪些特征不响应。下一步是搞清楚<b>为什么</b>不响应，因为原因不同，对策也不同。',
+  s4_p1: '为什么有些特征不响应？原因有两种：',
+  s4_type1_title: '训练样本变化不够',
+  s4_type1: '神经网络本身有能力处理这个特征，但训练数据中这个特征的变化不够丰富。',
+  s4_type1_fix: '对策：补充更多样的训练数据，或在生成时调高引导强度。',
+  s4_type2_title: '网络结构表达不了',
+  s4_type2: '神经网络的内部结构从根本上无法表达这个特征。补再多训练数据也没用。',
+  s4_type2_fix: '对策：改网络结构设计，或在AI生成完之后加一步自动检查修正。',
+  s4_p2: '区分方法是调节AI按指令走的力度。模型有一个控制力度的参数叫<b>引导强度</b>（下面按钮里标的 <b>s</b>）：',
+  s4_cfg0: '<b>s = 0</b>（关闭）：AI忽略所有指令，按学到的一般规律生成。',
+  s4_cfg2: '<b>s = 2</b>（默认）：正常按指令生成。',
+  s4_cfg4: '<b>s = 4</b>（加强）：更强力地按指令生成，但造出来的建筑变化会变少。',
+  s4_p3: '如果把引导强度调高后特征反应变大了，说明问题出在训练数据。如果调高了还是没变化，说明网络结构做不到。',
+  s4_p4: '下面的图表按反应模式把特征分了组。用按钮切换引导强度，看条形图怎么变化：',
+  s4_pattern_strong: '本身就在绿色区，保持不变',
+  s4_pattern_amplify: '从黄色区跨到绿色区（训练数据不足）',
+  s4_pattern_amplify_nm: '有响应，但s=4时反而下降（引导太强反而变差）',
+  s4_pattern_plateau: '一直停在黄色区，各强度都一样',
+  s4_pattern_weak_up: '微弱上升，但始终在红色区',
+  s4_pattern_flat: '完全没有变化',
+  s4_fig_caption: '三种引导强度的效果对比。「封闭性」对加强引导有反应（数据瓶颈）。高度在s=0时输出比较零散，s=4时控制精准但方块种类变少。',
+  s4_note: '注：包围盒、纵横比、前后对称这3个绿色区特征因为计算量太大没有纳入此表。表面积与体积比在此表中是红色区（15%），但完整实验中是黄色区（32%），因为这次小规模实验没有包含让它变化最大的那条指令。',
+
+  s5_title: '总结',
+  s5_p1: '如果你在搭建一个让AI自动生成内容的系统（不管是游戏关卡、3D物体还是空间布局），可以参考以下思路：',
+  s5_green: '<b>绿色区特征</b>用常规的指令机制就能控制好，不需要额外处理。',
+  s5_yellow: '<b>黄色区特征</b>有一定反应但不够强。可以先试试补充训练数据或调高引导强度，看能不能推到绿色区。',
+  s5_red: '<b>红色区特征</b>对指令几乎没有反应。要么改网络结构，要么在生成之后加一步自动检查修正。',
+  s5_p2: '预测分（关联强度 × 训练多样性）可以在<b>训练之前</b>估计各特征会落在哪个区域。引导强度实验（第⑤步）进一步告诉你<b>失败的原因</b>是数据不够还是结构做不到。',
+  s5_conclusion: '跑实验之前，先用训练数据算预测分。它能帮你分清哪些特征会响应指令，哪些还需要补数据，哪些得换网络设计。',
+  s5_limit_title: '局限',
+  s5_limit: '以上结论来自一种神经网络架构和一个数据集。相关系数0.879只算了10个点，结果挺强但还需要更多数据验证。我们认为能推广到其他系统的是<b>诊断方法本身</b>：把特征分区域，再用引导强度实验找出瓶颈在哪里。',
+}
+};
+
+function T(k) { return L[lang][k] || L['en'][k] || k; }
+
+// ========== Data ==========
+const PROPERTIES = [
+  { id:'height',          icon:'📏', direct:true,  eff:.068, cv:0.60, ctrl:266, ciLo:197, ciHi:360,  regime:'C', confident:true },
+  { id:'n_blocks',        icon:'🧱', direct:true,  eff:.117, cv:1.03, ctrl:632, ciLo:394, ciHi:1050, regime:'C', confident:true },
+  { id:'symmetry_iou',    icon:'🪞', direct:true,  eff:.039, cv:1.33, ctrl:237, ciLo:122, ciHi:492,  regime:'C', confident:true },
+  { id:'enclosed_ratio',  icon:'🚪', direct:true,  eff:.024, cv:5.37, ctrl:564, ciLo:132, ciHi:1141, regime:'C', confident:false },
+  { id:'floor_count',     icon:'🏢', direct:false, eff:.765, cv:0.76, ctrl:182, ciLo:116, ciHi:269,  regime:'C', confident:true },
+  { id:'bbox_volume',     icon:'📦', direct:false, eff:.750, cv:1.03, ctrl:422, ciLo:251, ciHi:725,  regime:'C', confident:true },
+  { id:'connected_comp',  icon:'🧩', direct:false, eff:.090, cv:1.44, ctrl:128, ciLo:58,  ciHi:233,  regime:'C', confident:false },
+  { id:'vertical_aspect', icon:'↕️', direct:false, eff:.784, cv:0.61, ctrl:333, ciLo:245, ciHi:446,  regime:'C', confident:true },
+  { id:'z_symmetry_iou',  icon:'🔄', direct:false, eff:.469, cv:0.93, ctrl:324, ciLo:161, ciHi:753,  regime:'C', confident:true },
+  { id:'elongation',      icon:'↔️', direct:false, eff:.179, cv:1.76, ctrl:64,  ciLo:29,  ciHi:105,  regime:'A', confident:false },
+  { id:'surface_ratio',   icon:'🎨', direct:false, eff:.400, cv:0.08, ctrl:32,  ciLo:27,  ciHi:37,   regime:'A', confident:true },
+  { id:'layer_consist',   icon:'📐', direct:false, eff:.320, cv:0.39, ctrl:44,  ciLo:29,  ciHi:62,   regime:'A', confident:true },
+  { id:'fp_convexity',    icon:'⬡',  direct:false, eff:.437, cv:0.37, ctrl:51,  ciLo:34,  ciHi:71,   regime:'A', confident:true },
+  { id:'hollowness',      icon:'🕳️', direct:false, eff:.311, cv:0.23, ctrl:14,  ciLo:8,   ciHi:19.9, regime:'U', confident:true },
+];
+
+const PROP_INFO = {
+en: {
+  height:          { name:'Height',                  desc:'How tall the building is, measured in blocks from bottom to top.' },
+  n_blocks:        { name:'Block Count',             desc:'Total number of blocks in the building. Bigger buildings use more blocks.' },
+  symmetry_iou:    { name:'Left-Right Symmetry',     desc:'Draw a vertical mirror line through the center. How similar are the left and right halves? Ranges from 0 (no similarity) to 1 (perfect mirror image).' },
+  enclosed_ratio:  { name:'Enclosure',               desc:'How much of the interior is sealed by walls and a roof. A fully walled house scores high; an open structure scores low.' },
+  floor_count:     { name:'Floor Count',             desc:'How many horizontal layers the building has. A two-story house has 2 floors.' },
+  bbox_volume:     { name:'Bounding Box Volume',     desc:'The volume of the smallest rectangular box that fits around the entire building. A spread-out building has a larger box than a compact one.' },
+  connected_comp:  { name:'Connected Parts',         desc:'How many separate, disconnected pieces the building has. A normal building is 1 piece; a building plus a detached tower is 2.' },
+  vertical_aspect: { name:'Vertical Aspect Ratio',   desc:'Is the building tall-and-narrow or short-and-wide? Higher values mean taller and narrower.' },
+  z_symmetry_iou:  { name:'Front-Back Symmetry',     desc:'Draw a vertical mirror line through the center, but front-to-back instead of left-to-right. How similar are the front and back halves? Same 0-to-1 scale.' },
+  elongation:      { name:'Elongation',              desc:'How stretched out the building\'s footprint is. A long corridor is highly elongated; a square room is not.' },
+  surface_ratio:   { name:'Surface-to-Volume Ratio', desc:'How much outer surface the building has relative to its total volume. A solid cube has a low ratio; a thin, spread-out structure has a high ratio.' },
+  layer_consist:   { name:'Layer Consistency',        desc:'If you slice the building horizontally, one block thick, how similar do neighboring slices look? A uniform tower scores high; a building that changes shape on every level scores low.' },
+  fp_convexity:    { name:'Footprint Convexity',     desc:'How "filled-in" the building\'s floor plan is, with no dents or cutouts. A rectangle has high convexity; an L-shaped or U-shaped floor plan has lower convexity.' },
+  hollowness:      { name:'Hollowness',              desc:'Whether the building is hollow inside (with rooms and air pockets) or solid throughout.' },
+},
+zh: {
+  height:          { name:'高度',           desc:'建筑从底到顶有多少格。' },
+  n_blocks:        { name:'方块总数',       desc:'整栋建筑一共用了多少个方块。越大的建筑方块越多。' },
+  symmetry_iou:    { name:'左右对称性',     desc:'从建筑正中画一条竖线当镜子，左右两半有多像？0到1打分，0完全不像，1完美对称。' },
+  enclosed_ratio:  { name:'封闭性',         desc:'内部有多少是被墙壁和屋顶围起来的。完全封闭的房子得分高，露天的棚子得分低。' },
+  floor_count:     { name:'楼层数',         desc:'建筑有几层。一栋两层小楼就是2。' },
+  bbox_volume:     { name:'包围盒体积',     desc:'能刚好把整栋建筑框进去的最小长方体有多大。建筑越分散，这个盒子就越大。' },
+  connected_comp:  { name:'连通部分数',     desc:'建筑由几个互不相连的部分组成。正常建筑是1整块，旁边带个独立塔楼就算2块。' },
+  vertical_aspect: { name:'纵横比',         desc:'建筑是高瘦型还是矮胖型。数值越大越高瘦。' },
+  z_symmetry_iou:  { name:'前后对称性',     desc:'跟左右对称一样的测法，但换个方向：看前半截和后半截是不是对称的。同样0到1打分。' },
+  elongation:      { name:'拉伸度',         desc:'建筑底面有多细长。长走廊拉伸度高，正方形的房间拉伸度低。' },
+  surface_ratio:   { name:'表面积与体积比', desc:'外表面积相对于总体积有多大。实心正方体比值低，又细又散的结构比值高。' },
+  layer_consist:   { name:'逐层相似度',       desc:'把建筑横着一层层切开来看，相邻的两层长得像不像？从头到脚都一样粗的塔楼得分高，每层都变形状的建筑得分低。' },
+  fp_convexity:    { name:'底面规整度',     desc:'底面有没有缺角、凹进去的地方。长方形很规整，得分高；L形或U形有凹角，得分低。' },
+  hollowness:      { name:'空心度',         desc:'建筑内部是空心的（有房间和空隙）还是实心的。' },
+}
+};
+
+const CFG_DATA = [
+  { id:'height',         s0:132, s2:224, s4:240, pattern:'strong' },
+  { id:'n_blocks',       s0:243, s2:569, s4:603, pattern:'strong' },
+  { id:'symmetry_iou',   s0:149, s2:190, s4:242, pattern:'strong' },
+  { id:'enclosed_ratio', s0:158, s2:542, s4:328, pattern:'amplify_nm' },
+  { id:'floor_count',    s0:88,  s2:167, s4:197, pattern:'amplify' },
+  { id:'elongation',     s0:37,  s2:40,  s4:30,  pattern:'plateau' },
+  { id:'connected_comp', s0:57,  s2:94,  s4:75,  pattern:'plateau' },
+  { id:'layer_consist',  s0:24,  s2:31,  s4:38,  pattern:'plateau' },
+  { id:'fp_convexity',   s0:26,  s2:45,  s4:52,  pattern:'plateau' },
+  { id:'hollowness',     s0:6,   s2:12,  s4:19,  pattern:'weak_up' },
+  { id:'surface_ratio',  s0:13,  s2:15,  s4:14,  pattern:'flat' },
+];
+
+// ========== Helpers ==========
+function regimeBadge(r) { return r==='C'?'badge-c':r==='A'?'badge-a':'badge-u'; }
+function regimeLabel(r) {
+  if (lang==='zh') return r==='C'?'绿色区':r==='A'?'黄色区':'红色区';
+  return r==='C'?'Green':r==='A'?'Yellow':'Red';
+}
+function propName(id) { return PROP_INFO[lang][id]?.name || id; }
+function barColor(r) { return r==='C'?'#4caf50':r==='A'?'#ff9800':'#f44336'; }
+
+function cfgPatternLabel(p) {
+  return T('s4_pattern_' + p) || p;
+}
+function cfgPatternColor(p) {
+  if (p === 'strong') return '#1a1a2e';
+  if (p === 'amplify' || p === 'amplify_nm') return '#2e7d32';
+  if (p === 'plateau') return '#f57f17';
+  if (p === 'weak_up') return '#e65100';
+  return '#c62828';
+}
+
+// ========== Navigation ==========
+let currentStep = 0;
+
+function buildProgress() {
+  const bar = document.getElementById('progressBar');
+  bar.innerHTML = T('steps').map((s, i) =>
+    `<div class="step-dot${i===currentStep?' active':''}" data-step="${i}">${s}</div>`
+  ).join('');
+  bar.querySelectorAll('.step-dot').forEach(d =>
+    d.addEventListener('click', () => goStep(+d.dataset.step))
+  );
+}
+
+function goStep(i) {
+  currentStep = i;
+  buildProgress();
+  [renderStep0, renderStep1, renderStep2, renderStep3, renderStep4, renderStep5][i]();
+  window.scrollTo({top:0, behavior:'smooth'});
+}
+
+function nextBtn() {
+  if (currentStep >= 5) return '';
+  const label = lang==='zh' ? '下一步 →' : 'Next →';
+  return `<div style="text-align:right;margin-top:16px"><button onclick="goStep(${currentStep+1})" style="padding:8px 20px;background:#1a1a2e;color:#fff;border:none;border-radius:6px;cursor:pointer;font-size:14px">${label}</button></div>`;
+}
+
+// ========== Step 0 ==========
+function renderStep0() {
+  document.getElementById('vizArea').innerHTML = `<div class="card fade-in">
+    <h2>${T('s0_title')}</h2>
+    <p>${T('s0_p1')}</p>
+    <p>${T('s0_p2')}</p>
+    <p>${T('s0_p3')}</p>
+    <p>${T('s0_p4')}</p>
+    <p style="font-size:13px;color:#888">${T('s0_p5')}</p>
+    <div class="highlight">${T('s0_highlight')}</div>
+    ${nextBtn()}
+  </div>`;
+}
+
+// ========== Step 1 ==========
+function renderStep1() {
+  let gridHtml = '';
+  PROPERTIES.forEach((p, i) => {
+    const typeLabel = p.direct ? T('s1_direct_label') : T('s1_indirect_label');
+    gridHtml += `<div class="prop-card" data-idx="${i}">
+      <div class="prop-icon">${p.icon}</div>
+      <div class="prop-name">${propName(p.id)}</div>
+      <div class="prop-desc">${typeLabel}</div>
+    </div>`;
+  });
+
+  document.getElementById('vizArea').innerHTML = `<div class="card fade-in">
+    <h2>${T('s1_title')}</h2>
+    <p>${T('s1_p1')}</p>
+    <div class="prop-grid">${gridHtml}</div>
+    <div class="prop-detail" id="propDetail">
+      <p style="color:#aaa;text-align:center">${T('s1_click')}</p>
+    </div>
+    ${nextBtn()}
+  </div>`;
+
+  document.querySelectorAll('.prop-card').forEach(card => {
+    card.addEventListener('click', () => {
+      document.querySelectorAll('.prop-card').forEach(c => c.classList.remove('active'));
+      card.classList.add('active');
+      const p = PROPERTIES[+card.dataset.idx];
+      const info = PROP_INFO[lang][p.id];
+      document.getElementById('propDetail').innerHTML = `
+        <h3>${p.icon} ${info.name}</h3>
+        <p>${info.desc}</p>
+        <p style="font-size:12px;color:#888">${p.direct ? T('s1_direct_label') : T('s1_indirect_label')}</p>
+      `;
+    });
+  });
+}
+
+// ========== Step 2 ==========
+function renderStep2() {
+  const maxCtrl = 700;
+  let barsHtml = '';
+  [...PROPERTIES].sort((a,b) => b.ctrl - a.ctrl).forEach(p => {
+    const pct = Math.min(p.ctrl / maxCtrl * 100, 100);
+    barsHtml += `<div class="bar-row" data-pid="${p.id}">
+      <div class="bar-label">${propName(p.id)}</div>
+      <div class="bar-track"><div class="bar-fill" style="width:${pct}%;background:${barColor(p.regime)}"></div></div>
+      <div class="bar-val">${p.ctrl}%</div>
+    </div>`;
+  });
+
+  document.getElementById('vizArea').innerHTML = `<div class="card fade-in">
+    <h2>${T('s2_title')}</h2>
+    <p>${T('s2_p1')}</p>
+    <div class="highlight">${T('s2_formula')}<br><br>${T('s2_example')}</div>
+    <p>${T('s2_p2')}</p>
+    <div style="margin:10px 0">
+      <p>${T('s2_zone_c')}</p>
+      <p>${T('s2_zone_a')}</p>
+      <p>${T('s2_zone_u')}</p>
+    </div>
+    <p>${T('s2_p3')}</p>
+    <div style="margin:10px 0">${barsHtml}</div>
+    <div class="prop-detail" id="zoneDetail"><p style="color:#aaa;text-align:center">${T('s1_click')}</p></div>
+    ${nextBtn()}
+  </div>`;
+
+  document.querySelectorAll('.bar-row').forEach(row => {
+    row.addEventListener('click', () => {
+      document.querySelectorAll('.bar-row').forEach(r => r.classList.remove('selected'));
+      row.classList.add('selected');
+      const p = PROPERTIES.find(x => x.id === row.dataset.pid);
+      const info = PROP_INFO[lang][p.id];
+      document.getElementById('zoneDetail').innerHTML = `
+        <h3>${p.icon} ${info.name} <span class="${regimeBadge(p.regime)}">${regimeLabel(p.regime)}</span></h3>
+        <p>${info.desc}</p>
+        <p style="font-size:12px;color:#888;margin-top:8px">
+          ${p.direct ? T('s1_direct_label') : T('s1_indirect_label')} ·
+          ${lang==='zh'?'可控性':'Controllability'}: ${p.ctrl}%
+        </p>
+      `;
+    });
+  });
+}
+
+// ========== Step 3 ==========
+function renderStep3() {
+  document.getElementById('vizArea').innerHTML = `<div class="card fade-in">
+    <h2>${T('s3_title')}</h2>
+    <p>${T('s3_p1')}</p>
+    <p>${T('s3_p2')}</p>
+    <div style="margin:10px 0">
+      <p>${T('s3_signal')}</p>
+      <p>${T('s3_cv')}</p>
+    </div>
+    <p>${T('s3_p3')}</p>
+    <div class="highlight" style="text-align:center;font-size:16px;font-weight:600">${T('s3_formula')}</div>
+    <p style="font-size:13px;color:#888">${T('s3_p3b')}</p>
+    <p>${T('s3_p4')}</p>
+    <p>${T('s3_result')}</p>
+    <p>${T('s3_p5')}</p>
+    <div class="scatter-wrap"><canvas id="scatterCanvas" width="600" height="400"></canvas></div>
+    <p class="figure-caption">${T('s3_fig_caption')}</p>
+    <div class="warn">
+      <b>${T('s3_example_title')}</b><br><br>
+      ${T('s3_hollowness')}<br><br>
+      ${T('s3_connected')}
+    </div>
+    ${nextBtn()}
+  </div>`;
+  drawScatter();
+}
+
+function drawScatter() {
+  const canvas = document.getElementById('scatterCanvas');
+  if (!canvas) return;
+  const ctx = canvas.getContext('2d');
+  const W = canvas.width, H = canvas.height;
+  const pad = {top:30, right:30, bottom:50, left:60};
+  const pw = W - pad.left - pad.right, ph = H - pad.top - pad.bottom;
+  ctx.clearRect(0, 0, W, H);
+
+  const emergent = PROPERTIES.filter(p => !p.direct);
+  const scores = emergent.map(p => p.eff * Math.min(p.cv, 1));
+  const ctrls = emergent.map(p => p.ctrl);
+  const maxScore = Math.max(...scores) * 1.15;
+  const maxCtrl = Math.max(...ctrls) * 1.15;
+  function toX(v) { return pad.left + (v / maxScore) * pw; }
+  function toY(v) { return pad.top + ph - (v / maxCtrl) * ph; }
+
+  // Grid
+  ctx.strokeStyle = '#eee'; ctx.lineWidth = 1;
+  for (let i = 0; i <= 5; i++) { const y = pad.top + (ph/5)*i; ctx.beginPath(); ctx.moveTo(pad.left,y); ctx.lineTo(W-pad.right,y); ctx.stroke(); }
+
+  // Zone backgrounds
+  const y100 = toY(100), y20 = toY(20);
+  ctx.fillStyle = 'rgba(244,67,54,0.05)'; ctx.fillRect(pad.left, y20, pw, pad.top+ph-y20);
+  ctx.fillStyle = 'rgba(255,152,0,0.05)'; ctx.fillRect(pad.left, y100, pw, y20-y100);
+  ctx.fillStyle = 'rgba(76,175,80,0.05)'; ctx.fillRect(pad.left, pad.top, pw, y100-pad.top);
+
+  ctx.setLineDash([4,4]); ctx.strokeStyle='#ccc'; ctx.lineWidth=1;
+  ctx.beginPath(); ctx.moveTo(pad.left,y100); ctx.lineTo(W-pad.right,y100); ctx.stroke();
+  ctx.beginPath(); ctx.moveTo(pad.left,y20); ctx.lineTo(W-pad.right,y20); ctx.stroke();
+  ctx.setLineDash([]);
+
+  ctx.fillStyle='#999'; ctx.font='11px sans-serif'; ctx.textAlign='left';
+  ctx.fillText('>100%', W-pad.right-45, y100-4);
+  ctx.fillText('20~100%', W-pad.right-55, y20-4);
+  ctx.fillText('<20%', W-pad.right-37, pad.top+ph-4);
+
+  emergent.forEach((p, i) => {
+    const x = toX(scores[i]), y = toY(ctrls[i]);
+    ctx.fillStyle = barColor(p.regime);
+    ctx.beginPath(); ctx.arc(x, y, 7, 0, Math.PI*2); ctx.fill();
+    ctx.fillStyle = '#333'; ctx.font = '10px monospace'; ctx.textAlign = 'center';
+    ctx.fillText(propName(p.id), x, y - 12);
+  });
+
+  ctx.strokeStyle='#333'; ctx.lineWidth=1.5;
+  ctx.beginPath(); ctx.moveTo(pad.left,pad.top); ctx.lineTo(pad.left,pad.top+ph); ctx.lineTo(W-pad.right,pad.top+ph); ctx.stroke();
+
+  ctx.fillStyle='#333'; ctx.font='12px sans-serif'; ctx.textAlign='center';
+  ctx.fillText(lang==='zh'?'预测分（关联 × min(多样性,1)）':'Score (connection × min(variety,1))', W/2, H-8);
+  ctx.save(); ctx.translate(14, H/2); ctx.rotate(-Math.PI/2);
+  ctx.fillText(lang==='zh'?'可控性 (%)':'Controllability (%)', 0, 0);
+  ctx.restore();
+
+  ctx.font='10px sans-serif'; ctx.fillStyle='#666'; ctx.textAlign='center';
+  for (let v = 0; v <= maxScore; v += 0.1) { if (v > maxScore) break; ctx.fillText(v.toFixed(1), toX(v), pad.top+ph+16); }
+  ctx.textAlign='right';
+  for (let v = 0; v <= maxCtrl; v += 100) ctx.fillText(v, pad.left-6, toY(v)+4);
+}
+
+// ========== Step 4 ==========
+function renderStep4() {
+  const maxVal = 650;
+  document.getElementById('vizArea').innerHTML = `<div class="card fade-in">
+    <h2>${T('s4_title')}</h2>
+    <p>${T('s4_intro')}</p>
+    <p>${T('s4_p1')}</p>
+    <div style="display:flex;gap:16px;margin:14px 0;flex-wrap:wrap">
+      <div style="flex:1;min-width:250px;background:#e8f5e9;border-radius:8px;padding:14px">
+        <b style="color:#2e7d32">${T('s4_type1_title')}</b>
+        <p style="margin:6px 0;font-size:13px">${T('s4_type1')}</p>
+        <p style="font-size:12px;color:#2e7d32;font-weight:600">${T('s4_type1_fix')}</p>
+      </div>
+      <div style="flex:1;min-width:250px;background:#ffebee;border-radius:8px;padding:14px">
+        <b style="color:#c62828">${T('s4_type2_title')}</b>
+        <p style="margin:6px 0;font-size:13px">${T('s4_type2')}</p>
+        <p style="font-size:12px;color:#c62828;font-weight:600">${T('s4_type2_fix')}</p>
+      </div>
+    </div>
+    <p>${T('s4_p2')}</p>
+    <div class="highlight">
+      ${T('s4_cfg0')}<br>${T('s4_cfg2')}<br>${T('s4_cfg4')}
+    </div>
+    <p>${T('s4_p3')}</p>
+    <p>${T('s4_p4')}</p>
+    <div id="cfgViz" style="margin:10px 0"></div>
+    <div style="margin:10px 0;text-align:center">
+      <label style="font-size:13px;margin-right:8px">${lang==='zh'?'引导强度：':'Guidance scale:'}</label>
+      <button class="cfg-btn active" data-s="0" style="padding:4px 16px;border:2px solid #1a1a2e;border-radius:6px;margin:0 2px;cursor:pointer;background:#1a1a2e;color:#fff;font-weight:600">s = 0</button>
+      <button class="cfg-btn" data-s="2" style="padding:4px 16px;border:2px solid #ddd;border-radius:6px;margin:0 2px;cursor:pointer;background:#fff;font-weight:600">s = 2</button>
+      <button class="cfg-btn" data-s="4" style="padding:4px 16px;border:2px solid #ddd;border-radius:6px;margin:0 2px;cursor:pointer;background:#fff;font-weight:600">s = 4</button>
+    </div>
+    <p style="font-size:12px;color:#888;margin:8px 0">${T('s4_note')}</p>
+    <div class="figure-container">
+      <img src="figures/cfg_sensitivity.png" alt="CFG sensitivity" onerror="this.style.display='none'">
+      <p class="figure-caption">${T('s4_fig_caption')}</p>
+    </div>
+    ${nextBtn()}
+  </div>`;
+
+  function renderCfgBars(scale) {
+    let html = '';
+    CFG_DATA.forEach(d => {
+      const val = scale===0?d.s0:scale===2?d.s2:d.s4;
+      const pct = Math.min(val/maxVal*100, 100);
+      const color = val>100?'#4caf50':val>=20?'#ff9800':'#f44336';
+      html += `<div class="bar-row" title="${cfgPatternLabel(d.pattern)}">
+        <div class="bar-label">${propName(d.id)}</div>
+        <div class="bar-track"><div class="bar-fill" style="width:${pct}%;background:${color}"></div></div>
+        <div class="bar-val">${val}%</div>
+        <div style="width:200px;font-size:11px;color:${cfgPatternColor(d.pattern)};overflow:hidden;white-space:nowrap;text-overflow:ellipsis">${cfgPatternLabel(d.pattern)}</div>
+      </div>`;
+    });
+    document.getElementById('cfgViz').innerHTML = html;
+  }
+
+  renderCfgBars(0);
+
+  document.querySelectorAll('.cfg-btn').forEach(btn => {
+    btn.addEventListener('click', () => {
+      document.querySelectorAll('.cfg-btn').forEach(b => { b.classList.remove('active'); b.style.background='#fff'; b.style.color='#333'; b.style.borderColor='#ddd'; });
+      btn.classList.add('active'); btn.style.background='#1a1a2e'; btn.style.color='#fff'; btn.style.borderColor='#1a1a2e';
+      renderCfgBars(+btn.dataset.s);
+    });
+  });
+}
+
+// ========== Step 5 ==========
+function renderStep5() {
+  document.getElementById('vizArea').innerHTML = `<div class="card fade-in">
+    <h2>${T('s5_title')}</h2>
+    <p>${T('s5_p1')}</p>
+    <div style="display:flex;flex-direction:column;gap:10px;margin:14px 0">
+      <div style="background:#e8f5e9;border-radius:8px;padding:14px;border-left:4px solid #4caf50">${T('s5_green')}</div>
+      <div style="background:#fff8e1;border-radius:8px;padding:14px;border-left:4px solid #ff9800">${T('s5_yellow')}</div>
+      <div style="background:#ffebee;border-radius:8px;padding:14px;border-left:4px solid #f44336">${T('s5_red')}</div>
+    </div>
+    <p>${T('s5_p2')}</p>
+    <div class="highlight">${T('s5_conclusion')}</div>
+    <div class="warn"><b>${T('s5_limit_title')}</b><br>${T('s5_limit')}</div>
+    <div class="figure-container" style="margin-top:20px">
+      <img src="figures/scatter_predictor.png" alt="Scatter predictor" onerror="this.style.display='none'">
+      <p class="figure-caption">${T('s3_fig_caption')}</p>
+    </div>
+  </div>`;
+}
+
+// ========== Lang Switch & Init ==========
+document.querySelectorAll('.lang-sw button').forEach(btn => {
+  btn.addEventListener('click', () => {
+    document.querySelectorAll('.lang-sw button').forEach(b => b.classList.remove('active'));
+    btn.classList.add('active');
+    lang = btn.dataset.lang;
+    document.title = T('html_title');
+    document.getElementById('headerTitle').innerHTML = T('header_title');
+    buildProgress();
+    goStep(currentStep);
+  });
+});
+
+buildProgress();
+renderStep0();
+</script>
+</body>
+</html>
