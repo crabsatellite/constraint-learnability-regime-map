@@ -1,0 +1,232 @@
+{
+  "feature_table": [
+    {
+      "property": "height",
+      "effective_frequency": 0.0676,
+      "locality": 1,
+      "training_cv": 0.6024,
+      "has_direct_cond": 1,
+      "regime": "CONTROLLABLE",
+      "regime_idx": 0
+    },
+    {
+      "property": "n_blocks",
+      "effective_frequency": 0.117,
+      "locality": 1,
+      "training_cv": 1.0316,
+      "has_direct_cond": 1,
+      "regime": "CONTROLLABLE",
+      "regime_idx": 0
+    },
+    {
+      "property": "symmetry_iou",
+      "effective_frequency": 0.0385,
+      "locality": 3,
+      "training_cv": 1.3304,
+      "has_direct_cond": 1,
+      "regime": "CONTROLLABLE",
+      "regime_idx": 0
+    },
+    {
+      "property": "enclosed_ratio",
+      "effective_frequency": 0.0242,
+      "locality": 3,
+      "training_cv": 5.3674,
+      "has_direct_cond": 1,
+      "regime": "APPROACHABLE",
+      "regime_idx": 1
+    },
+    {
+      "property": "elongation",
+      "effective_frequency": 0.179,
+      "locality": 2,
+      "training_cv": 1.7621,
+      "has_direct_cond": 0,
+      "regime": "APPROACHABLE",
+      "regime_idx": 1
+    },
+    {
+      "property": "floor_count",
+      "effective_frequency": 0.7647,
+      "locality": 2,
+      "training_cv": 0.7576,
+      "has_direct_cond": 0,
+      "regime": "CONTROLLABLE",
+      "regime_idx": 0
+    },
+    {
+      "property": "hollowness",
+      "effective_frequency": 0.3109,
+      "locality": 2,
+      "training_cv": 0.2264,
+      "has_direct_cond": 0,
+      "regime": "UNRESPONSIVE",
+      "regime_idx": 2
+    },
+    {
+      "property": "bbox_volume",
+      "effective_frequency": 0.75,
+      "locality": 1,
+      "training_cv": 1.0316,
+      "has_direct_cond": 0,
+      "regime": "CONTROLLABLE",
+      "regime_idx": 0
+    },
+    {
+      "property": "surface_ratio",
+      "effective_frequency": 0.3997,
+      "locality": 2,
+      "training_cv": 0.0782,
+      "has_direct_cond": 0,
+      "regime": "UNRESPONSIVE",
+      "regime_idx": 2
+    },
+    {
+      "property": "connected_components",
+      "effective_frequency": 0.0903,
+      "locality": 3,
+      "training_cv": 1.4446,
+      "has_direct_cond": 0,
+      "regime": "APPROACHABLE",
+      "regime_idx": 1
+    },
+    {
+      "property": "vertical_aspect",
+      "effective_frequency": 0.7836,
+      "locality": 2,
+      "training_cv": 0.6138,
+      "has_direct_cond": 0,
+      "regime": "CONTROLLABLE",
+      "regime_idx": 0
+    },
+    {
+      "property": "z_symmetry_iou",
+      "effective_frequency": 0.4694,
+      "locality": 3,
+      "training_cv": 0.9348,
+      "has_direct_cond": 0,
+      "regime": "CONTROLLABLE",
+      "regime_idx": 0
+    },
+    {
+      "property": "layer_consistency",
+      "effective_frequency": 0.3195,
+      "locality": 2,
+      "training_cv": 0.3947,
+      "has_direct_cond": 0,
+      "regime": "APPROACHABLE",
+      "regime_idx": 1
+    },
+    {
+      "property": "footprint_convexity",
+      "effective_frequency": 0.437,
+      "locality": 2,
+      "training_cv": 0.3703,
+      "has_direct_cond": 0,
+      "regime": "APPROACHABLE",
+      "regime_idx": 1
+    }
+  ],
+  "correlations": {
+    "elongation": {
+      "height": 0.1479,
+      "n_blocks": -0.1482,
+      "symmetry_iou": -0.179,
+      "enclosed_ratio": -0.0451,
+      "_best_proxy": "n_blocks",
+      "_max_corr": 0.179
+    },
+    "floor_count": {
+      "height": 0.7647,
+      "n_blocks": 0.4184,
+      "symmetry_iou": -0.112,
+      "enclosed_ratio": 0.1617,
+      "_best_proxy": "height",
+      "_max_corr": 0.7647
+    },
+    "hollowness": {
+      "height": 0.2423,
+      "n_blocks": -0.0776,
+      "symmetry_iou": -0.3109,
+      "enclosed_ratio": -0.0214,
+      "_best_proxy": "height",
+      "_max_corr": 0.3109
+    },
+    "bbox_volume": {
+      "height": 0.6466,
+      "n_blocks": 0.75,
+      "symmetry_iou": 0.0454,
+      "enclosed_ratio": 0.1588,
+      "_best_proxy": "n_blocks",
+      "_max_corr": 0.75
+    },
+    "surface_ratio": {
+      "height": -0.0756,
+      "n_blocks": -0.3997,
+      "symmetry_iou": 0.0769,
+      "enclosed_ratio": 0.0882,
+      "_best_proxy": "n_blocks",
+      "_max_corr": 0.3997
+    },
+    "connected_components": {
+      "height": 0.0903,
+      "n_blocks": -0.0679,
+      "symmetry_iou": -0.0757,
+      "enclosed_ratio": -0.0432,
+      "_best_proxy": "n_blocks",
+      "_max_corr": 0.0903
+    },
+    "vertical_aspect": {
+      "height": 0.7836,
+      "n_blocks": 0.0933,
+      "symmetry_iou": 0.0108,
+      "enclosed_ratio": 0.0249,
+      "_best_proxy": "height",
+      "_max_corr": 0.7836
+    },
+    "z_symmetry_iou": {
+      "height": 0.0506,
+      "n_blocks": 0.305,
+      "symmetry_iou": 0.4694,
+      "enclosed_ratio": 0.0457,
+      "_best_proxy": "n_blocks",
+      "_max_corr": 0.4694
+    },
+    "layer_consistency": {
+      "height": 0.3195,
+      "n_blocks": 0.2439,
+      "symmetry_iou": 0.0727,
+      "enclosed_ratio": 0.1167,
+      "_best_proxy": "n_blocks",
+      "_max_corr": 0.3195
+    },
+    "footprint_convexity": {
+      "height": 0.1682,
+      "n_blocks": 0.3706,
+      "symmetry_iou": 0.437,
+      "enclosed_ratio": 0.1196,
+      "_best_proxy": "n_blocks",
+      "_max_corr": 0.437
+    }
+  },
+  "tree_result": {
+    "direct_branch": {
+      "acc": 1.0,
+      "threshold": 0.03135,
+      "low": 1,
+      "high": 0
+    },
+    "emergent_branch": {
+      "acc": 1.0,
+      "feature": "corr_x_cv",
+      "tc": 0.41835,
+      "tv": 0.3825,
+      "q00": 2,
+      "q01": 1,
+      "q10": 1,
+      "q11": 0
+    },
+    "total_accuracy": 1.0,
+    "loo_accuracy": 0.6428571428571429
+  }
+}

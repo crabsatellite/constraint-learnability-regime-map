@@ -1,0 +1,169 @@
+{
+  "checkpoint": "checkpoints/ar_cond/ar_cond_step15000.pt",
+  "step": 15000,
+  "composability": [
+    {
+      "pair": "height+size",
+      "axis": "height",
+      "metric": "height",
+      "single": 12.25,
+      "combined": 21.875,
+      "drift_pct": 78.6
+    },
+    {
+      "pair": "height+size",
+      "axis": "size",
+      "metric": "blocks",
+      "single": 1655.625,
+      "combined": 1457.0,
+      "drift_pct": 12.0
+    },
+    {
+      "pair": "height+symmetry",
+      "axis": "height",
+      "metric": "height",
+      "single": 12.25,
+      "combined": 16.25,
+      "drift_pct": 32.7
+    },
+    {
+      "pair": "height+symmetry",
+      "axis": "symmetry",
+      "metric": "symmetry",
+      "single": 0.3705125,
+      "combined": 0.19287500000000002,
+      "drift_pct": 17.8
+    },
+    {
+      "pair": "size+footprint",
+      "axis": "size",
+      "metric": "blocks",
+      "single": 1655.625,
+      "combined": 2528.125,
+      "drift_pct": 52.7
+    },
+    {
+      "pair": "size+footprint",
+      "axis": "footprint",
+      "metric": "footprint",
+      "single": 307.25,
+      "combined": 624.0,
+      "drift_pct": 103.1
+    },
+    {
+      "pair": "size+symmetry",
+      "axis": "size",
+      "metric": "blocks",
+      "single": 1655.625,
+      "combined": 2378.125,
+      "drift_pct": 43.6
+    },
+    {
+      "pair": "size+symmetry",
+      "axis": "symmetry",
+      "metric": "symmetry",
+      "single": 0.3705125,
+      "combined": 0.29381250000000003,
+      "drift_pct": 7.7
+    },
+    {
+      "pair": "height+footprint",
+      "axis": "height",
+      "metric": "height",
+      "single": 12.25,
+      "combined": 12.75,
+      "drift_pct": 4.1
+    },
+    {
+      "pair": "height+footprint",
+      "axis": "footprint",
+      "metric": "footprint",
+      "single": 307.25,
+      "combined": 169.25,
+      "drift_pct": 44.9
+    }
+  ],
+  "ood_generalization": [
+    {
+      "name": "medium_height + medium_size",
+      "category": "COMMON",
+      "spec": {
+        "height": 1,
+        "size": 2
+      },
+      "avg_satisfaction": 0.5
+    },
+    {
+      "name": "flat + small",
+      "category": "COMMON",
+      "spec": {
+        "height": 0,
+        "size": 1
+      },
+      "avg_satisfaction": 0.562
+    },
+    {
+      "name": "symmetric (4% in train)",
+      "category": "RARE_SINGLE",
+      "spec": {
+        "symmetry": 1
+      },
+      "avg_satisfaction": 0.125
+    },
+    {
+      "name": "enclosed (2% in train)",
+      "category": "RARE_SINGLE",
+      "spec": {
+        "enclosure": 1
+      },
+      "avg_satisfaction": 0.0
+    },
+    {
+      "name": "blocky (2% in train)",
+      "category": "RARE_SINGLE",
+      "spec": {
+        "complexity": 0
+      },
+      "avg_satisfaction": 0
+    },
+    {
+      "name": "tower + symmetric + enclosed",
+      "category": "OOD",
+      "spec": {
+        "height": 3,
+        "symmetry": 1,
+        "enclosure": 1
+      },
+      "avg_satisfaction": 0.167
+    },
+    {
+      "name": "tiny + tower",
+      "category": "OOD",
+      "spec": {
+        "size": 0,
+        "height": 3
+      },
+      "avg_satisfaction": 0.125
+    },
+    {
+      "name": "large + flat + blocky",
+      "category": "OOD",
+      "spec": {
+        "size": 3,
+        "height": 0,
+        "complexity": 0
+      },
+      "avg_satisfaction": 0.375
+    },
+    {
+      "name": "symmetric + enclosed + detailed",
+      "category": "OOD",
+      "spec": {
+        "symmetry": 1,
+        "enclosure": 1,
+        "complexity": 2
+      },
+      "avg_satisfaction": 0.0
+    }
+  ]
+}

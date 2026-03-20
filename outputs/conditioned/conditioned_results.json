@@ -1,0 +1,200 @@
+{
+  "uncond": {
+    "experiment": "uncond",
+    "constraints": {},
+    "n_samples": 8,
+    "avg_blocks": 184.875,
+    "avg_height": 4.875,
+    "std_height": 2.315032397181517,
+    "min_blocks": 33,
+    "max_blocks": 635
+  },
+  "height_flat": {
+    "experiment": "height_flat",
+    "constraints": {
+      "height": 0
+    },
+    "n_samples": 8,
+    "avg_blocks": 202.625,
+    "avg_height": 5.375,
+    "std_height": 1.5761900266148114,
+    "min_blocks": 14,
+    "max_blocks": 622
+  },
+  "height_tall": {
+    "experiment": "height_tall",
+    "constraints": {
+      "height": 2
+    },
+    "n_samples": 8,
+    "avg_blocks": 727.5,
+    "avg_height": 27.625,
+    "std_height": 2.6896793489187516,
+    "min_blocks": 74,
+    "max_blocks": 1487
+  },
+  "height_tower": {
+    "experiment": "height_tower",
+    "constraints": {
+      "height": 3
+    },
+    "n_samples": 8,
+    "avg_blocks": 1091.5,
+    "avg_height": 27.625,
+    "std_height": 10.148121747397397,
+    "min_blocks": 7,
+    "max_blocks": 2811
+  },
+  "size_tiny": {
+    "experiment": "size_tiny",
+    "constraints": {
+      "size": 0
+    },
+    "n_samples": 8,
+    "avg_blocks": 46.875,
+    "avg_height": 6.75,
+    "std_height": 6.703543838895961,
+    "min_blocks": 13,
+    "max_blocks": 129
+  },
+  "size_large": {
+    "experiment": "size_large",
+    "constraints": {
+      "size": 3
+    },
+    "n_samples": 8,
+    "avg_blocks": 3701.375,
+    "avg_height": 18.75,
+    "std_height": 3.072051431861127,
+    "min_blocks": 1054,
+    "max_blocks": 11976
+  },
+  "symmetric": {
+    "experiment": "symmetric",
+    "constraints": {
+      "symmetry": 1
+    },
+    "n_samples": 8,
+    "avg_blocks": 634.25,
+    "avg_height": 8.0,
+    "std_height": 1.4142135623730951,
+    "min_blocks": 447,
+    "max_blocks": 972
+  },
+  "asymmetric": {
+    "experiment": "asymmetric",
+    "constraints": {
+      "symmetry": 0
+    },
+    "n_samples": 8,
+    "avg_blocks": 609.125,
+    "avg_height": 7.25,
+    "std_height": 3.2307119958300214,
+    "min_blocks": 46,
+    "max_blocks": 1714
+  },
+  "enclosed": {
+    "experiment": "enclosed",
+    "constraints": {
+      "enclosure": 1
+    },
+    "n_samples": 8,
+    "avg_blocks": 3027.375,
+    "avg_height": 21.5,
+    "std_height": 5.634713834792322,
+    "min_blocks": 917,
+    "max_blocks": 5419
+  },
+  "open": {
+    "experiment": "open",
+    "constraints": {
+      "enclosure": 0
+    },
+    "n_samples": 8,
+    "avg_blocks": 338.625,
+    "avg_height": 7.125,
+    "std_height": 4.594493987372276,
+    "min_blocks": 56,
+    "max_blocks": 866
+  },
+  "blocky": {
+    "experiment": "blocky",
+    "constraints": {
+      "complexity": 0
+    },
+    "n_samples": 8,
+    "avg_blocks": 542.0,
+    "avg_height": 10.125,
+    "std_height": 6.273705045664802,
+    "min_blocks": 83,
+    "max_blocks": 1293
+  },
+  "detailed": {
+    "experiment": "detailed",
+    "constraints": {
+      "complexity": 2
+    },
+    "n_samples": 8,
+    "avg_blocks": 1246.25,
+    "avg_height": 11.5,
+    "std_height": 3.7416573867739413,
+    "min_blocks": 462,
+    "max_blocks": 2130
+  },
+  "tall_symmetric_enclosed": {
+    "experiment": "tall_symmetric_enclosed",
+    "constraints": {
+      "height": 2,
+      "symmetry": 1,
+      "enclosure": 1
+    },
+    "n_samples": 8,
+    "avg_blocks": 2105.375,
+    "avg_height": 25.125,
+    "std_height": 3.4437443284889775,
+    "min_blocks": 1119,
+    "max_blocks": 3157
+  },
+  "flat_sprawling_detailed": {
+    "experiment": "flat_sprawling_detailed",
+    "constraints": {
+      "height": 0,
+      "footprint": 2,
+      "complexity": 2
+    },
+    "n_samples": 8,
+    "avg_blocks": 1341.125,
+    "avg_height": 12.75,
+    "std_height": 7.75806032459145,
+    "min_blocks": 820,
+    "max_blocks": 2109
+  },
+  "tower_compact_blocky": {
+    "experiment": "tower_compact_blocky",
+    "constraints": {
+      "height": 3,
+      "footprint": 0,
+      "complexity": 0
+    },
+    "n_samples": 8,
+    "avg_blocks": 1930.25,
+    "avg_height": 31.125,
+    "std_height": 0.9270248108869579,
+    "min_blocks": 755,
+    "max_blocks": 4438
+  },
+  "large_symmetric_detailed": {
+    "experiment": "large_symmetric_detailed",
+    "constraints": {
+      "size": 3,
+      "symmetry": 1,
+      "complexity": 2
+    },
+    "n_samples": 8,
+    "avg_blocks": 3462.875,
+    "avg_height": 15.0,
+    "std_height": 1.7320508075688772,
+    "min_blocks": 2354,
+    "max_blocks": 5601
+  }
+}

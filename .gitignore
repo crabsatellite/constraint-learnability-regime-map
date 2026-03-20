@@ -1,0 +1,31 @@
+# Python cache
+__pycache__/
+*.pyc
+*.pyo
+
+# Trained models (large binary files, retrain from scratch)
+checkpoints/
+*.pt
+*.pth
+
+# Training data (not distributed, see README)
+data/
+
+# IDE / OS
+.vscode/
+.idea/
+*.swp
+Thumbs.db
+.DS_Store
+
+# Logs
+logs/
+*.log
+
+# TensorBoard
+tb_*/
+runs/
+
+# Generated outputs (renders, samples)
+outputs/generated/
+outputs/renders/
