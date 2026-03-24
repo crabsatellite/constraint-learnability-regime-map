@@ -78,7 +78,7 @@ def render_voxels(voxels, ax, title=None, elev=25, azim=45):
     ax.set_zlim(0, sz)
     ax.set_axis_off()
     if title:
-        ax.set_title(title, fontsize=9, pad=-5)
+        ax.set_title(title, fontsize=14, pad=2)
 
 
 def generate_samples(ar, vqvae, grid_size, spec, cfg_scale=2.0, seed=42,
@@ -130,7 +130,7 @@ def make_comparison_figure(ar, vqvae, grid_size, device='cuda'):
                     'Enclosure=1': f"enc={props['enclosed_ratio']:.3f}",
                 }
                 ax.text2D(0.02, 0.02, key_props.get(cond_name, ''),
-                          transform=ax.transAxes, fontsize=7, color='gray')
+                          transform=ax.transAxes, fontsize=11, color='gray')
 
     fig.suptitle('Structural Constraint Controllability: Unconditioned vs Conditioned Samples',
                  fontsize=12, y=0.98)
@@ -161,7 +161,7 @@ def make_cfg_comparison_figure(ar, vqvae, grid_size, device='cuda'):
             props = measure_all_properties(voxels_batch[0])
             if 'Enclosure' in cond_name:
                 ax.text2D(0.02, 0.02, f"enc={props['enclosed_ratio']:.3f}",
-                          transform=ax.transAxes, fontsize=7, color='gray')
+                          transform=ax.transAxes, fontsize=11, color='gray')
 
     fig.suptitle('CFG Sensitivity: Guidance Scale Effect on Structure',
                  fontsize=12, y=0.98)
