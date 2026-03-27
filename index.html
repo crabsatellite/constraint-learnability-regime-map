@@ -2,6 +2,7 @@
 <html lang="en" id="htmlRoot">
 <head>
 <meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>Which Building Features Can AI Control?</title>
 <style>
 *{margin:0;padding:0;box-sizing:border-box}
@@ -50,9 +51,18 @@ header h1{font-size:17px;font-weight:600}
 @keyframes fadeIn{from{opacity:0;transform:translateY(10px)}to{opacity:1;transform:translateY(0)}}
 .fade-in{animation:fadeIn .3s ease}
 @media(max-width:600px){
-  .bar-label{width:80px;font-size:10px}
-  .prop-grid{grid-template-columns:repeat(auto-fill,minmax(140px,1fr))}
+  header{padding:10px 16px}
   header h1{font-size:14px}
+  .bar-label{width:70px;font-size:10px}
+  .bar-val{width:44px;font-size:11px}
+  .prop-grid{grid-template-columns:repeat(2,1fr)}
+  .prop-card{padding:10px}
+  .prop-card .prop-icon{font-size:22px}
+  .card{padding:18px 16px}
+  .card h2{font-size:17px}
+  .scatter-wrap canvas{max-width:100%;height:auto}
+  .progress-bar{padding:0 8px}
+  .step-dot{padding:8px 10px;font-size:11px}
 }
 </style>
 </head>
