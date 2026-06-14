@@ -270,7 +270,9 @@ def generate_and_measure_all(ar, vqvae, grid_size, spec, seeds, n_per_seed=8, de
     """Generate across multiple seeds and measure all properties.
 
     cfg_scale: classifier-free guidance weight. Default 2.0 matches
-    inference default.
+    inference default. Previous versions used 0.0 (conditioning-only,
+    no guidance amplification), which caused enclosed_ratio to read <1%
+    despite the model responding strongly at cfg>=2.
     """
     all_props = []
     for seed in seeds:

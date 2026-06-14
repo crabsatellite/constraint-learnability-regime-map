@@ -1,0 +1,26 @@
+{
+  "permutation_test": {
+    "composite": {
+      "rho": 0.8788,
+      "parametric_p": 0.0008,
+      "permutation_p": 0.0016
+    },
+    "cv_alone": {
+      "rho": 0.6364,
+      "parametric_p": 0.0479,
+      "permutation_p": 0.0534
+    },
+    "corr_alone": {
+      "rho": 0.6242,
+      "parametric_p": 0.0537,
+      "permutation_p": 0.0598
+    }
+  },
+  "enclosed_ratio_per_seed_ctrl": [
+    117.5,
+    626.25,
+    882.5,
+    72.5,
+    1118.75
+  ]
+}

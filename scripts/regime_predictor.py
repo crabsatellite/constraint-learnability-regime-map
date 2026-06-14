@@ -17,9 +17,20 @@ PROJECT_ROOT = Path(__file__).parent.parent
 sys.path.insert(0, str(PROJECT_ROOT))
 
 
+def _load_saved_predictor_features(saved_path):
+    """Use the committed feature table when processed training data is absent."""
+    with open(saved_path) as f:
+        saved = json.load(f)
+    rows = saved["feature_table"]
+    correlations = saved.get("correlations", {})
+    print(f"\nNOTE: data/processed/structural_features.json not found; "
+          f"using saved predictor features from {saved_path}.")
+    return rows, correlations
+
+
 def compute_predictor_features():
     """
-    Compute pre-experiment features for each of the 7 regime map properties.
+    Compute pre-experiment features for each of the 14 regime map properties.
 
     Features:
       1. effective_frequency: How much training data supports the target condition?
@@ -28,15 +39,25 @@ def compute_predictor_features():
       2. locality_score: Spatial computation complexity (1=local, 2=semi-global, 3=global)
       3. training_cv: Coefficient of variation in training data
     """
+    data_path = PROJECT_ROOT / "data/processed/structural_features.json"
+    saved_path = PROJECT_ROOT / "outputs/regime_predictor_results.json"
+    if not data_path.exists():
+        if saved_path.exists():
+            return _load_saved_predictor_features(saved_path)
+        raise FileNotFoundError(
+            f"{data_path} is required to recompute predictor features. "
+            f"No saved fallback was found at {saved_path}."
+        )
+
     # Load training features
-    with open(PROJECT_ROOT / "data/processed/structural_features.json") as f:
+    with open(data_path) as f:
         sf = json.load(f)
 
     features_dict = sf["features"]
     n_total = sf["total_builds"]
     bucket_dist = sf["bucket_distributions"]
 
-    # Load regime map training samples (subset with full 7-property measurements)
+    # Load regime map training samples (subset with full 14-property measurements)
     with open(PROJECT_ROOT / "outputs/regime_map_results.json") as f:
         regime_data = json.load(f)
 
@@ -645,7 +666,7 @@ def main():
     print("=" * 90)
 
     print(f"""
-Hierarchical Decision Tree (3 features, 7 properties):
+Hierarchical Decision Tree (3 features, 14 properties):
   Training accuracy: {tree_result['total_accuracy']:.1%}
   LOO accuracy:      {tree_result['loo_accuracy']:.1%}
 

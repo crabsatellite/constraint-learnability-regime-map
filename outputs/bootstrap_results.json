@@ -32,7 +32,7 @@
       "ci_high": 1141.26,
       "best_condition": "enclosure=1",
       "regime": "CONTROLLABLE",
-      "regime_confident": false
+      "regime_confident": true
     },
     "elongation": {
       "controllability_pct": 63.97,
@@ -72,7 +72,7 @@
       "ci_high": 37.47,
       "best_condition": "size=large",
       "regime": "APPROACHABLE",
-      "regime_confident": true
+      "regime_confident": false
     },
     "connected_components": {
       "controllability_pct": 128.43,
@@ -104,7 +104,7 @@
       "ci_high": 61.95,
       "best_condition": "size=large",
       "regime": "APPROACHABLE",
-      "regime_confident": true
+      "regime_confident": false
     },
     "footprint_convexity": {
       "controllability_pct": 51.26,
@@ -112,7 +112,7 @@
       "ci_high": 71.08,
       "best_condition": "symmetry=1",
       "regime": "APPROACHABLE",
-      "regime_confident": true
+      "regime_confident": false
     }
   }
 }
