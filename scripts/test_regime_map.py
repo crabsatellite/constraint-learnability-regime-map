@@ -1,13 +1,9 @@
 """
-Constraint Learnability Regime Map — expanded taxonomy (12 properties).
+Generate and measure the 14-property constraint-learnability regime map.
 
-Original 7: height, n_blocks, symmetry_iou, enclosed_ratio, elongation, floor_count, hollowness
-New 5: bbox_volume, surface_ratio, connected_components, vertical_aspect, z_symmetry_iou
-
-The expansion increases regime map resolution from n=7 to n=12, enabling
-meaningful leave-one-out validation of the learnability predictor.
-
-No retraining needed — pure measurement on existing models.
+This script samples the fixed VQ-VAE + conditioned autoregressive transformer
+under the paper's conditioning configurations, measures structural properties
+on generated voxel grids, and writes outputs/regime_map_results.json.
 """
 
 import sys
@@ -70,7 +66,7 @@ def make_features(spec, device, n=8):
 # ============================================================
 
 def measure_all_properties(voxels):
-    """Compute all 12 structural properties for a single 32x32x32 voxel grid."""
+    """Compute all 14 structural properties for a single 32x32x32 voxel grid."""
     filled = voxels > 0
     n_blocks = int(filled.sum())
     all_props = [
@@ -159,7 +155,7 @@ def measure_all_properties(voxels):
     else:
         hollowness = 0.0
 
-    # --- New properties (expansion to 12) ---
+    # --- Additional properties ---
 
     # Bounding box volume: total spatial extent (LOCAL)
     bbox_volume = int(x_span * height * z_span) if (len(xs) > 0 and len(zs) > 0) else 0

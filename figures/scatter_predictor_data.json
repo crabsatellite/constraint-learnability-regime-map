@@ -1,0 +1,113 @@
+{
+  "points": [
+    {
+      "index": 1,
+      "property": "floor_count",
+      "label": "floor_count",
+      "effective_frequency": 0.7647,
+      "training_cv": 0.7576,
+      "composite": 0.57933672,
+      "controllability_pct": 182.38,
+      "regime": "CONTROLLABLE"
+    },
+    {
+      "index": 2,
+      "property": "bbox_volume",
+      "label": "bbox_volume",
+      "effective_frequency": 0.75,
+      "training_cv": 1.0316,
+      "composite": 0.75,
+      "controllability_pct": 421.94,
+      "regime": "CONTROLLABLE"
+    },
+    {
+      "index": 3,
+      "property": "connected_components",
+      "label": "connected_comp",
+      "effective_frequency": 0.0903,
+      "training_cv": 1.4446,
+      "composite": 0.0903,
+      "controllability_pct": 128.43,
+      "regime": "CONTROLLABLE"
+    },
+    {
+      "index": 4,
+      "property": "vertical_aspect",
+      "label": "vertical_aspect",
+      "effective_frequency": 0.7836,
+      "training_cv": 0.6138,
+      "composite": 0.48097368,
+      "controllability_pct": 332.86,
+      "regime": "CONTROLLABLE"
+    },
+    {
+      "index": 5,
+      "property": "z_symmetry_iou",
+      "label": "z_symmetry_iou",
+      "effective_frequency": 0.4694,
+      "training_cv": 0.9348,
+      "composite": 0.43879512,
+      "controllability_pct": 324.03,
+      "regime": "CONTROLLABLE"
+    },
+    {
+      "index": 6,
+      "property": "elongation",
+      "label": "elongation",
+      "effective_frequency": 0.179,
+      "training_cv": 1.7621,
+      "composite": 0.179,
+      "controllability_pct": 63.97,
+      "regime": "APPROACHABLE"
+    },
+    {
+      "index": 7,
+      "property": "surface_ratio",
+      "label": "surface_ratio",
+      "effective_frequency": 0.3997,
+      "training_cv": 0.0782,
+      "composite": 0.03125654,
+      "controllability_pct": 32.28,
+      "regime": "APPROACHABLE"
+    },
+    {
+      "index": 8,
+      "property": "layer_consistency",
+      "label": "layer_consist",
+      "effective_frequency": 0.3195,
+      "training_cv": 0.3947,
+      "composite": 0.12610665000000001,
+      "controllability_pct": 44.28,
+      "regime": "APPROACHABLE"
+    },
+    {
+      "index": 9,
+      "property": "footprint_convexity",
+      "label": "fp_convexity",
+      "effective_frequency": 0.437,
+      "training_cv": 0.3703,
+      "composite": 0.1618211,
+      "controllability_pct": 51.26,
+      "regime": "APPROACHABLE"
+    },
+    {
+      "index": 10,
+      "property": "hollowness",
+      "label": "hollowness",
+      "effective_frequency": 0.3109,
+      "training_cv": 0.2264,
+      "composite": 0.07038776,
+      "controllability_pct": 14.16,
+      "regime": "UNRESPONSIVE"
+    }
+  ],
+  "stats": {
+    "rho": 0.8788,
+    "permutation_p": 0.0016,
+    "sources": [
+      "outputs/regime_predictor_results.json",
+      "outputs/bootstrap_results.json",
+      "outputs/supplementary_results.json"
+    ]
+  }
+}

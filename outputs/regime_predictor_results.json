@@ -1,4 +1,9 @@
 {
+  "metadata": {
+    "direct_frequency_source": "data/processed/structural_features.json; all 10,310 filtered builds",
+    "training_cv_source": "outputs/regime_map_results.json; fixed 200-build training sample",
+    "proxy_correlation_source": "outputs/regime_map_results.json; fixed 200-build training sample"
+  },
   "feature_table": [
     {
       "property": "height",

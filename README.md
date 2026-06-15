@@ -7,27 +7,28 @@ Code, saved experimental results, and [interactive explainer](https://crabsatell
 | Regime | Properties | Ctrl% Range | Bottleneck |
 |--------|------------|-------------|------------|
 | Controllable | 9 / 14 | >100% | None for the measured response; standard CFG works |
-| Approachable | 4 / 14 | 20--100% | Frequency floor (more data, stronger guidance, or fine-tuning) |
+| Approachable | 4 / 14 | 20--100% | Frequency floor (more data, stronger guidance, or fine-tuning may help) |
 | Unresponsive | 1 / 14 | <20% | Representation ceiling or insufficient learnable variation |
 
-Composite predictor: effective signal x min(CV, 1) correlates with controllability at **Spearman rho = 0.879** (permutation p = 0.002, n = 10 emergent properties). Neither signal alone (0.624) nor CV alone (0.636) reaches significance under the same permutation test; their product does.
+Composite predictor: effective signal x min(CV, 1) correlates with controllability at **Spearman rho = 0.879** (permutation p = 0.002, n = 10 emergent properties). Neither signal alone (0.624) nor CV alone (0.636) reaches significance under the same permutation test; their product does. This is an association from one pipeline, not a validated general predictor.
 
 ## What This Is
 
-- **Three-regime learnability map** across 14 structural properties of Minecraft buildings (10,310 filtered builds, 32^3 voxel grids, ~260 block types)
-- **VQ-VAE** (32^3 -> 8^3 latent, 2048 codebook, ~22M params) + **AR Transformer** (512d, 12 layers, 8 heads, ~55M params) with classifier-free guidance
-- **Dual bottleneck analysis**: CFG sensitivity (s=0,2,4) separates frequency-limited from representation-limited constraints
-- **Predictive framework**: composite score (signal x min(CV, 1)) predicts regime before running generation experiments
-- **Interactive explainer**: bilingual (EN/ZH) step-by-step walkthrough of the paper for non-specialist audiences
+- **Three-regime learnability map** across 14 structural properties of Minecraft buildings (10,310 filtered builds, 32^3 voxel grids, 513 remapped block tokens)
+- **VQ-VAE** (32^3 -> 8^3 latent, 2048 codebook, ~40M params) + **AR Transformer** (512d, 12 layers, 8 heads, ~40M params) with classifier-free guidance
+- **Dual bottleneck analysis**: CFG sensitivity (s=0,2,4) helps diagnose frequency floors versus representation ceilings
+- **Predictor analysis**: composite score (signal x min(CV, 1)) is tested against generated-sample responsiveness
+- **[Interactive explainer](https://crabsatellite.github.io/constraint-learnability-regime-map/)**: bilingual (EN/ZH) step-by-step walkthrough of the paper for non-specialist audiences
 
 ## Repository Structure
 
-```
+```text
 constraint-learnability/
 |-- index.html                             # Interactive paper explainer (bilingual EN/ZH)
 |-- figures/
-|   |-- scatter_predictor.png              # Composite score vs controllability (Figure 1)
-|   |-- cfg_sensitivity.png                # CFG sensitivity visualization (Figure 2)
+|   |-- scatter_predictor.png              # Composite score vs controllability
+|   |-- scatter_predictor_data.json        # Data used to draw scatter_predictor
+|   |-- cfg_sensitivity.png                # CFG sensitivity visualization
 |   `-- condition_comparison.png           # Condition comparison visualization
 |-- models/
 |   |-- vqvae.py                           # VQ-VAE (3D conv encoder-decoder, 2048 codebook)
@@ -39,14 +40,13 @@ constraint-learnability/
 |   |-- train_vqvae.py                     # VQ-VAE training (100K steps)
 |   |-- train_ar.py                        # Unconditional AR training
 |   |-- train_ar_conditioned.py            # Conditioned AR training (80K steps, CFG)
-|   |-- extract_structural_features.py     # Extract 14 structural properties from builds
-|   |-- eval_structural.py                 # Evaluate controllability across conditions
+|   |-- extract_structural_features.py     # Extract structural conditioning features
 |   |-- test_regime_map.py                 # Full regime map evaluation (5 seeds x 8 samples)
 |   |-- test_cfg_sensitivity.py            # CFG sensitivity sweep (s=0,2,4)
 |   |-- test_conditioning.py               # Per-condition generation tests
 |   |-- test_composability_ood.py          # Composability and OOD experiments
 |   |-- test_robustness.py                 # Threshold robustness analysis
-|   |-- regime_predictor.py                # Decision tree predictor + statistical analysis
+|   |-- regime_predictor.py                # Predictor statistics and association analysis
 |   |-- bootstrap_regime_map.py            # Bootstrap 95% CI computation
 |   |-- supplementary_analysis.py          # Permutation tests and robustness checks
 |   |-- generate.py                        # Generate builds from trained models
@@ -56,11 +56,11 @@ constraint-learnability/
 |   |-- visualize_structures.py            # Visualization utilities
 |   `-- legacy_block_map.py                # Minecraft legacy block ID mapping
 |-- outputs/
-|   |-- regime_map_results.json            # Table 1 generated-sample measurements
-|   |-- cfg_sensitivity_results.json       # Table 2 data (CFG s=0,2,4)
-|   |-- regime_predictor_results.json      # Predictor feature table and LOO results
+|   |-- regime_map_results.json            # Regime map samples and statistics
+|   |-- cfg_sensitivity_results.json       # CFG sensitivity data
+|   |-- regime_predictor_results.json      # Predictor feature table and statistics
 |   |-- bootstrap_results.json             # Bootstrap 95% CI analysis
-|   |-- supplementary_results.json         # Permutation tests and robustness checks
+|   |-- supplementary_results.json         # Permutation and per-seed diagnostics
 |   |-- robustness_results.json            # Threshold robustness sweep
 |   |-- composability_ood_results.json     # Composability experiment
 |   |-- sym_aug_composability_ood.json     # Symmetry-augmented composability
@@ -70,9 +70,9 @@ constraint-learnability/
 
 ## Quick Start
 
-### Option A: Reproduce analysis from saved results (~1 minute)
+### Option A: Reproduce analysis from saved results
 
-Saved result files are included in `outputs/`. They reproduce the paper tables and statistical checks without retraining:
+All saved experimental results are included in `outputs/`.
 
 ```bash
 pip install -r requirements.txt
@@ -81,9 +81,7 @@ python scripts/bootstrap_regime_map.py
 python scripts/supplementary_analysis.py
 ```
 
-`regime_predictor.py` prints both an all-property diagnostic and the branch-specific diagnostics. The paper's headline composite result is the emergent-property permutation test reported by `supplementary_analysis.py`: Spearman rho = 0.8788, permutation p = 0.0016 (rounded in the paper to rho = 0.879, p = 0.002).
-
-### Option B: Train from scratch (~24 hours on 1 GPU)
+### Option B: Train from scratch
 
 ```bash
 pip install -r requirements.txt
@@ -103,26 +101,23 @@ python scripts/test_regime_map.py
 # 5. Run CFG sensitivity analysis
 python scripts/test_cfg_sensitivity.py
 
-# 6. Fit predictor
+# 6. Fit predictor and supplementary analyses
 python scripts/regime_predictor.py
-
-# 7. Recompute bootstrap CIs and supplementary checks
 python scripts/bootstrap_regime_map.py
 python scripts/supplementary_analysis.py
 ```
-
-Training from scratch requires the raw Minecraft data under `data/raw/` and writes processed data/checkpoints that are intentionally not committed because of size. The saved `outputs/` files are the public audit surface for the reported paper numbers.
 
 ## Requirements
 
 - Python 3.10+
 - PyTorch 2.0+ with CUDA
-- ~8 GB VRAM for training
-- See [requirements.txt](requirements.txt) for full dependencies
+- GPU recommended for training and fresh generation runs
+- See [requirements.txt](requirements.txt) for dependencies
 
 ## Paper
 
 *Which Structural Constraints Are Learnable? A Regime Map for a Minecraft Voxel Generator*
+
 Alex Chengyu Li, 2026
 
 [![DOI](https://zenodo.org/badge/DOI/10.5281/zenodo.19135431.svg)](https://doi.org/10.5281/zenodo.19135431)
@@ -131,11 +126,10 @@ Alex Chengyu Li, 2026
 
 ```bibtex
 @misc{li2026regimemap,
-  author    = {Li, Alex Chengyu},
-  title     = {Which Structural Constraints Are Learnable?
-               A Regime Map for a Minecraft Voxel Generator},
-  year      = {2026},
-  note      = {Preprint}
+  author = {Li, Alex Chengyu},
+  title = {Which Structural Constraints Are Learnable? A Regime Map for a Minecraft Voxel Generator},
+  year = {2026},
+  note = {Preprint}
 }
 ```
 

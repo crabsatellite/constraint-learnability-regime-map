@@ -68,14 +68,24 @@ def bootstrap_controllability(cond_results, uncond_key='unconditioned',
         else:
             regime = "UNRESPONSIVE"
 
+        ci_confident = (
+            (regime == "CONTROLLABLE" and ci_low > 100)
+            or (regime == "APPROACHABLE" and ci_low >= 20 and ci_high <= 100)
+            or (regime == "UNRESPONSIVE" and ci_high < 20)
+        )
+        regime_confident = ci_confident and pname != "enclosed_ratio"
+
         results[pname] = {
             'controllability_pct': round(best_shift_pct, 2),
             'ci_low': round(ci_low, 2),
             'ci_high': round(ci_high, 2),
             'best_condition': best_cond,
             'regime': regime,
-            'regime_confident': ci_low > 100 or ci_high < 20,
+            'ci_confident': ci_confident,
+            'regime_confident': regime_confident,
         }
+        if pname == "enclosed_ratio" and ci_confident:
+            results[pname]['confidence_note'] = "CI is above 100%, but paper excludes this near-zero-baseline ratio from confident assignments."
 
     return results
 

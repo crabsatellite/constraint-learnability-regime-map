@@ -1,11 +1,11 @@
 """
-Regime Predictor: predict constraint learnability from pre-experiment features.
+Analyze how training-data features relate to constraint responsiveness.
 
-Given measurable properties of a constraint (training frequency, spatial locality,
-training variance), predict whether it will be CONTROLLABLE, APPROACHABLE, or
-UNRESPONSIVE — WITHOUT running generation experiments.
+The regime labels still come from generation experiments. The pre-generation
+features are used to test whether training signal and variation are associated
+with the observed response regimes.
 
-This transforms the regime map from a post-hoc taxonomy into a predictive framework.
+This keeps the predictor result as an association analysis rather than a deployable classifier.
 """
 
 import sys
@@ -35,7 +35,7 @@ def compute_predictor_features():
     Features:
       1. effective_frequency: How much training data supports the target condition?
          - Direct: % of data with target conditioning value
-         - Emergent: max |correlation with conditioned property| * that property's frequency
+         - Emergent: max |correlation with conditioned property| as a proxy signal
       2. locality_score: Spatial computation complexity (1=local, 2=semi-global, 3=global)
       3. training_cv: Coefficient of variation in training data
     """
@@ -123,7 +123,7 @@ def compute_predictor_features():
             _, _, count = direct_cond_map[p]
             effective_freq[p] = count / n_total
         else:
-            # Emergent: max |correlation| * correlated property's frequency
+            # Emergent: use the strongest observed proxy correlation as signal.
             max_eff = 0.0
             best_proxy = None
             for cp in conditioned_props:
@@ -200,11 +200,11 @@ def compute_predictor_features():
 
 def continuous_analysis(rows):
     """
-    Instead of predicting discrete regimes (overfits with n=7),
-    show that predictor features CONTINUOUSLY CORRELATE with controllability.
+    Instead of treating the result as a deployable discrete-regime classifier,
+    show that predictor features continuously correlate with controllability.
 
     This is the honest claim: signal strength and training variation jointly
-    predict WHERE a constraint falls on the controllability spectrum.
+    are associated with where a constraint falls on the controllability spectrum.
     The three regimes are descriptive labels for regions of this space.
     """
     print("\n" + "=" * 90)
@@ -347,7 +347,7 @@ def hierarchical_tree(rows):
     fundamentally different mechanisms, so the predictor should split on
     has_direct_cond first, then use the most relevant feature within each branch.
 
-    Direct branch:  frequency threshold -> CONTROLLABLE vs APPROACHABLE
+    Direct branch:  frequency threshold baseline on directly conditioned properties
     Emergent branch: training_cv + proxy_correlation -> CONTROLLABLE / APPROACHABLE / UNRESPONSIVE
     """
     print("\n" + "=" * 90)
@@ -371,10 +371,8 @@ def hierarchical_tree(rows):
     # ================================================================
     # Direct branch: find frequency threshold
     # ================================================================
-    # Sort by frequency: enclosure(0.024) < symmetry(0.039) < height(0.068) < n_blocks(0.117)
-    # APPROACHABLE: enclosure(0.024)
-    # CONTROLLABLE: symmetry(0.039), height(0.068), n_blocks(0.117)
-    # Threshold: between 0.024 and 0.039
+    # Sort by frequency: enclosure(0.024) < symmetry(0.039) < height(0.068) < n_blocks(0.117).
+    # All four are controllable in this experiment, so the threshold baseline is descriptive only.
 
     direct_freqs = sorted([(r["effective_frequency"], r["regime_idx"], r["property"]) for r in direct])
     print(f"\n  Direct properties sorted by frequency:")
@@ -674,9 +672,8 @@ The regime predictor uses a two-level hierarchy:
 
   Level 1: Does the property have a DIRECT conditioning signal?
 
-  YES (direct) -> split on TARGET FREQUENCY in training data
-    freq >= ~3%  -> CONTROLLABLE
-    freq <  ~3%  -> APPROACHABLE
+  YES (direct) -> target frequency baseline in training data
+    all four directly conditioned properties are CONTROLLABLE here
 
   NO (emergent) -> split on PROXY CORRELATION x TRAINING CV
     high correlation + sufficient CV -> CONTROLLABLE (strong proxy)
@@ -684,8 +681,8 @@ The regime predictor uses a two-level hierarchy:
     any correlation + low CV         -> UNRESPONSIVE (nothing to learn)
 
 Interpretation:
-  Controllability requires BOTH a learning signal AND learnable variation.
-  - Direct conditioning provides explicit signal (sufficient freq = controllable)
+  Responsiveness is associated with BOTH a learning signal AND learnable variation.
+  - Direct conditioning provides an explicit signal in this experiment
   - Without direct conditioning, the signal must come from correlation with
     conditioned properties, AND the property must actually vary in training data.
   - If training data is homogeneous for a property (low CV), the model has no
@@ -694,6 +691,11 @@ Interpretation:
 
     # Save results
     output = {
+        "metadata": {
+            "direct_frequency_source": "data/processed/structural_features.json; all 10,310 filtered builds",
+            "training_cv_source": "outputs/regime_map_results.json; fixed 200-build training sample",
+            "proxy_correlation_source": "outputs/regime_map_results.json; fixed 200-build training sample",
+        },
         "feature_table": rows,
         "correlations": {k: {kk: round(vv, 4) if isinstance(vv, float) else vv
                              for kk, vv in v.items()}

@@ -199,16 +199,25 @@ def m1_threshold_sensitivity(regime, boot):
         marker = " <-- baseline" if u_t == 20 and c_t == 100 else ""
         print(f"  {u_t:>8} {c_t:>8} | {n_c:>3} {n_a:>3} {n_u:>3} | {', '.join(changed) if changed else '(none)'}{marker}")
 
-    # Also: CI-conservative classification
-    print(f"\n  CI-conservative classification (use CI lower bound for C, upper for U):")
-    n_conf_c = sum(1 for d in props_data.values() if d['ci_low'] > 100)
-    n_conf_u = sum(1 for d in props_data.values() if d['ci_high'] < 20)
-    n_borderline = 14 - n_conf_c - n_conf_u
+    # Also: CI-conservative classification.
+    print(f"\n  CI-conservative classification (CI lies entirely within one regime):")
+    n_conf_c = sum(1 for p, d in props_data.items() if p != 'enclosed_ratio' and d['regime'] == 'CONTROLLABLE' and d['ci_low'] > 100)
+    n_conf_a = sum(1 for p, d in props_data.items() if p != 'enclosed_ratio' and d['regime'] == 'APPROACHABLE' and d['ci_low'] >= 20 and d['ci_high'] <= 100)
+    n_conf_u = sum(1 for p, d in props_data.items() if p != 'enclosed_ratio' and d['regime'] == 'UNRESPONSIVE' and d['ci_high'] < 20)
+    n_borderline = 14 - n_conf_c - n_conf_a - n_conf_u
     print(f"    Confident CONTROLLABLE: {n_conf_c}")
+    print(f"    Confident APPROACHABLE: {n_conf_a}")
     print(f"    Confident UNRESPONSIVE: {n_conf_u}")
     print(f"    Borderline: {n_borderline}")
     borderline = [p for p, d in props_data.items()
-                  if not (d['ci_low'] > 100 or d['ci_high'] < 20)]
+                  if not (
+                      p != 'enclosed_ratio'
+                      and (
+                          (d['regime'] == 'CONTROLLABLE' and d['ci_low'] > 100)
+                          or (d['regime'] == 'APPROACHABLE' and d['ci_low'] >= 20 and d['ci_high'] <= 100)
+                          or (d['regime'] == 'UNRESPONSIVE' and d['ci_high'] < 20)
+                      )
+                  )]
     for p in borderline:
         d = props_data[p]
         print(f"      {p}: {d['controllability_pct']:.1f}% [{d['ci_low']:.1f}%, {d['ci_high']:.1f}%]")
