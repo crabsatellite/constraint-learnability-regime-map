@@ -45,7 +45,6 @@ constraint-learnability/
 |   |-- test_cfg_sensitivity.py            # CFG sensitivity sweep (s=0,2,4)
 |   |-- test_conditioning.py               # Per-condition generation tests
 |   |-- test_composability_ood.py          # Composability and OOD experiments
-|   |-- test_robustness.py                 # Threshold robustness analysis
 |   |-- regime_predictor.py                # Predictor statistics and association analysis
 |   |-- bootstrap_regime_map.py            # Bootstrap 95% CI computation
 |   |-- supplementary_analysis.py          # Permutation tests and robustness checks
@@ -61,7 +60,6 @@ constraint-learnability/
 |   |-- regime_predictor_results.json      # Predictor feature table and statistics
 |   |-- bootstrap_results.json             # Bootstrap 95% CI analysis
 |   |-- supplementary_results.json         # Permutation and per-seed diagnostics
-|   |-- robustness_results.json            # Threshold robustness sweep
 |   |-- composability_ood_results.json     # Composability experiment
 |   |-- sym_aug_composability_ood.json     # Symmetry-augmented composability
 |   `-- conditioned/                       # Per-condition generation results
