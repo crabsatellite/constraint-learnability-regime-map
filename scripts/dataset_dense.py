@@ -3,7 +3,7 @@ Dense voxel dataset for VQ-VAE training.
 
 Loads processed MC builds and pads them to 32x32x32 grids.
 Supports data augmentation: 4 rotations x 2 flips = 8x augmentation.
-Uses remapped vocab (top-512 block types + air = 513 total).
+Uses remapped vocab (top-512 non-air source tokens + air = 513 total).
 """
 
 import csv

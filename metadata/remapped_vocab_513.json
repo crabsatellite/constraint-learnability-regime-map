@@ -1,0 +1,3455 @@
+{
+  "description": "Project-specific 513-class voxel vocabulary used by the FDG 2026 constraint-learnability experiments. Token 0 is air; tokens 1-512 are the most frequent non-air source tokens in the filtered VQ-VAE training set, remapped for the VQ-VAE voxel decoder.",
+  "vocab_size": 513,
+  "air_token": 0,
+  "non_air_tokens": 512,
+  "resolved_minecraft_block_names": 152,
+  "rom1504_raw_int16_tokens": 361,
+  "notes": [
+    "This is a project-specific remapped vocabulary, not an official Minecraft block vocabulary.",
+    "The non-air vocabulary is selected by source-token frequency after the same max-dimension and minimum-block filters used for VQ-VAE training.",
+    "rom1504 entries are retained as raw int16 schematic tokens because that source stores mixed raw schematic encodings; the training pipeline treats each unique raw value as a distinct block/material token.",
+    "The paper reports this vocabulary as 513 remapped block tokens: 512 non-air tokens plus air."
+  ],
+  "tokens": [
+    {
+      "remapped_token": 0,
+      "source_token": 0,
+      "block": "minecraft:air",
+      "source": "unified_minecraft_block_vocab"
+    },
+    {
+      "remapped_token": 1,
+      "source_token": 5010,
+      "block": null,
+      "source": "rom1504_raw_int16_token",
+      "rom1504_raw_value": 10
+    },
+    {
+      "remapped_token": 2,
+      "source_token": 5001,
+      "block": null,
+      "source": "rom1504_raw_int16_token",
+      "rom1504_raw_value": 1
+    },
+    {
+      "remapped_token": 3,
+      "source_token": 5009,
+      "block": null,
+      "source": "rom1504_raw_int16_token",
+      "rom1504_raw_value": 9
+    },
+    {
+      "remapped_token": 4,
+      "source_token": 5015,
+      "block": null,
+      "source": "rom1504_raw_int16_token",
+      "rom1504_raw_value": 15
+    },
+    {
+      "remapped_token": 5,
+      "source_token": 9495,
+      "block": null,
+      "source": "rom1504_raw_int16_token",
+      "rom1504_raw_value": 4495
+    },
+    {
+      "remapped_token": 6,
+      "source_token": 5014,
+      "block": null,
+      "source": "rom1504_raw_int16_token",
+      "rom1504_raw_value": 14
+    },
+    {
+      "remapped_token": 7,
+      "source_token": 6384,
+      "block": null,
+      "source": "rom1504_raw_int16_token",
+      "rom1504_raw_value": 1384
+    },
+    {
+      "remapped_token": 8,
+      "source_token": 5246,
+      "block": null,
+      "source": "rom1504_raw_int16_token",
+      "rom1504_raw_value": 246
+    },
+    {
+      "remapped_token": 9,
+      "source_token": 11742,
+      "block": null,
+      "source": "rom1504_raw_int16_token",
+      "rom1504_raw_value": 6742
+    },
+    {
+      "remapped_token": 10,
+      "source_token": 5016,
+      "block": null,
+      "source": "rom1504_raw_int16_token",
+      "rom1504_raw_value": 16
+    },
+    {
+      "remapped_token": 11,
+      "source_token": 5231,
+      "block": null,
+      "source": "rom1504_raw_int16_token",
+      "rom1504_raw_value": 231
+    },
+    {
+      "remapped_token": 12,
+      "source_token": 6428,
+      "block": null,
+      "source": "rom1504_raw_int16_token",
+      "rom1504_raw_value": 1428
+    },
+    {
+      "remapped_token": 13,
+      "source_token": 5074,
+      "block": null,
+      "source": "rom1504_raw_int16_token",
+      "rom1504_raw_value": 74
+    },
+    {
+      "remapped_token": 14,
+      "source_token": 5033,
+      "block": null,
+      "source": "rom1504_raw_int16_token",
+      "rom1504_raw_value": 33
+    },
+    {
+      "remapped_token": 15,
+      "source_token": 6399,
+      "block": null,
+      "source": "rom1504_raw_int16_token",
+      "rom1504_raw_value": 1399
+    },
+    {
+      "remapped_token": 16,
+      "source_token": 5066,
+      "block": null,
+      "source": "rom1504_raw_int16_token",
+      "rom1504_raw_value": 66
+    },
+    {
+      "remapped_token": 17,
+      "source_token": 5077,
+      "block": null,
+      "source": "rom1504_raw_int16_token",
+      "rom1504_raw_value": 77
+    },
+    {
+      "remapped_token": 18,
+      "source_token": 5034,
+      "block": null,
+      "source": "rom1504_raw_int16_token",
+      "rom1504_raw_value": 34
+    },
+    {
+      "remapped_token": 19,
+      "source_token": 2679,
+      "block": "minecraft:quartz_block",
+      "source": "unified_minecraft_block_vocab"
+    },
+    {
+      "remapped_token": 20,
+      "source_token": 8995,
+      "block": null,
+      "source": "rom1504_raw_int16_token",
+      "rom1504_raw_value": 3995
+    },
+    {
+      "remapped_token": 21,
+      "source_token": 5017,
+      "block": null,
+      "source": "rom1504_raw_int16_token",
+      "rom1504_raw_value": 17
+    },
+    {
+      "remapped_token": 22,
+      "source_token": 6398,
+      "block": null,
+      "source": "rom1504_raw_int16_token",
+      "rom1504_raw_value": 1398
+    },
+    {
+      "remapped_token": 23,
+      "source_token": 6429,
+      "block": null,
+      "source": "rom1504_raw_int16_token",
+      "rom1504_raw_value": 1429
+    },
+    {
+      "remapped_token": 24,
+      "source_token": 13344,
+      "block": null,
+      "source": "rom1504_raw_int16_token",
+      "rom1504_raw_value": 8344
+    },
+    {
+      "remapped_token": 25,
+      "source_token": 2050,
+      "block": "minecraft:oak_planks",
+      "source": "unified_minecraft_block_vocab"
+    },
+    {
+      "remapped_token": 26,
+      "source_token": 337,
+      "block": "minecraft:birch_planks",
+      "source": "unified_minecraft_block_vocab"
+    },
+    {
+      "remapped_token": 27,
+      "source_token": 8218,
+      "block": null,
+      "source": "rom1504_raw_int16_token",
+      "rom1504_raw_value": 3218
+    },
+    {
+      "remapped_token": 28,
+      "source_token": 8930,
+      "block": null,
+      "source": "rom1504_raw_int16_token",
+      "rom1504_raw_value": 3930
+    },
+    {
+      "remapped_token": 29,
+      "source_token": 6434,
+      "block": null,
+      "source": "rom1504_raw_int16_token",
+      "rom1504_raw_value": 1434
+    },
+    {
+      "remapped_token": 30,
+      "source_token": 13342,
+      "block": null,
+      "source": "rom1504_raw_int16_token",
+      "rom1504_raw_value": 8342
+    },
+    {
+      "remapped_token": 31,
+      "source_token": 6392,
+      "block": null,
+      "source": "rom1504_raw_int16_token",
+      "rom1504_raw_value": 1392
+    },
+    {
+      "remapped_token": 32,
+      "source_token": 9764,
+      "block": null,
+      "source": "rom1504_raw_int16_token",
+      "rom1504_raw_value": 4764
+    },
+    {
+      "remapped_token": 33,
+      "source_token": 6391,
+      "block": null,
+      "source": "rom1504_raw_int16_token",
+      "rom1504_raw_value": 1391
+    },
+    {
+      "remapped_token": 34,
+      "source_token": 3088,
+      "block": "minecraft:spruce_planks",
+      "source": "unified_minecraft_block_vocab"
+    },
+    {
+      "remapped_token": 35,
+      "source_token": 5020,
+      "block": null,
+      "source": "rom1504_raw_int16_token",
+      "rom1504_raw_value": 20
+    },
+    {
+      "remapped_token": 36,
+      "source_token": 9013,
+      "block": null,
+      "source": "rom1504_raw_int16_token",
+      "rom1504_raw_value": 4013
+    },
+    {
+      "remapped_token": 37,
+      "source_token": 5248,
+      "block": null,
+      "source": "rom1504_raw_int16_token",
+      "rom1504_raw_value": 248
+    },
+    {
+      "remapped_token": 38,
+      "source_token": 988,
+      "block": "minecraft:dark_oak_planks",
+      "source": "unified_minecraft_block_vocab"
+    },
+    {
+      "remapped_token": 39,
+      "source_token": 540,
+      "block": "minecraft:bricks",
+      "source": "unified_minecraft_block_vocab"
+    },
+    {
+      "remapped_token": 40,
+      "source_token": 6389,
+      "block": null,
+      "source": "rom1504_raw_int16_token",
+      "rom1504_raw_value": 1389
+    },
+    {
+      "remapped_token": 41,
+      "source_token": 5145,
+      "block": null,
+      "source": "rom1504_raw_int16_token",
+      "rom1504_raw_value": 145
+    },
+    {
+      "remapped_token": 42,
+      "source_token": 5146,
+      "block": null,
+      "source": "rom1504_raw_int16_token",
+      "rom1504_raw_value": 146
+    },
+    {
+      "remapped_token": 43,
+      "source_token": 1402,
+      "block": "minecraft:glass",
+      "source": "unified_minecraft_block_vocab"
+    },
+    {
+      "remapped_token": 44,
+      "source_token": 6342,
+      "block": null,
+      "source": "rom1504_raw_int16_token",
+      "rom1504_raw_value": 1342
+    },
+    {
+      "remapped_token": 45,
+      "source_token": 5007,
+      "block": null,
+      "source": "rom1504_raw_int16_token",
+      "rom1504_raw_value": 7
+    },
+    {
+      "remapped_token": 46,
+      "source_token": 13340,
+      "block": null,
+      "source": "rom1504_raw_int16_token",
+      "rom1504_raw_value": 8340
+    },
+    {
+      "remapped_token": 47,
+      "source_token": 1454,
+      "block": "minecraft:grass_block",
+      "source": "unified_minecraft_block_vocab"
+    },
+    {
+      "remapped_token": 48,
+      "source_token": 13384,
+      "block": null,
+      "source": "rom1504_raw_int16_token",
+      "rom1504_raw_value": 8384
+    },
+    {
+      "remapped_token": 49,
+      "source_token": 11851,
+      "block": null,
+      "source": "rom1504_raw_int16_token",
+      "rom1504_raw_value": 6851
+    },
+    {
+      "remapped_token": 50,
+      "source_token": 740,
+      "block": "minecraft:cobblestone",
+      "source": "unified_minecraft_block_vocab"
+    },
+    {
+      "remapped_token": 51,
+      "source_token": 14442,
+      "block": null,
+      "source": "rom1504_raw_int16_token",
+      "rom1504_raw_value": 9442
+    },
+    {
+      "remapped_token": 52,
+      "source_token": 11860,
+      "block": null,
+      "source": "rom1504_raw_int16_token",
+      "rom1504_raw_value": 6860
+    },
+    {
+      "remapped_token": 53,
+      "source_token": 10019,
+      "block": null,
+      "source": "rom1504_raw_int16_token",
+      "rom1504_raw_value": 5019
+    },
+    {
+      "remapped_token": 54,
+      "source_token": 6397,
+      "block": null,
+      "source": "rom1504_raw_int16_token",
+      "rom1504_raw_value": 1397
+    },
+    {
+      "remapped_token": 55,
+      "source_token": 6396,
+      "block": null,
+      "source": "rom1504_raw_int16_token",
+      "rom1504_raw_value": 1396
+    },
+    {
+      "remapped_token": 56,
+      "source_token": 10510,
+      "block": null,
+      "source": "rom1504_raw_int16_token",
+      "rom1504_raw_value": 5510
+    },
+    {
+      "remapped_token": 57,
+      "source_token": 6395,
+      "block": null,
+      "source": "rom1504_raw_int16_token",
+      "rom1504_raw_value": 1395
+    },
+    {
+      "remapped_token": 58,
+      "source_token": 3162,
+      "block": "minecraft:stone",
+      "source": "unified_minecraft_block_vocab"
+    },
+    {
+      "remapped_token": 59,
+      "source_token": 6152,
+      "block": null,
+      "source": "rom1504_raw_int16_token",
+      "rom1504_raw_value": 1152
+    },
+    {
+      "remapped_token": 60,
+      "source_token": 6385,
+      "block": null,
+      "source": "rom1504_raw_int16_token",
+      "rom1504_raw_value": 1385
+    },
+    {
+      "remapped_token": 61,
+      "source_token": 6388,
+      "block": null,
+      "source": "rom1504_raw_int16_token",
+      "rom1504_raw_value": 1388
+    },
+    {
+      "remapped_token": 62,
+      "source_token": 3206,
+      "block": "minecraft:stone_bricks",
+      "source": "unified_minecraft_block_vocab"
+    },
+    {
+      "remapped_token": 63,
+      "source_token": 3717,
+      "block": "minecraft:oak_log",
+      "source": "unified_minecraft_block_vocab"
+    },
+    {
+      "remapped_token": 64,
+      "source_token": 12540,
+      "block": null,
+      "source": "rom1504_raw_int16_token",
+      "rom1504_raw_value": 7540
+    },
+    {
+      "remapped_token": 65,
+      "source_token": 13304,
+      "block": null,
+      "source": "rom1504_raw_int16_token",
+      "rom1504_raw_value": 8304
+    },
+    {
+      "remapped_token": 66,
+      "source_token": 13312,
+      "block": null,
+      "source": "rom1504_raw_int16_token",
+      "rom1504_raw_value": 8312
+    },
+    {
+      "remapped_token": 67,
+      "source_token": 13396,
+      "block": null,
+      "source": "rom1504_raw_int16_token",
+      "rom1504_raw_value": 8396
+    },
+    {
+      "remapped_token": 68,
+      "source_token": 13310,
+      "block": null,
+      "source": "rom1504_raw_int16_token",
+      "rom1504_raw_value": 8310
+    },
+    {
+      "remapped_token": 69,
+      "source_token": 5068,
+      "block": null,
+      "source": "rom1504_raw_int16_token",
+      "rom1504_raw_value": 68
+    },
+    {
+      "remapped_token": 70,
+      "source_token": 11865,
+      "block": null,
+      "source": "rom1504_raw_int16_token",
+      "rom1504_raw_value": 6865
+    },
+    {
+      "remapped_token": 71,
+      "source_token": 7032,
+      "block": null,
+      "source": "rom1504_raw_int16_token",
+      "rom1504_raw_value": 2032
+    },
+    {
+      "remapped_token": 72,
+      "source_token": 11864,
+      "block": null,
+      "source": "rom1504_raw_int16_token",
+      "rom1504_raw_value": 6864
+    },
+    {
+      "remapped_token": 73,
+      "source_token": 24,
+      "block": "minecraft:acacia_planks",
+      "source": "unified_minecraft_block_vocab"
+    },
+    {
+      "remapped_token": 74,
+      "source_token": 7012,
+      "block": null,
+      "source": "rom1504_raw_int16_token",
+      "rom1504_raw_value": 2012
+    },
+    {
+      "remapped_token": 75,
+      "source_token": 3749,
+      "block": "minecraft:oak_slab",
+      "source": "unified_minecraft_block_vocab"
+    },
+    {
+      "remapped_token": 76,
+      "source_token": 1564,
+      "block": "minecraft:jungle_planks",
+      "source": "unified_minecraft_block_vocab"
+    },
+    {
+      "remapped_token": 77,
+      "source_token": 5075,
+      "block": null,
+      "source": "rom1504_raw_int16_token",
+      "rom1504_raw_value": 75
+    },
+    {
+      "remapped_token": 78,
+      "source_token": 13382,
+      "block": null,
+      "source": "rom1504_raw_int16_token",
+      "rom1504_raw_value": 8382
+    },
+    {
+      "remapped_token": 79,
+      "source_token": 13394,
+      "block": null,
+      "source": "rom1504_raw_int16_token",
+      "rom1504_raw_value": 8394
+    },
+    {
+      "remapped_token": 80,
+      "source_token": 6992,
+      "block": null,
+      "source": "rom1504_raw_int16_token",
+      "rom1504_raw_value": 1992
+    },
+    {
+      "remapped_token": 81,
+      "source_token": 6972,
+      "block": null,
+      "source": "rom1504_raw_int16_token",
+      "rom1504_raw_value": 1972
+    },
+    {
+      "remapped_token": 82,
+      "source_token": 6390,
+      "block": null,
+      "source": "rom1504_raw_int16_token",
+      "rom1504_raw_value": 1390
+    },
+    {
+      "remapped_token": 83,
+      "source_token": 9726,
+      "block": null,
+      "source": "rom1504_raw_int16_token",
+      "rom1504_raw_value": 4726
+    },
+    {
+      "remapped_token": 84,
+      "source_token": 5073,
+      "block": null,
+      "source": "rom1504_raw_int16_token",
+      "rom1504_raw_value": 73
+    },
+    {
+      "remapped_token": 85,
+      "source_token": 6431,
+      "block": null,
+      "source": "rom1504_raw_int16_token",
+      "rom1504_raw_value": 1431
+    },
+    {
+      "remapped_token": 86,
+      "source_token": 11856,
+      "block": null,
+      "source": "rom1504_raw_int16_token",
+      "rom1504_raw_value": 6856
+    },
+    {
+      "remapped_token": 87,
+      "source_token": 11866,
+      "block": null,
+      "source": "rom1504_raw_int16_token",
+      "rom1504_raw_value": 6866
+    },
+    {
+      "remapped_token": 88,
+      "source_token": 5018,
+      "block": null,
+      "source": "rom1504_raw_int16_token",
+      "rom1504_raw_value": 18
+    },
+    {
+      "remapped_token": 89,
+      "source_token": 2017,
+      "block": "minecraft:nether_bricks",
+      "source": "unified_minecraft_block_vocab"
+    },
+    {
+      "remapped_token": 90,
+      "source_token": 13306,
+      "block": null,
+      "source": "rom1504_raw_int16_token",
+      "rom1504_raw_value": 8306
+    },
+    {
+      "remapped_token": 91,
+      "source_token": 6432,
+      "block": null,
+      "source": "rom1504_raw_int16_token",
+      "rom1504_raw_value": 1432
+    },
+    {
+      "remapped_token": 92,
+      "source_token": 3725,
+      "block": "minecraft:smooth_stone_slab",
+      "source": "unified_minecraft_block_vocab"
+    },
+    {
+      "remapped_token": 93,
+      "source_token": 13366,
+      "block": null,
+      "source": "rom1504_raw_int16_token",
+      "rom1504_raw_value": 8366
+    },
+    {
+      "remapped_token": 94,
+      "source_token": 1403,
+      "block": "minecraft:glass_pane",
+      "source": "unified_minecraft_block_vocab"
+    },
+    {
+      "remapped_token": 95,
+      "source_token": 2217,
+      "block": "minecraft:polished_andesite",
+      "source": "unified_minecraft_block_vocab"
+    },
+    {
+      "remapped_token": 96,
+      "source_token": 5076,
+      "block": null,
+      "source": "rom1504_raw_int16_token",
+      "rom1504_raw_value": 76
+    },
+    {
+      "remapped_token": 97,
+      "source_token": 5089,
+      "block": null,
+      "source": "rom1504_raw_int16_token",
+      "rom1504_raw_value": 89
+    },
+    {
+      "remapped_token": 98,
+      "source_token": 11858,
+      "block": null,
+      "source": "rom1504_raw_int16_token",
+      "rom1504_raw_value": 6858
+    },
+    {
+      "remapped_token": 99,
+      "source_token": 5078,
+      "block": null,
+      "source": "rom1504_raw_int16_token",
+      "rom1504_raw_value": 78
+    },
+    {
+      "remapped_token": 100,
+      "source_token": 9496,
+      "block": null,
+      "source": "rom1504_raw_int16_token",
+      "rom1504_raw_value": 4496
+    },
+    {
+      "remapped_token": 101,
+      "source_token": 8921,
+      "block": null,
+      "source": "rom1504_raw_int16_token",
+      "rom1504_raw_value": 3921
+    },
+    {
+      "remapped_token": 102,
+      "source_token": 6433,
+      "block": null,
+      "source": "rom1504_raw_int16_token",
+      "rom1504_raw_value": 1433
+    },
+    {
+      "remapped_token": 103,
+      "source_token": 945,
+      "block": "minecraft:cut_sandstone",
+      "source": "unified_minecraft_block_vocab"
+    },
+    {
+      "remapped_token": 104,
+      "source_token": 10006,
+      "block": null,
+      "source": "rom1504_raw_int16_token",
+      "rom1504_raw_value": 5006
+    },
+    {
+      "remapped_token": 105,
+      "source_token": 6427,
+      "block": null,
+      "source": "rom1504_raw_int16_token",
+      "rom1504_raw_value": 1427
+    },
+    {
+      "remapped_token": 106,
+      "source_token": 13372,
+      "block": null,
+      "source": "rom1504_raw_int16_token",
+      "rom1504_raw_value": 8372
+    },
+    {
+      "remapped_token": 107,
+      "source_token": 6387,
+      "block": null,
+      "source": "rom1504_raw_int16_token",
+      "rom1504_raw_value": 1387
+    },
+    {
+      "remapped_token": 108,
+      "source_token": 9966,
+      "block": null,
+      "source": "rom1504_raw_int16_token",
+      "rom1504_raw_value": 4966
+    },
+    {
+      "remapped_token": 109,
+      "source_token": 9946,
+      "block": null,
+      "source": "rom1504_raw_int16_token",
+      "rom1504_raw_value": 4946
+    },
+    {
+      "remapped_token": 110,
+      "source_token": 11855,
+      "block": null,
+      "source": "rom1504_raw_int16_token",
+      "rom1504_raw_value": 6855
+    },
+    {
+      "remapped_token": 111,
+      "source_token": 9986,
+      "block": null,
+      "source": "rom1504_raw_int16_token",
+      "rom1504_raw_value": 4986
+    },
+    {
+      "remapped_token": 112,
+      "source_token": 6393,
+      "block": null,
+      "source": "rom1504_raw_int16_token",
+      "rom1504_raw_value": 1393
+    },
+    {
+      "remapped_token": 113,
+      "source_token": 5233,
+      "block": null,
+      "source": "rom1504_raw_int16_token",
+      "rom1504_raw_value": 233
+    },
+    {
+      "remapped_token": 114,
+      "source_token": 8999,
+      "block": null,
+      "source": "rom1504_raw_int16_token",
+      "rom1504_raw_value": 3999
+    },
+    {
+      "remapped_token": 115,
+      "source_token": 3681,
+      "block": "minecraft:white_concrete",
+      "source": "unified_minecraft_block_vocab"
+    },
+    {
+      "remapped_token": 116,
+      "source_token": 5050,
+      "block": null,
+      "source": "rom1504_raw_int16_token",
+      "rom1504_raw_value": 50
+    },
+    {
+      "remapped_token": 117,
+      "source_token": 2852,
+      "block": "minecraft:sandstone",
+      "source": "unified_minecraft_block_vocab"
+    },
+    {
+      "remapped_token": 118,
+      "source_token": 10659,
+      "block": null,
+      "source": "rom1504_raw_int16_token",
+      "rom1504_raw_value": 5659
+    },
+    {
+      "remapped_token": 119,
+      "source_token": 11859,
+      "block": null,
+      "source": "rom1504_raw_int16_token",
+      "rom1504_raw_value": 6859
+    },
+    {
+      "remapped_token": 120,
+      "source_token": 10478,
+      "block": null,
+      "source": "rom1504_raw_int16_token",
+      "rom1504_raw_value": 5478
+    },
+    {
+      "remapped_token": 121,
+      "source_token": 13354,
+      "block": null,
+      "source": "rom1504_raw_int16_token",
+      "rom1504_raw_value": 8354
+    },
+    {
+      "remapped_token": 122,
+      "source_token": 10458,
+      "block": null,
+      "source": "rom1504_raw_int16_token",
+      "rom1504_raw_value": 5458
+    },
+    {
+      "remapped_token": 123,
+      "source_token": 14449,
+      "block": null,
+      "source": "rom1504_raw_int16_token",
+      "rom1504_raw_value": 9449
+    },
+    {
+      "remapped_token": 124,
+      "source_token": 10438,
+      "block": null,
+      "source": "rom1504_raw_int16_token",
+      "rom1504_raw_value": 5438
+    },
+    {
+      "remapped_token": 125,
+      "source_token": 6435,
+      "block": null,
+      "source": "rom1504_raw_int16_token",
+      "rom1504_raw_value": 1435
+    },
+    {
+      "remapped_token": 126,
+      "source_token": 9497,
+      "block": null,
+      "source": "rom1504_raw_int16_token",
+      "rom1504_raw_value": 4497
+    },
+    {
+      "remapped_token": 127,
+      "source_token": 14457,
+      "block": null,
+      "source": "rom1504_raw_int16_token",
+      "rom1504_raw_value": 9457
+    },
+    {
+      "remapped_token": 128,
+      "source_token": 10418,
+      "block": null,
+      "source": "rom1504_raw_int16_token",
+      "rom1504_raw_value": 5418
+    },
+    {
+      "remapped_token": 129,
+      "source_token": 12887,
+      "block": null,
+      "source": "rom1504_raw_int16_token",
+      "rom1504_raw_value": 7887
+    },
+    {
+      "remapped_token": 130,
+      "source_token": 5019,
+      "block": null,
+      "source": "rom1504_raw_int16_token",
+      "rom1504_raw_value": 19
+    },
+    {
+      "remapped_token": 131,
+      "source_token": 8705,
+      "block": null,
+      "source": "rom1504_raw_int16_token",
+      "rom1504_raw_value": 3705
+    },
+    {
+      "remapped_token": 132,
+      "source_token": 8725,
+      "block": null,
+      "source": "rom1504_raw_int16_token",
+      "rom1504_raw_value": 3725
+    },
+    {
+      "remapped_token": 133,
+      "source_token": 9110,
+      "block": null,
+      "source": "rom1504_raw_int16_token",
+      "rom1504_raw_value": 4110
+    },
+    {
+      "remapped_token": 134,
+      "source_token": 11745,
+      "block": null,
+      "source": "rom1504_raw_int16_token",
+      "rom1504_raw_value": 6745
+    },
+    {
+      "remapped_token": 135,
+      "source_token": 9498,
+      "block": null,
+      "source": "rom1504_raw_int16_token",
+      "rom1504_raw_value": 4498
+    },
+    {
+      "remapped_token": 136,
+      "source_token": 3732,
+      "block": "minecraft:oak_stairs",
+      "source": "unified_minecraft_block_vocab"
+    },
+    {
+      "remapped_token": 137,
+      "source_token": 2046,
+      "block": "minecraft:oak_leaves",
+      "source": "unified_minecraft_block_vocab"
+    },
+    {
+      "remapped_token": 138,
+      "source_token": 3756,
+      "block": "minecraft:spruce_stairs",
+      "source": "unified_minecraft_block_vocab"
+    },
+    {
+      "remapped_token": 139,
+      "source_token": 3353,
+      "block": "minecraft:wall_torch",
+      "source": "unified_minecraft_block_vocab"
+    },
+    {
+      "remapped_token": 140,
+      "source_token": 1643,
+      "block": "minecraft:lapis_block",
+      "source": "unified_minecraft_block_vocab"
+    },
+    {
+      "remapped_token": 141,
+      "source_token": 5006,
+      "block": null,
+      "source": "rom1504_raw_int16_token",
+      "rom1504_raw_value": 6
+    },
+    {
+      "remapped_token": 142,
+      "source_token": 3747,
+      "block": "minecraft:stone_brick_stairs",
+      "source": "unified_minecraft_block_vocab"
+    },
+    {
+      "remapped_token": 143,
+      "source_token": 8685,
+      "block": null,
+      "source": "rom1504_raw_int16_token",
+      "rom1504_raw_value": 3685
+    },
+    {
+      "remapped_token": 144,
+      "source_token": 8665,
+      "block": null,
+      "source": "rom1504_raw_int16_token",
+      "rom1504_raw_value": 3665
+    },
+    {
+      "remapped_token": 145,
+      "source_token": 13420,
+      "block": null,
+      "source": "rom1504_raw_int16_token",
+      "rom1504_raw_value": 8420
+    },
+    {
+      "remapped_token": 146,
+      "source_token": 13336,
+      "block": null,
+      "source": "rom1504_raw_int16_token",
+      "rom1504_raw_value": 8336
+    },
+    {
+      "remapped_token": 147,
+      "source_token": 9095,
+      "block": null,
+      "source": "rom1504_raw_int16_token",
+      "rom1504_raw_value": 4095
+    },
+    {
+      "remapped_token": 148,
+      "source_token": 3770,
+      "block": "minecraft:dark_oak_stairs",
+      "source": "unified_minecraft_block_vocab"
+    },
+    {
+      "remapped_token": 149,
+      "source_token": 5159,
+      "block": null,
+      "source": "rom1504_raw_int16_token",
+      "rom1504_raw_value": 159
+    },
+    {
+      "remapped_token": 150,
+      "source_token": 1276,
+      "block": "minecraft:dirt",
+      "source": "unified_minecraft_block_vocab"
+    },
+    {
+      "remapped_token": 151,
+      "source_token": 5042,
+      "block": null,
+      "source": "rom1504_raw_int16_token",
+      "rom1504_raw_value": 42
+    },
+    {
+      "remapped_token": 152,
+      "source_token": 13611,
+      "block": null,
+      "source": "rom1504_raw_int16_token",
+      "rom1504_raw_value": 8611
+    },
+    {
+      "remapped_token": 153,
+      "source_token": 11852,
+      "block": null,
+      "source": "rom1504_raw_int16_token",
+      "rom1504_raw_value": 6852
+    },
+    {
+      "remapped_token": 154,
+      "source_token": 5247,
+      "block": null,
+      "source": "rom1504_raw_int16_token",
+      "rom1504_raw_value": 247
+    },
+    {
+      "remapped_token": 155,
+      "source_token": 12886,
+      "block": null,
+      "source": "rom1504_raw_int16_token",
+      "rom1504_raw_value": 7886
+    },
+    {
+      "remapped_token": 156,
+      "source_token": 9936,
+      "block": null,
+      "source": "rom1504_raw_int16_token",
+      "rom1504_raw_value": 4936
+    },
+    {
+      "remapped_token": 157,
+      "source_token": 11730,
+      "block": null,
+      "source": "rom1504_raw_int16_token",
+      "rom1504_raw_value": 6730
+    },
+    {
+      "remapped_token": 158,
+      "source_token": 8355,
+      "block": null,
+      "source": "rom1504_raw_int16_token",
+      "rom1504_raw_value": 3355
+    },
+    {
+      "remapped_token": 159,
+      "source_token": 5005,
+      "block": null,
+      "source": "rom1504_raw_int16_token",
+      "rom1504_raw_value": 5
+    },
+    {
+      "remapped_token": 160,
+      "source_token": 9956,
+      "block": null,
+      "source": "rom1504_raw_int16_token",
+      "rom1504_raw_value": 4956
+    },
+    {
+      "remapped_token": 161,
+      "source_token": 9996,
+      "block": null,
+      "source": "rom1504_raw_int16_token",
+      "rom1504_raw_value": 4996
+    },
+    {
+      "remapped_token": 162,
+      "source_token": 1509,
+      "block": "minecraft:infested_stone",
+      "source": "unified_minecraft_block_vocab"
+    },
+    {
+      "remapped_token": 163,
+      "source_token": 3731,
+      "block": "minecraft:quartz_slab",
+      "source": "unified_minecraft_block_vocab"
+    },
+    {
+      "remapped_token": 164,
+      "source_token": 11863,
+      "block": null,
+      "source": "rom1504_raw_int16_token",
+      "rom1504_raw_value": 6863
+    },
+    {
+      "remapped_token": 165,
+      "source_token": 11743,
+      "block": null,
+      "source": "rom1504_raw_int16_token",
+      "rom1504_raw_value": 6743
+    },
+    {
+      "remapped_token": 166,
+      "source_token": 9976,
+      "block": null,
+      "source": "rom1504_raw_int16_token",
+      "rom1504_raw_value": 4976
+    },
+    {
+      "remapped_token": 167,
+      "source_token": 13334,
+      "block": null,
+      "source": "rom1504_raw_int16_token",
+      "rom1504_raw_value": 8334
+    },
+    {
+      "remapped_token": 168,
+      "source_token": 39834,
+      "block": null,
+      "source": "rom1504_raw_int16_token",
+      "rom1504_raw_value": 34834
+    },
+    {
+      "remapped_token": 169,
+      "source_token": 38802,
+      "block": null,
+      "source": "rom1504_raw_int16_token",
+      "rom1504_raw_value": 33802
+    },
+    {
+      "remapped_token": 170,
+      "source_token": 37778,
+      "block": null,
+      "source": "rom1504_raw_int16_token",
+      "rom1504_raw_value": 32778
+    },
+    {
+      "remapped_token": 171,
+      "source_token": 6436,
+      "block": null,
+      "source": "rom1504_raw_int16_token",
+      "rom1504_raw_value": 1436
+    },
+    {
+      "remapped_token": 172,
+      "source_token": 13352,
+      "block": null,
+      "source": "rom1504_raw_int16_token",
+      "rom1504_raw_value": 8352
+    },
+    {
+      "remapped_token": 173,
+      "source_token": 6438,
+      "block": null,
+      "source": "rom1504_raw_int16_token",
+      "rom1504_raw_value": 1438
+    },
+    {
+      "remapped_token": 174,
+      "source_token": 3763,
+      "block": "minecraft:quartz_stairs",
+      "source": "unified_minecraft_block_vocab"
+    },
+    {
+      "remapped_token": 175,
+      "source_token": 13316,
+      "block": null,
+      "source": "rom1504_raw_int16_token",
+      "rom1504_raw_value": 8316
+    },
+    {
+      "remapped_token": 176,
+      "source_token": 13314,
+      "block": null,
+      "source": "rom1504_raw_int16_token",
+      "rom1504_raw_value": 8314
+    },
+    {
+      "remapped_token": 177,
+      "source_token": 6437,
+      "block": null,
+      "source": "rom1504_raw_int16_token",
+      "rom1504_raw_value": 1437
+    },
+    {
+      "remapped_token": 178,
+      "source_token": 6439,
+      "block": null,
+      "source": "rom1504_raw_int16_token",
+      "rom1504_raw_value": 1439
+    },
+    {
+      "remapped_token": 179,
+      "source_token": 13398,
+      "block": null,
+      "source": "rom1504_raw_int16_token",
+      "rom1504_raw_value": 8398
+    },
+    {
+      "remapped_token": 180,
+      "source_token": 10049,
+      "block": null,
+      "source": "rom1504_raw_int16_token",
+      "rom1504_raw_value": 5049
+    },
+    {
+      "remapped_token": 181,
+      "source_token": 8372,
+      "block": null,
+      "source": "rom1504_raw_int16_token",
+      "rom1504_raw_value": 3372
+    },
+    {
+      "remapped_token": 182,
+      "source_token": 13370,
+      "block": null,
+      "source": "rom1504_raw_int16_token",
+      "rom1504_raw_value": 8370
+    },
+    {
+      "remapped_token": 183,
+      "source_token": 2851,
+      "block": "minecraft:sand",
+      "source": "unified_minecraft_block_vocab"
+    },
+    {
+      "remapped_token": 184,
+      "source_token": 1512,
+      "block": "minecraft:iron_block",
+      "source": "unified_minecraft_block_vocab"
+    },
+    {
+      "remapped_token": 185,
+      "source_token": 8947,
+      "block": null,
+      "source": "rom1504_raw_int16_token",
+      "rom1504_raw_value": 3947
+    },
+    {
+      "remapped_token": 186,
+      "source_token": 13386,
+      "block": null,
+      "source": "rom1504_raw_int16_token",
+      "rom1504_raw_value": 8386
+    },
+    {
+      "remapped_token": 187,
+      "source_token": 1406,
+      "block": "minecraft:glowstone",
+      "source": "unified_minecraft_block_vocab"
+    },
+    {
+      "remapped_token": 188,
+      "source_token": 3053,
+      "block": "minecraft:snow_block",
+      "source": "unified_minecraft_block_vocab"
+    },
+    {
+      "remapped_token": 189,
+      "source_token": 5083,
+      "block": null,
+      "source": "rom1504_raw_int16_token",
+      "rom1504_raw_value": 83
+    },
+    {
+      "remapped_token": 190,
+      "source_token": 11854,
+      "block": null,
+      "source": "rom1504_raw_int16_token",
+      "rom1504_raw_value": 6854
+    },
+    {
+      "remapped_token": 191,
+      "source_token": 12376,
+      "block": null,
+      "source": "rom1504_raw_int16_token",
+      "rom1504_raw_value": 7376
+    },
+    {
+      "remapped_token": 192,
+      "source_token": 5011,
+      "block": null,
+      "source": "rom1504_raw_int16_token",
+      "rom1504_raw_value": 11
+    },
+    {
+      "remapped_token": 193,
+      "source_token": 8929,
+      "block": null,
+      "source": "rom1504_raw_int16_token",
+      "rom1504_raw_value": 3929
+    },
+    {
+      "remapped_token": 194,
+      "source_token": 3736,
+      "block": "minecraft:cobblestone_stairs",
+      "source": "unified_minecraft_block_vocab"
+    },
+    {
+      "remapped_token": 195,
+      "source_token": 3718,
+      "block": "minecraft:spruce_log",
+      "source": "unified_minecraft_block_vocab"
+    },
+    {
+      "remapped_token": 196,
+      "source_token": 688,
+      "block": "minecraft:chiseled_sandstone",
+      "source": "unified_minecraft_block_vocab"
+    },
+    {
+      "remapped_token": 197,
+      "source_token": 5187,
+      "block": null,
+      "source": "rom1504_raw_int16_token",
+      "rom1504_raw_value": 187
+    },
+    {
+      "remapped_token": 198,
+      "source_token": 1679,
+      "block": "minecraft:light_gray_concrete",
+      "source": "unified_minecraft_block_vocab"
+    },
+    {
+      "remapped_token": 199,
+      "source_token": 1503,
+      "block": "minecraft:ice",
+      "source": "unified_minecraft_block_vocab"
+    },
+    {
+      "remapped_token": 200,
+      "source_token": 5004,
+      "block": null,
+      "source": "rom1504_raw_int16_token",
+      "rom1504_raw_value": 4
+    },
+    {
+      "remapped_token": 201,
+      "source_token": 3757,
+      "block": "minecraft:birch_stairs",
+      "source": "unified_minecraft_block_vocab"
+    },
+    {
+      "remapped_token": 202,
+      "source_token": 686,
+      "block": "minecraft:chiseled_quartz_block",
+      "source": "unified_minecraft_block_vocab"
+    },
+    {
+      "remapped_token": 203,
+      "source_token": 1836,
+      "block": "minecraft:mossy_cobblestone",
+      "source": "unified_minecraft_block_vocab"
+    },
+    {
+      "remapped_token": 204,
+      "source_token": 13390,
+      "block": null,
+      "source": "rom1504_raw_int16_token",
+      "rom1504_raw_value": 8390
+    },
+    {
+      "remapped_token": 205,
+      "source_token": 3743,
+      "block": "minecraft:white_stained_glass",
+      "source": "unified_minecraft_block_vocab"
+    },
+    {
+      "remapped_token": 206,
+      "source_token": 1341,
+      "block": "minecraft:end_stone_bricks",
+      "source": "unified_minecraft_block_vocab"
+    },
+    {
+      "remapped_token": 207,
+      "source_token": 2402,
+      "block": "minecraft:polished_diorite",
+      "source": "unified_minecraft_block_vocab"
+    },
+    {
+      "remapped_token": 208,
+      "source_token": 3750,
+      "block": "minecraft:spruce_slab",
+      "source": "unified_minecraft_block_vocab"
+    },
+    {
+      "remapped_token": 209,
+      "source_token": 10158,
+      "block": null,
+      "source": "rom1504_raw_int16_token",
+      "rom1504_raw_value": 5158
+    },
+    {
+      "remapped_token": 210,
+      "source_token": 13388,
+      "block": null,
+      "source": "rom1504_raw_int16_token",
+      "rom1504_raw_value": 8388
+    },
+    {
+      "remapped_token": 211,
+      "source_token": 3754,
+      "block": "minecraft:dark_oak_slab",
+      "source": "unified_minecraft_block_vocab"
+    },
+    {
+      "remapped_token": 212,
+      "source_token": 3724,
+      "block": "minecraft:white_wool",
+      "source": "unified_minecraft_block_vocab"
+    },
+    {
+      "remapped_token": 213,
+      "source_token": 8353,
+      "block": null,
+      "source": "rom1504_raw_int16_token",
+      "rom1504_raw_value": 3353
+    },
+    {
+      "remapped_token": 214,
+      "source_token": 2039,
+      "block": "minecraft:oak_fence",
+      "source": "unified_minecraft_block_vocab"
+    },
+    {
+      "remapped_token": 215,
+      "source_token": 5035,
+      "block": null,
+      "source": "rom1504_raw_int16_token",
+      "rom1504_raw_value": 35
+    },
+    {
+      "remapped_token": 216,
+      "source_token": 13739,
+      "block": null,
+      "source": "rom1504_raw_int16_token",
+      "rom1504_raw_value": 8739
+    },
+    {
+      "remapped_token": 217,
+      "source_token": 10448,
+      "block": null,
+      "source": "rom1504_raw_int16_token",
+      "rom1504_raw_value": 5448
+    },
+    {
+      "remapped_token": 218,
+      "source_token": 2445,
+      "block": "minecraft:polished_granite",
+      "source": "unified_minecraft_block_vocab"
+    },
+    {
+      "remapped_token": 219,
+      "source_token": 10468,
+      "block": null,
+      "source": "rom1504_raw_int16_token",
+      "rom1504_raw_value": 5468
+    },
+    {
+      "remapped_token": 220,
+      "source_token": 5090,
+      "block": null,
+      "source": "rom1504_raw_int16_token",
+      "rom1504_raw_value": 90
+    },
+    {
+      "remapped_token": 221,
+      "source_token": 5080,
+      "block": null,
+      "source": "rom1504_raw_int16_token",
+      "rom1504_raw_value": 80
+    },
+    {
+      "remapped_token": 222,
+      "source_token": 10408,
+      "block": null,
+      "source": "rom1504_raw_int16_token",
+      "rom1504_raw_value": 5408
+    },
+    {
+      "remapped_token": 223,
+      "source_token": 5058,
+      "block": null,
+      "source": "rom1504_raw_int16_token",
+      "rom1504_raw_value": 58
+    },
+    {
+      "remapped_token": 224,
+      "source_token": 1461,
+      "block": "minecraft:gray_concrete",
+      "source": "unified_minecraft_block_vocab"
+    },
+    {
+      "remapped_token": 225,
+      "source_token": 10428,
+      "block": null,
+      "source": "rom1504_raw_int16_token",
+      "rom1504_raw_value": 5428
+    },
+    {
+      "remapped_token": 226,
+      "source_token": 3719,
+      "block": "minecraft:birch_log",
+      "source": "unified_minecraft_block_vocab"
+    },
+    {
+      "remapped_token": 227,
+      "source_token": 5088,
+      "block": null,
+      "source": "rom1504_raw_int16_token",
+      "rom1504_raw_value": 88
+    },
+    {
+      "remapped_token": 228,
+      "source_token": 5160,
+      "block": null,
+      "source": "rom1504_raw_int16_token",
+      "rom1504_raw_value": 160
+    },
+    {
+      "remapped_token": 229,
+      "source_token": 2124,
+      "block": "minecraft:obsidian",
+      "source": "unified_minecraft_block_vocab"
+    },
+    {
+      "remapped_token": 230,
+      "source_token": 12870,
+      "block": null,
+      "source": "rom1504_raw_int16_token",
+      "rom1504_raw_value": 7870
+    },
+    {
+      "remapped_token": 231,
+      "source_token": 14456,
+      "block": null,
+      "source": "rom1504_raw_int16_token",
+      "rom1504_raw_value": 9456
+    },
+    {
+      "remapped_token": 232,
+      "source_token": 5043,
+      "block": null,
+      "source": "rom1504_raw_int16_token",
+      "rom1504_raw_value": 43
+    },
+    {
+      "remapped_token": 233,
+      "source_token": 13318,
+      "block": null,
+      "source": "rom1504_raw_int16_token",
+      "rom1504_raw_value": 8318
+    },
+    {
+      "remapped_token": 234,
+      "source_token": 12877,
+      "block": null,
+      "source": "rom1504_raw_int16_token",
+      "rom1504_raw_value": 7877
+    },
+    {
+      "remapped_token": 235,
+      "source_token": 10658,
+      "block": null,
+      "source": "rom1504_raw_int16_token",
+      "rom1504_raw_value": 5658
+    },
+    {
+      "remapped_token": 236,
+      "source_token": 2186,
+      "block": "minecraft:packed_ice",
+      "source": "unified_minecraft_block_vocab"
+    },
+    {
+      "remapped_token": 237,
+      "source_token": 11896,
+      "block": null,
+      "source": "rom1504_raw_int16_token",
+      "rom1504_raw_value": 6896
+    },
+    {
+      "remapped_token": 238,
+      "source_token": 11862,
+      "block": null,
+      "source": "rom1504_raw_int16_token",
+      "rom1504_raw_value": 6862
+    },
+    {
+      "remapped_token": 239,
+      "source_token": 11777,
+      "block": null,
+      "source": "rom1504_raw_int16_token",
+      "rom1504_raw_value": 6777
+    },
+    {
+      "remapped_token": 240,
+      "source_token": 13378,
+      "block": null,
+      "source": "rom1504_raw_int16_token",
+      "rom1504_raw_value": 8378
+    },
+    {
+      "remapped_token": 241,
+      "source_token": 9098,
+      "block": null,
+      "source": "rom1504_raw_int16_token",
+      "rom1504_raw_value": 4098
+    },
+    {
+      "remapped_token": 242,
+      "source_token": 11757,
+      "block": null,
+      "source": "rom1504_raw_int16_token",
+      "rom1504_raw_value": 6757
+    },
+    {
+      "remapped_token": 243,
+      "source_token": 12489,
+      "block": null,
+      "source": "rom1504_raw_int16_token",
+      "rom1504_raw_value": 7489
+    },
+    {
+      "remapped_token": 244,
+      "source_token": 13308,
+      "block": null,
+      "source": "rom1504_raw_int16_token",
+      "rom1504_raw_value": 8308
+    },
+    {
+      "remapped_token": 245,
+      "source_token": 3748,
+      "block": "minecraft:nether_brick_stairs",
+      "source": "unified_minecraft_block_vocab"
+    },
+    {
+      "remapped_token": 246,
+      "source_token": 10160,
+      "block": null,
+      "source": "rom1504_raw_int16_token",
+      "rom1504_raw_value": 5160
+    },
+    {
+      "remapped_token": 247,
+      "source_token": 12888,
+      "block": null,
+      "source": "rom1504_raw_int16_token",
+      "rom1504_raw_value": 7888
+    },
+    {
+      "remapped_token": 248,
+      "source_token": 13418,
+      "block": null,
+      "source": "rom1504_raw_int16_token",
+      "rom1504_raw_value": 8418
+    },
+    {
+      "remapped_token": 249,
+      "source_token": 5002,
+      "block": null,
+      "source": "rom1504_raw_int16_token",
+      "rom1504_raw_value": 2
+    },
+    {
+      "remapped_token": 250,
+      "source_token": 5003,
+      "block": null,
+      "source": "rom1504_raw_int16_token",
+      "rom1504_raw_value": 3
+    },
+    {
+      "remapped_token": 251,
+      "source_token": 3766,
+      "block": "minecraft:white_stained_glass_pane",
+      "source": "unified_minecraft_block_vocab"
+    },
+    {
+      "remapped_token": 252,
+      "source_token": 2681,
+      "block": "minecraft:quartz_pillar",
+      "source": "unified_minecraft_block_vocab"
+    },
+    {
+      "remapped_token": 253,
+      "source_token": 12866,
+      "block": null,
+      "source": "rom1504_raw_int16_token",
+      "rom1504_raw_value": 7866
+    },
+    {
+      "remapped_token": 254,
+      "source_token": 7022,
+      "block": null,
+      "source": "rom1504_raw_int16_token",
+      "rom1504_raw_value": 2022
+    },
+    {
+      "remapped_token": 255,
+      "source_token": 7002,
+      "block": null,
+      "source": "rom1504_raw_int16_token",
+      "rom1504_raw_value": 2002
+    },
+    {
+      "remapped_token": 256,
+      "source_token": 5060,
+      "block": null,
+      "source": "rom1504_raw_int16_token",
+      "rom1504_raw_value": 60
+    },
+    {
+      "remapped_token": 257,
+      "source_token": 11797,
+      "block": null,
+      "source": "rom1504_raw_int16_token",
+      "rom1504_raw_value": 6797
+    },
+    {
+      "remapped_token": 258,
+      "source_token": 12469,
+      "block": null,
+      "source": "rom1504_raw_int16_token",
+      "rom1504_raw_value": 7469
+    },
+    {
+      "remapped_token": 259,
+      "source_token": 8887,
+      "block": null,
+      "source": "rom1504_raw_int16_token",
+      "rom1504_raw_value": 3887
+    },
+    {
+      "remapped_token": 260,
+      "source_token": 6341,
+      "block": null,
+      "source": "rom1504_raw_int16_token",
+      "rom1504_raw_value": 1341
+    },
+    {
+      "remapped_token": 261,
+      "source_token": 8908,
+      "block": null,
+      "source": "rom1504_raw_int16_token",
+      "rom1504_raw_value": 3908
+    },
+    {
+      "remapped_token": 262,
+      "source_token": 8364,
+      "block": null,
+      "source": "rom1504_raw_int16_token",
+      "rom1504_raw_value": 3364
+    },
+    {
+      "remapped_token": 263,
+      "source_token": 14450,
+      "block": null,
+      "source": "rom1504_raw_int16_token",
+      "rom1504_raw_value": 9450
+    },
+    {
+      "remapped_token": 264,
+      "source_token": 14454,
+      "block": null,
+      "source": "rom1504_raw_int16_token",
+      "rom1504_raw_value": 9454
+    },
+    {
+      "remapped_token": 265,
+      "source_token": 14138,
+      "block": null,
+      "source": "rom1504_raw_int16_token",
+      "rom1504_raw_value": 9138
+    },
+    {
+      "remapped_token": 266,
+      "source_token": 8906,
+      "block": null,
+      "source": "rom1504_raw_int16_token",
+      "rom1504_raw_value": 3906
+    },
+    {
+      "remapped_token": 267,
+      "source_token": 12878,
+      "block": null,
+      "source": "rom1504_raw_int16_token",
+      "rom1504_raw_value": 7878
+    },
+    {
+      "remapped_token": 268,
+      "source_token": 11817,
+      "block": null,
+      "source": "rom1504_raw_int16_token",
+      "rom1504_raw_value": 6817
+    },
+    {
+      "remapped_token": 269,
+      "source_token": 12868,
+      "block": null,
+      "source": "rom1504_raw_int16_token",
+      "rom1504_raw_value": 7868
+    },
+    {
+      "remapped_token": 270,
+      "source_token": 5071,
+      "block": null,
+      "source": "rom1504_raw_int16_token",
+      "rom1504_raw_value": 71
+    },
+    {
+      "remapped_token": 271,
+      "source_token": 12884,
+      "block": null,
+      "source": "rom1504_raw_int16_token",
+      "rom1504_raw_value": 7884
+    },
+    {
+      "remapped_token": 272,
+      "source_token": 6982,
+      "block": null,
+      "source": "rom1504_raw_int16_token",
+      "rom1504_raw_value": 1982
+    },
+    {
+      "remapped_token": 273,
+      "source_token": 491,
+      "block": "minecraft:bookshelf",
+      "source": "unified_minecraft_block_vocab"
+    },
+    {
+      "remapped_token": 274,
+      "source_token": 12606,
+      "block": null,
+      "source": "rom1504_raw_int16_token",
+      "rom1504_raw_value": 7606
+    },
+    {
+      "remapped_token": 275,
+      "source_token": 8912,
+      "block": null,
+      "source": "rom1504_raw_int16_token",
+      "rom1504_raw_value": 3912
+    },
+    {
+      "remapped_token": 276,
+      "source_token": 6962,
+      "block": null,
+      "source": "rom1504_raw_int16_token",
+      "rom1504_raw_value": 1962
+    },
+    {
+      "remapped_token": 277,
+      "source_token": 8874,
+      "block": null,
+      "source": "rom1504_raw_int16_token",
+      "rom1504_raw_value": 3874
+    },
+    {
+      "remapped_token": 278,
+      "source_token": 8910,
+      "block": null,
+      "source": "rom1504_raw_int16_token",
+      "rom1504_raw_value": 3910
+    },
+    {
+      "remapped_token": 279,
+      "source_token": 8344,
+      "block": null,
+      "source": "rom1504_raw_int16_token",
+      "rom1504_raw_value": 3344
+    },
+    {
+      "remapped_token": 280,
+      "source_token": 7046,
+      "block": null,
+      "source": "rom1504_raw_int16_token",
+      "rom1504_raw_value": 2046
+    },
+    {
+      "remapped_token": 281,
+      "source_token": 1230,
+      "block": "minecraft:diamond_block",
+      "source": "unified_minecraft_block_vocab"
+    },
+    {
+      "remapped_token": 282,
+      "source_token": 12529,
+      "block": null,
+      "source": "rom1504_raw_int16_token",
+      "rom1504_raw_value": 7529
+    },
+    {
+      "remapped_token": 283,
+      "source_token": 10407,
+      "block": null,
+      "source": "rom1504_raw_int16_token",
+      "rom1504_raw_value": 5407
+    },
+    {
+      "remapped_token": 284,
+      "source_token": 7040,
+      "block": null,
+      "source": "rom1504_raw_int16_token",
+      "rom1504_raw_value": 2040
+    },
+    {
+      "remapped_token": 285,
+      "source_token": 326,
+      "block": "minecraft:birch_fence",
+      "source": "unified_minecraft_block_vocab"
+    },
+    {
+      "remapped_token": 286,
+      "source_token": 2838,
+      "block": "minecraft:red_wool",
+      "source": "unified_minecraft_block_vocab"
+    },
+    {
+      "remapped_token": 287,
+      "source_token": 8637,
+      "block": null,
+      "source": "rom1504_raw_int16_token",
+      "rom1504_raw_value": 3637
+    },
+    {
+      "remapped_token": 288,
+      "source_token": 8695,
+      "block": null,
+      "source": "rom1504_raw_int16_token",
+      "rom1504_raw_value": 3695
+    },
+    {
+      "remapped_token": 289,
+      "source_token": 8639,
+      "block": null,
+      "source": "rom1504_raw_int16_token",
+      "rom1504_raw_value": 3639
+    },
+    {
+      "remapped_token": 290,
+      "source_token": 8715,
+      "block": null,
+      "source": "rom1504_raw_int16_token",
+      "rom1504_raw_value": 3715
+    },
+    {
+      "remapped_token": 291,
+      "source_token": 2734,
+      "block": "minecraft:red_bed",
+      "source": "unified_minecraft_block_vocab"
+    },
+    {
+      "remapped_token": 292,
+      "source_token": 9819,
+      "block": null,
+      "source": "rom1504_raw_int16_token",
+      "rom1504_raw_value": 4819
+    },
+    {
+      "remapped_token": 293,
+      "source_token": 7052,
+      "block": null,
+      "source": "rom1504_raw_int16_token",
+      "rom1504_raw_value": 2052
+    },
+    {
+      "remapped_token": 294,
+      "source_token": 12539,
+      "block": null,
+      "source": "rom1504_raw_int16_token",
+      "rom1504_raw_value": 7539
+    },
+    {
+      "remapped_token": 295,
+      "source_token": 9815,
+      "block": null,
+      "source": "rom1504_raw_int16_token",
+      "rom1504_raw_value": 4815
+    },
+    {
+      "remapped_token": 296,
+      "source_token": 8655,
+      "block": null,
+      "source": "rom1504_raw_int16_token",
+      "rom1504_raw_value": 3655
+    },
+    {
+      "remapped_token": 297,
+      "source_token": 3450,
+      "block": "minecraft:water",
+      "source": "unified_minecraft_block_vocab"
+    },
+    {
+      "remapped_token": 298,
+      "source_token": 5173,
+      "block": null,
+      "source": "rom1504_raw_int16_token",
+      "rom1504_raw_value": 173
+    },
+    {
+      "remapped_token": 299,
+      "source_token": 14446,
+      "block": null,
+      "source": "rom1504_raw_int16_token",
+      "rom1504_raw_value": 9446
+    },
+    {
+      "remapped_token": 300,
+      "source_token": 3767,
+      "block": "minecraft:acacia_log",
+      "source": "unified_minecraft_block_vocab"
+    },
+    {
+      "remapped_token": 301,
+      "source_token": 9106,
+      "block": null,
+      "source": "rom1504_raw_int16_token",
+      "rom1504_raw_value": 4106
+    },
+    {
+      "remapped_token": 302,
+      "source_token": 485,
+      "block": "minecraft:blue_terracotta",
+      "source": "unified_minecraft_block_vocab"
+    },
+    {
+      "remapped_token": 303,
+      "source_token": 12885,
+      "block": null,
+      "source": "rom1504_raw_int16_token",
+      "rom1504_raw_value": 7885
+    },
+    {
+      "remapped_token": 304,
+      "source_token": 8641,
+      "block": null,
+      "source": "rom1504_raw_int16_token",
+      "rom1504_raw_value": 3641
+    },
+    {
+      "remapped_token": 305,
+      "source_token": 2902,
+      "block": "minecraft:sea_lantern",
+      "source": "unified_minecraft_block_vocab"
+    },
+    {
+      "remapped_token": 306,
+      "source_token": 9807,
+      "block": null,
+      "source": "rom1504_raw_int16_token",
+      "rom1504_raw_value": 4807
+    },
+    {
+      "remapped_token": 307,
+      "source_token": 5086,
+      "block": null,
+      "source": "rom1504_raw_int16_token",
+      "rom1504_raw_value": 86
+    },
+    {
+      "remapped_token": 308,
+      "source_token": 6394,
+      "block": null,
+      "source": "rom1504_raw_int16_token",
+      "rom1504_raw_value": 1394
+    },
+    {
+      "remapped_token": 309,
+      "source_token": 8643,
+      "block": null,
+      "source": "rom1504_raw_int16_token",
+      "rom1504_raw_value": 3643
+    },
+    {
+      "remapped_token": 310,
+      "source_token": 1923,
+      "block": "minecraft:mossy_stone_bricks",
+      "source": "unified_minecraft_block_vocab"
+    },
+    {
+      "remapped_token": 311,
+      "source_token": 9046,
+      "block": null,
+      "source": "rom1504_raw_int16_token",
+      "rom1504_raw_value": 4046
+    },
+    {
+      "remapped_token": 312,
+      "source_token": 9822,
+      "block": null,
+      "source": "rom1504_raw_int16_token",
+      "rom1504_raw_value": 4822
+    },
+    {
+      "remapped_token": 313,
+      "source_token": 12509,
+      "block": null,
+      "source": "rom1504_raw_int16_token",
+      "rom1504_raw_value": 7509
+    },
+    {
+      "remapped_token": 314,
+      "source_token": 8675,
+      "block": null,
+      "source": "rom1504_raw_int16_token",
+      "rom1504_raw_value": 3675
+    },
+    {
+      "remapped_token": 315,
+      "source_token": 415,
+      "block": "minecraft:black_concrete",
+      "source": "unified_minecraft_block_vocab"
+    },
+    {
+      "remapped_token": 316,
+      "source_token": 3755,
+      "block": "minecraft:sandstone_stairs",
+      "source": "unified_minecraft_block_vocab"
+    },
+    {
+      "remapped_token": 317,
+      "source_token": 12152,
+      "block": null,
+      "source": "rom1504_raw_int16_token",
+      "rom1504_raw_value": 7152
+    },
+    {
+      "remapped_token": 318,
+      "source_token": 11767,
+      "block": null,
+      "source": "rom1504_raw_int16_token",
+      "rom1504_raw_value": 6767
+    },
+    {
+      "remapped_token": 319,
+      "source_token": 9038,
+      "block": null,
+      "source": "rom1504_raw_int16_token",
+      "rom1504_raw_value": 4038
+    },
+    {
+      "remapped_token": 320,
+      "source_token": 8948,
+      "block": null,
+      "source": "rom1504_raw_int16_token",
+      "rom1504_raw_value": 3948
+    },
+    {
+      "remapped_token": 321,
+      "source_token": 1669,
+      "block": "minecraft:light_blue_stained_glass",
+      "source": "unified_minecraft_block_vocab"
+    },
+    {
+      "remapped_token": 322,
+      "source_token": 3729,
+      "block": "minecraft:stone_brick_slab",
+      "source": "unified_minecraft_block_vocab"
+    },
+    {
+      "remapped_token": 323,
+      "source_token": 10082,
+      "block": null,
+      "source": "rom1504_raw_int16_token",
+      "rom1504_raw_value": 5082
+    },
+    {
+      "remapped_token": 324,
+      "source_token": 423,
+      "block": "minecraft:black_wool",
+      "source": "unified_minecraft_block_vocab"
+    },
+    {
+      "remapped_token": 325,
+      "source_token": 9906,
+      "block": null,
+      "source": "rom1504_raw_int16_token",
+      "rom1504_raw_value": 4906
+    },
+    {
+      "remapped_token": 326,
+      "source_token": 1481,
+      "block": "minecraft:green_terracotta",
+      "source": "unified_minecraft_block_vocab"
+    },
+    {
+      "remapped_token": 327,
+      "source_token": 1407,
+      "block": "minecraft:gold_block",
+      "source": "unified_minecraft_block_vocab"
+    },
+    {
+      "remapped_token": 328,
+      "source_token": 14443,
+      "block": null,
+      "source": "rom1504_raw_int16_token",
+      "rom1504_raw_value": 9443
+    },
+    {
+      "remapped_token": 329,
+      "source_token": 11747,
+      "block": null,
+      "source": "rom1504_raw_int16_token",
+      "rom1504_raw_value": 6747
+    },
+    {
+      "remapped_token": 330,
+      "source_token": 7034,
+      "block": null,
+      "source": "rom1504_raw_int16_token",
+      "rom1504_raw_value": 2034
+    },
+    {
+      "remapped_token": 331,
+      "source_token": 3720,
+      "block": "minecraft:jungle_log",
+      "source": "unified_minecraft_block_vocab"
+    },
+    {
+      "remapped_token": 332,
+      "source_token": 3751,
+      "block": "minecraft:birch_slab",
+      "source": "unified_minecraft_block_vocab"
+    },
+    {
+      "remapped_token": 333,
+      "source_token": 13643,
+      "block": null,
+      "source": "rom1504_raw_int16_token",
+      "rom1504_raw_value": 8643
+    },
+    {
+      "remapped_token": 334,
+      "source_token": 5174,
+      "block": null,
+      "source": "rom1504_raw_int16_token",
+      "rom1504_raw_value": 174
+    },
+    {
+      "remapped_token": 335,
+      "source_token": 8624,
+      "block": null,
+      "source": "rom1504_raw_int16_token",
+      "rom1504_raw_value": 3624
+    },
+    {
+      "remapped_token": 336,
+      "source_token": 9926,
+      "block": null,
+      "source": "rom1504_raw_int16_token",
+      "rom1504_raw_value": 4926
+    },
+    {
+      "remapped_token": 337,
+      "source_token": 977,
+      "block": "minecraft:dark_oak_fence",
+      "source": "unified_minecraft_block_vocab"
+    },
+    {
+      "remapped_token": 338,
+      "source_token": 13305,
+      "block": null,
+      "source": "rom1504_raw_int16_token",
+      "rom1504_raw_value": 8305
+    },
+    {
+      "remapped_token": 339,
+      "source_token": 1671,
+      "block": "minecraft:light_blue_terracotta",
+      "source": "unified_minecraft_block_vocab"
+    },
+    {
+      "remapped_token": 340,
+      "source_token": 13338,
+      "block": null,
+      "source": "rom1504_raw_int16_token",
+      "rom1504_raw_value": 8338
+    },
+    {
+      "remapped_token": 341,
+      "source_token": 8808,
+      "block": null,
+      "source": "rom1504_raw_int16_token",
+      "rom1504_raw_value": 3808
+    },
+    {
+      "remapped_token": 342,
+      "source_token": 10161,
+      "block": null,
+      "source": "rom1504_raw_int16_token",
+      "rom1504_raw_value": 5161
+    },
+    {
+      "remapped_token": 343,
+      "source_token": 3705,
+      "block": "minecraft:yellow_terracotta",
+      "source": "unified_minecraft_block_vocab"
+    },
+    {
+      "remapped_token": 344,
+      "source_token": 13368,
+      "block": null,
+      "source": "rom1504_raw_int16_token",
+      "rom1504_raw_value": 8368
+    },
+    {
+      "remapped_token": 345,
+      "source_token": 1469,
+      "block": "minecraft:gray_wool",
+      "source": "unified_minecraft_block_vocab"
+    },
+    {
+      "remapped_token": 346,
+      "source_token": 8356,
+      "block": null,
+      "source": "rom1504_raw_int16_token",
+      "rom1504_raw_value": 3356
+    },
+    {
+      "remapped_token": 347,
+      "source_token": 3746,
+      "block": "minecraft:brick_stairs",
+      "source": "unified_minecraft_block_vocab"
+    },
+    {
+      "remapped_token": 348,
+      "source_token": 1511,
+      "block": "minecraft:iron_bars",
+      "source": "unified_minecraft_block_vocab"
+    },
+    {
+      "remapped_token": 349,
+      "source_token": 9042,
+      "block": null,
+      "source": "rom1504_raw_int16_token",
+      "rom1504_raw_value": 4042
+    },
+    {
+      "remapped_token": 350,
+      "source_token": 10062,
+      "block": null,
+      "source": "rom1504_raw_int16_token",
+      "rom1504_raw_value": 5062
+    },
+    {
+      "remapped_token": 351,
+      "source_token": 6386,
+      "block": null,
+      "source": "rom1504_raw_int16_token",
+      "rom1504_raw_value": 1386
+    },
+    {
+      "remapped_token": 352,
+      "source_token": 11787,
+      "block": null,
+      "source": "rom1504_raw_int16_token",
+      "rom1504_raw_value": 6787
+    },
+    {
+      "remapped_token": 353,
+      "source_token": 9034,
+      "block": null,
+      "source": "rom1504_raw_int16_token",
+      "rom1504_raw_value": 4034
+    },
+    {
+      "remapped_token": 354,
+      "source_token": 679,
+      "block": "minecraft:chest",
+      "source": "unified_minecraft_block_vocab"
+    },
+    {
+      "remapped_token": 355,
+      "source_token": 689,
+      "block": "minecraft:chiseled_stone_bricks",
+      "source": "unified_minecraft_block_vocab"
+    },
+    {
+      "remapped_token": 356,
+      "source_token": 11807,
+      "block": null,
+      "source": "rom1504_raw_int16_token",
+      "rom1504_raw_value": 6807
+    },
+    {
+      "remapped_token": 357,
+      "source_token": 1061,
+      "block": "minecraft:dark_prismarine",
+      "source": "unified_minecraft_block_vocab"
+    },
+    {
+      "remapped_token": 358,
+      "source_token": 13380,
+      "block": null,
+      "source": "rom1504_raw_int16_token",
+      "rom1504_raw_value": 8380
+    },
+    {
+      "remapped_token": 359,
+      "source_token": 9501,
+      "block": null,
+      "source": "rom1504_raw_int16_token",
+      "rom1504_raw_value": 4501
+    },
+    {
+      "remapped_token": 360,
+      "source_token": 1665,
+      "block": "minecraft:light_blue_concrete",
+      "source": "unified_minecraft_block_vocab"
+    },
+    {
+      "remapped_token": 361,
+      "source_token": 12607,
+      "block": null,
+      "source": "rom1504_raw_int16_token",
+      "rom1504_raw_value": 7607
+    },
+    {
+      "remapped_token": 362,
+      "source_token": 3734,
+      "block": "minecraft:ladder",
+      "source": "unified_minecraft_block_vocab"
+    },
+    {
+      "remapped_token": 363,
+      "source_token": 10122,
+      "block": null,
+      "source": "rom1504_raw_int16_token",
+      "rom1504_raw_value": 5122
+    },
+    {
+      "remapped_token": 364,
+      "source_token": 307,
+      "block": "minecraft:bedrock",
+      "source": "unified_minecraft_block_vocab"
+    },
+    {
+      "remapped_token": 365,
+      "source_token": 9102,
+      "block": null,
+      "source": "rom1504_raw_int16_token",
+      "rom1504_raw_value": 4102
+    },
+    {
+      "remapped_token": 366,
+      "source_token": 13374,
+      "block": null,
+      "source": "rom1504_raw_int16_token",
+      "rom1504_raw_value": 8374
+    },
+    {
+      "remapped_token": 367,
+      "source_token": 6412,
+      "block": null,
+      "source": "rom1504_raw_int16_token",
+      "rom1504_raw_value": 1412
+    },
+    {
+      "remapped_token": 368,
+      "source_token": 9000,
+      "block": null,
+      "source": "rom1504_raw_int16_token",
+      "rom1504_raw_value": 4000
+    },
+    {
+      "remapped_token": 369,
+      "source_token": 8335,
+      "block": null,
+      "source": "rom1504_raw_int16_token",
+      "rom1504_raw_value": 3335
+    },
+    {
+      "remapped_token": 370,
+      "source_token": 9135,
+      "block": null,
+      "source": "rom1504_raw_int16_token",
+      "rom1504_raw_value": 4135
+    },
+    {
+      "remapped_token": 371,
+      "source_token": 2635,
+      "block": "minecraft:purpur_block",
+      "source": "unified_minecraft_block_vocab"
+    },
+    {
+      "remapped_token": 372,
+      "source_token": 3768,
+      "block": "minecraft:dark_oak_log",
+      "source": "unified_minecraft_block_vocab"
+    },
+    {
+      "remapped_token": 373,
+      "source_token": 13356,
+      "block": null,
+      "source": "rom1504_raw_int16_token",
+      "rom1504_raw_value": 8356
+    },
+    {
+      "remapped_token": 374,
+      "source_token": 10102,
+      "block": null,
+      "source": "rom1504_raw_int16_token",
+      "rom1504_raw_value": 5102
+    },
+    {
+      "remapped_token": 375,
+      "source_token": 3726,
+      "block": "minecraft:sandstone_slab",
+      "source": "unified_minecraft_block_vocab"
+    },
+    {
+      "remapped_token": 376,
+      "source_token": 1409,
+      "block": "minecraft:granite",
+      "source": "unified_minecraft_block_vocab"
+    },
+    {
+      "remapped_token": 377,
+      "source_token": 3773,
+      "block": "minecraft:white_carpet",
+      "source": "unified_minecraft_block_vocab"
+    },
+    {
+      "remapped_token": 378,
+      "source_token": 2786,
+      "block": "minecraft:red_nether_bricks",
+      "source": "unified_minecraft_block_vocab"
+    },
+    {
+      "remapped_token": 379,
+      "source_token": 477,
+      "block": "minecraft:blue_concrete",
+      "source": "unified_minecraft_block_vocab"
+    },
+    {
+      "remapped_token": 380,
+      "source_token": 3077,
+      "block": "minecraft:spruce_fence",
+      "source": "unified_minecraft_block_vocab"
+    },
+    {
+      "remapped_token": 381,
+      "source_token": 9119,
+      "block": null,
+      "source": "rom1504_raw_int16_token",
+      "rom1504_raw_value": 4119
+    },
+    {
+      "remapped_token": 382,
+      "source_token": 3699,
+      "block": "minecraft:yellow_concrete",
+      "source": "unified_minecraft_block_vocab"
+    },
+    {
+      "remapped_token": 383,
+      "source_token": 5036,
+      "block": null,
+      "source": "rom1504_raw_int16_token",
+      "rom1504_raw_value": 36
+    },
+    {
+      "remapped_token": 384,
+      "source_token": 1297,
+      "block": "minecraft:end_stone",
+      "source": "unified_minecraft_block_vocab"
+    },
+    {
+      "remapped_token": 385,
+      "source_token": 11853,
+      "block": null,
+      "source": "rom1504_raw_int16_token",
+      "rom1504_raw_value": 6853
+    },
+    {
+      "remapped_token": 386,
+      "source_token": 9167,
+      "block": null,
+      "source": "rom1504_raw_int16_token",
+      "rom1504_raw_value": 4167
+    },
+    {
+      "remapped_token": 387,
+      "source_token": 3351,
+      "block": "minecraft:vine",
+      "source": "unified_minecraft_block_vocab"
+    },
+    {
+      "remapped_token": 388,
+      "source_token": 3727,
+      "block": "minecraft:cobblestone_slab",
+      "source": "unified_minecraft_block_vocab"
+    },
+    {
+      "remapped_token": 389,
+      "source_token": 12120,
+      "block": null,
+      "source": "rom1504_raw_int16_token",
+      "rom1504_raw_value": 7120
+    },
+    {
+      "remapped_token": 390,
+      "source_token": 1231,
+      "block": "minecraft:diamond_ore",
+      "source": "unified_minecraft_block_vocab"
+    },
+    {
+      "remapped_token": 391,
+      "source_token": 12605,
+      "block": null,
+      "source": "rom1504_raw_int16_token",
+      "rom1504_raw_value": 7605
+    },
+    {
+      "remapped_token": 392,
+      "source_token": 3049,
+      "block": "minecraft:smooth_stone",
+      "source": "unified_minecraft_block_vocab"
+    },
+    {
+      "remapped_token": 393,
+      "source_token": 9096,
+      "block": null,
+      "source": "rom1504_raw_int16_token",
+      "rom1504_raw_value": 4096
+    },
+    {
+      "remapped_token": 394,
+      "source_token": 6413,
+      "block": null,
+      "source": "rom1504_raw_int16_token",
+      "rom1504_raw_value": 1413
+    },
+    {
+      "remapped_token": 395,
+      "source_token": 1683,
+      "block": "minecraft:light_gray_stained_glass",
+      "source": "unified_minecraft_block_vocab"
+    },
+    {
+      "remapped_token": 396,
+      "source_token": 5013,
+      "block": null,
+      "source": "rom1504_raw_int16_token",
+      "rom1504_raw_value": 13
+    },
+    {
+      "remapped_token": 397,
+      "source_token": 9151,
+      "block": null,
+      "source": "rom1504_raw_int16_token",
+      "rom1504_raw_value": 4151
+    },
+    {
+      "remapped_token": 398,
+      "source_token": 8888,
+      "block": null,
+      "source": "rom1504_raw_int16_token",
+      "rom1504_raw_value": 3888
+    },
+    {
+      "remapped_token": 399,
+      "source_token": 14360,
+      "block": null,
+      "source": "rom1504_raw_int16_token",
+      "rom1504_raw_value": 9360
+    },
+    {
+      "remapped_token": 400,
+      "source_token": 9103,
+      "block": null,
+      "source": "rom1504_raw_int16_token",
+      "rom1504_raw_value": 4103
+    },
+    {
+      "remapped_token": 401,
+      "source_token": 13322,
+      "block": null,
+      "source": "rom1504_raw_int16_token",
+      "rom1504_raw_value": 8322
+    },
+    {
+      "remapped_token": 402,
+      "source_token": 3728,
+      "block": "minecraft:brick_slab",
+      "source": "unified_minecraft_block_vocab"
+    },
+    {
+      "remapped_token": 403,
+      "source_token": 9886,
+      "block": null,
+      "source": "rom1504_raw_int16_token",
+      "rom1504_raw_value": 4886
+    },
+    {
+      "remapped_token": 404,
+      "source_token": 2209,
+      "block": "minecraft:pink_wool",
+      "source": "unified_minecraft_block_vocab"
+    },
+    {
+      "remapped_token": 405,
+      "source_token": 9109,
+      "block": null,
+      "source": "rom1504_raw_int16_token",
+      "rom1504_raw_value": 4109
+    },
+    {
+      "remapped_token": 406,
+      "source_token": 419,
+      "block": "minecraft:black_stained_glass",
+      "source": "unified_minecraft_block_vocab"
+    },
+    {
+      "remapped_token": 407,
+      "source_token": 6339,
+      "block": null,
+      "source": "rom1504_raw_int16_token",
+      "rom1504_raw_value": 1339
+    },
+    {
+      "remapped_token": 408,
+      "source_token": 3752,
+      "block": "minecraft:jungle_slab",
+      "source": "unified_minecraft_block_vocab"
+    },
+    {
+      "remapped_token": 409,
+      "source_token": 13419,
+      "block": null,
+      "source": "rom1504_raw_int16_token",
+      "rom1504_raw_value": 8419
+    },
+    {
+      "remapped_token": 410,
+      "source_token": 5215,
+      "block": null,
+      "source": "rom1504_raw_int16_token",
+      "rom1504_raw_value": 215
+    },
+    {
+      "remapped_token": 411,
+      "source_token": 8326,
+      "block": null,
+      "source": "rom1504_raw_int16_token",
+      "rom1504_raw_value": 3326
+    },
+    {
+      "remapped_token": 412,
+      "source_token": 10498,
+      "block": null,
+      "source": "rom1504_raw_int16_token",
+      "rom1504_raw_value": 5498
+    },
+    {
+      "remapped_token": 413,
+      "source_token": 12883,
+      "block": null,
+      "source": "rom1504_raw_int16_token",
+      "rom1504_raw_value": 7883
+    },
+    {
+      "remapped_token": 414,
+      "source_token": 1673,
+      "block": "minecraft:light_blue_wool",
+      "source": "unified_minecraft_block_vocab"
+    },
+    {
+      "remapped_token": 415,
+      "source_token": 3753,
+      "block": "minecraft:acacia_slab",
+      "source": "unified_minecraft_block_vocab"
+    },
+    {
+      "remapped_token": 416,
+      "source_token": 13376,
+      "block": null,
+      "source": "rom1504_raw_int16_token",
+      "rom1504_raw_value": 8376
+    },
+    {
+      "remapped_token": 417,
+      "source_token": 414,
+      "block": "minecraft:black_carpet",
+      "source": "unified_minecraft_block_vocab"
+    },
+    {
+      "remapped_token": 418,
+      "source_token": 12881,
+      "block": null,
+      "source": "rom1504_raw_int16_token",
+      "rom1504_raw_value": 7881
+    },
+    {
+      "remapped_token": 419,
+      "source_token": 9866,
+      "block": null,
+      "source": "rom1504_raw_int16_token",
+      "rom1504_raw_value": 4866
+    },
+    {
+      "remapped_token": 420,
+      "source_token": 2835,
+      "block": "minecraft:red_terracotta",
+      "source": "unified_minecraft_block_vocab"
+    },
+    {
+      "remapped_token": 421,
+      "source_token": 1678,
+      "block": "minecraft:light_gray_carpet",
+      "source": "unified_minecraft_block_vocab"
+    },
+    {
+      "remapped_token": 422,
+      "source_token": 2626,
+      "block": "minecraft:purple_concrete",
+      "source": "unified_minecraft_block_vocab"
+    },
+    {
+      "remapped_token": 423,
+      "source_token": 10518,
+      "block": null,
+      "source": "rom1504_raw_int16_token",
+      "rom1504_raw_value": 5518
+    },
+    {
+      "remapped_token": 424,
+      "source_token": 2738,
+      "block": "minecraft:red_concrete",
+      "source": "unified_minecraft_block_vocab"
+    },
+    {
+      "remapped_token": 425,
+      "source_token": 1465,
+      "block": "minecraft:gray_stained_glass",
+      "source": "unified_minecraft_block_vocab"
+    },
+    {
+      "remapped_token": 426,
+      "source_token": 10558,
+      "block": null,
+      "source": "rom1504_raw_int16_token",
+      "rom1504_raw_value": 5558
+    },
+    {
+      "remapped_token": 427,
+      "source_token": 11744,
+      "block": null,
+      "source": "rom1504_raw_int16_token",
+      "rom1504_raw_value": 6744
+    },
+    {
+      "remapped_token": 428,
+      "source_token": 13311,
+      "block": null,
+      "source": "rom1504_raw_int16_token",
+      "rom1504_raw_value": 8311
+    },
+    {
+      "remapped_token": 429,
+      "source_token": 3730,
+      "block": "minecraft:nether_brick_slab",
+      "source": "unified_minecraft_block_vocab"
+    },
+    {
+      "remapped_token": 430,
+      "source_token": 1684,
+      "block": "minecraft:light_gray_stained_glass_pane",
+      "source": "unified_minecraft_block_vocab"
+    },
+    {
+      "remapped_token": 431,
+      "source_token": 2909,
+      "block": "minecraft:slime_block",
+      "source": "unified_minecraft_block_vocab"
+    },
+    {
+      "remapped_token": 432,
+      "source_token": 5052,
+      "block": null,
+      "source": "rom1504_raw_int16_token",
+      "rom1504_raw_value": 52
+    },
+    {
+      "remapped_token": 433,
+      "source_token": 12882,
+      "block": null,
+      "source": "rom1504_raw_int16_token",
+      "rom1504_raw_value": 7882
+    },
+    {
+      "remapped_token": 434,
+      "source_token": 1285,
+      "block": "minecraft:emerald_block",
+      "source": "unified_minecraft_block_vocab"
+    },
+    {
+      "remapped_token": 435,
+      "source_token": 420,
+      "block": "minecraft:black_stained_glass_pane",
+      "source": "unified_minecraft_block_vocab"
+    },
+    {
+      "remapped_token": 436,
+      "source_token": 5037,
+      "block": null,
+      "source": "rom1504_raw_int16_token",
+      "rom1504_raw_value": 37
+    },
+    {
+      "remapped_token": 437,
+      "source_token": 5229,
+      "block": null,
+      "source": "rom1504_raw_int16_token",
+      "rom1504_raw_value": 229
+    },
+    {
+      "remapped_token": 438,
+      "source_token": 3758,
+      "block": "minecraft:jungle_stairs",
+      "source": "unified_minecraft_block_vocab"
+    },
+    {
+      "remapped_token": 439,
+      "source_token": 11309,
+      "block": null,
+      "source": "rom1504_raw_int16_token",
+      "rom1504_raw_value": 6309
+    },
+    {
+      "remapped_token": 440,
+      "source_token": 11746,
+      "block": null,
+      "source": "rom1504_raw_int16_token",
+      "rom1504_raw_value": 6746
+    },
+    {
+      "remapped_token": 441,
+      "source_token": 10538,
+      "block": null,
+      "source": "rom1504_raw_int16_token",
+      "rom1504_raw_value": 5538
+    },
+    {
+      "remapped_token": 442,
+      "source_token": 797,
+      "block": "minecraft:cracked_stone_bricks",
+      "source": "unified_minecraft_block_vocab"
+    },
+    {
+      "remapped_token": 443,
+      "source_token": 3335,
+      "block": "minecraft:torch",
+      "source": "unified_minecraft_block_vocab"
+    },
+    {
+      "remapped_token": 444,
+      "source_token": 942,
+      "block": "minecraft:cut_red_sandstone",
+      "source": "unified_minecraft_block_vocab"
+    },
+    {
+      "remapped_token": 445,
+      "source_token": 487,
+      "block": "minecraft:blue_wool",
+      "source": "unified_minecraft_block_vocab"
+    },
+    {
+      "remapped_token": 446,
+      "source_token": 11733,
+      "block": null,
+      "source": "rom1504_raw_int16_token",
+      "rom1504_raw_value": 6733
+    },
+    {
+      "remapped_token": 447,
+      "source_token": 959,
+      "block": "minecraft:cyan_terracotta",
+      "source": "unified_minecraft_block_vocab"
+    },
+    {
+      "remapped_token": 448,
+      "source_token": 12869,
+      "block": null,
+      "source": "rom1504_raw_int16_token",
+      "rom1504_raw_value": 7869
+    },
+    {
+      "remapped_token": 449,
+      "source_token": 5216,
+      "block": null,
+      "source": "rom1504_raw_int16_token",
+      "rom1504_raw_value": 216
+    },
+    {
+      "remapped_token": 450,
+      "source_token": 2199,
+      "block": "minecraft:pink_concrete",
+      "source": "unified_minecraft_block_vocab"
+    },
+    {
+      "remapped_token": 451,
+      "source_token": 13392,
+      "block": null,
+      "source": "rom1504_raw_int16_token",
+      "rom1504_raw_value": 8392
+    },
+    {
+      "remapped_token": 452,
+      "source_token": 8317,
+      "block": null,
+      "source": "rom1504_raw_int16_token",
+      "rom1504_raw_value": 3317
+    },
+    {
+      "remapped_token": 453,
+      "source_token": 1483,
+      "block": "minecraft:green_wool",
+      "source": "unified_minecraft_block_vocab"
+    },
+    {
+      "remapped_token": 454,
+      "source_token": 3063,
+      "block": "minecraft:sponge",
+      "source": "unified_minecraft_block_vocab"
+    },
+    {
+      "remapped_token": 455,
+      "source_token": 10184,
+      "block": null,
+      "source": "rom1504_raw_int16_token",
+      "rom1504_raw_value": 5184
+    },
+    {
+      "remapped_token": 456,
+      "source_token": 417,
+      "block": "minecraft:black_glazed_terracotta",
+      "source": "unified_minecraft_block_vocab"
+    },
+    {
+      "remapped_token": 457,
+      "source_token": 13,
+      "block": "minecraft:acacia_fence",
+      "source": "unified_minecraft_block_vocab"
+    },
+    {
+      "remapped_token": 458,
+      "source_token": 5201,
+      "block": null,
+      "source": "rom1504_raw_int16_token",
+      "rom1504_raw_value": 201
+    },
+    {
+      "remapped_token": 459,
+      "source_token": 2630,
+      "block": "minecraft:purple_stained_glass",
+      "source": "unified_minecraft_block_vocab"
+    },
+    {
+      "remapped_token": 460,
+      "source_token": 13389,
+      "block": null,
+      "source": "rom1504_raw_int16_token",
+      "rom1504_raw_value": 8389
+    },
+    {
+      "remapped_token": 461,
+      "source_token": 9017,
+      "block": null,
+      "source": "rom1504_raw_int16_token",
+      "rom1504_raw_value": 4017
+    },
+    {
+      "remapped_token": 462,
+      "source_token": 14222,
+      "block": null,
+      "source": "rom1504_raw_int16_token",
+      "rom1504_raw_value": 9222
+    },
+    {
+      "remapped_token": 463,
+      "source_token": 11861,
+      "block": null,
+      "source": "rom1504_raw_int16_token",
+      "rom1504_raw_value": 6861
+    },
+    {
+      "remapped_token": 464,
+      "source_token": 3790,
+      "block": "minecraft:dark_oak_door",
+      "source": "unified_minecraft_block_vocab"
+    },
+    {
+      "remapped_token": 465,
+      "source_token": 15838,
+      "block": null,
+      "source": "rom1504_raw_int16_token",
+      "rom1504_raw_value": 10838
+    },
+    {
+      "remapped_token": 466,
+      "source_token": 2833,
+      "block": "minecraft:red_stained_glass",
+      "source": "unified_minecraft_block_vocab"
+    },
+    {
+      "remapped_token": 467,
+      "source_token": 2532,
+      "block": "minecraft:prismarine",
+      "source": "unified_minecraft_block_vocab"
+    },
+    {
+      "remapped_token": 468,
+      "source_token": 14455,
+      "block": null,
+      "source": "rom1504_raw_int16_token",
+      "rom1504_raw_value": 9455
+    },
+    {
+      "remapped_token": 469,
+      "source_token": 421,
+      "block": "minecraft:black_terracotta",
+      "source": "unified_minecraft_block_vocab"
+    },
+    {
+      "remapped_token": 470,
+      "source_token": 2575,
+      "block": "minecraft:prismarine_bricks",
+      "source": "unified_minecraft_block_vocab"
+    },
+    {
+      "remapped_token": 471,
+      "source_token": 9086,
+      "block": null,
+      "source": "rom1504_raw_int16_token",
+      "rom1504_raw_value": 4086
+    },
+    {
+      "remapped_token": 472,
+      "source_token": 10204,
+      "block": null,
+      "source": "rom1504_raw_int16_token",
+      "rom1504_raw_value": 5204
+    },
+    {
+      "remapped_token": 473,
+      "source_token": 11734,
+      "block": null,
+      "source": "rom1504_raw_int16_token",
+      "rom1504_raw_value": 6734
+    },
+    {
+      "remapped_token": 474,
+      "source_token": 8636,
+      "block": null,
+      "source": "rom1504_raw_int16_token",
+      "rom1504_raw_value": 3636
+    },
+    {
+      "remapped_token": 475,
+      "source_token": 10224,
+      "block": null,
+      "source": "rom1504_raw_int16_token",
+      "rom1504_raw_value": 5224
+    },
+    {
+      "remapped_token": 476,
+      "source_token": 1670,
+      "block": "minecraft:light_blue_stained_glass_pane",
+      "source": "unified_minecraft_block_vocab"
+    },
+    {
+      "remapped_token": 477,
+      "source_token": 13385,
+      "block": null,
+      "source": "rom1504_raw_int16_token",
+      "rom1504_raw_value": 8385
+    },
+    {
+      "remapped_token": 478,
+      "source_token": 10834,
+      "block": null,
+      "source": "rom1504_raw_int16_token",
+      "rom1504_raw_value": 5834
+    },
+    {
+      "remapped_token": 479,
+      "source_token": 13221,
+      "block": null,
+      "source": "rom1504_raw_int16_token",
+      "rom1504_raw_value": 8221
+    },
+    {
+      "remapped_token": 480,
+      "source_token": 11992,
+      "block": null,
+      "source": "rom1504_raw_int16_token",
+      "rom1504_raw_value": 6992
+    },
+    {
+      "remapped_token": 481,
+      "source_token": 9767,
+      "block": null,
+      "source": "rom1504_raw_int16_token",
+      "rom1504_raw_value": 4767
+    },
+    {
+      "remapped_token": 482,
+      "source_token": 1644,
+      "block": "minecraft:lapis_ore",
+      "source": "unified_minecraft_block_vocab"
+    },
+    {
+      "remapped_token": 483,
+      "source_token": 11735,
+      "block": null,
+      "source": "rom1504_raw_int16_token",
+      "rom1504_raw_value": 6735
+    },
+    {
+      "remapped_token": 484,
+      "source_token": 3769,
+      "block": "minecraft:acacia_stairs",
+      "source": "unified_minecraft_block_vocab"
+    },
+    {
+      "remapped_token": 485,
+      "source_token": 3787,
+      "block": "minecraft:birch_door",
+      "source": "unified_minecraft_block_vocab"
+    },
+    {
+      "remapped_token": 486,
+      "source_token": 1711,
+      "block": "minecraft:lime_wool",
+      "source": "unified_minecraft_block_vocab"
+    },
+    {
+      "remapped_token": 487,
+      "source_token": 13335,
+      "block": null,
+      "source": "rom1504_raw_int16_token",
+      "rom1504_raw_value": 8335
+    },
+    {
+      "remapped_token": 488,
+      "source_token": 9082,
+      "block": null,
+      "source": "rom1504_raw_int16_token",
+      "rom1504_raw_value": 4082
+    },
+    {
+      "remapped_token": 489,
+      "source_token": 2140,
+      "block": "minecraft:orange_wool",
+      "source": "unified_minecraft_block_vocab"
+    },
+    {
+      "remapped_token": 490,
+      "source_token": 8354,
+      "block": null,
+      "source": "rom1504_raw_int16_token",
+      "rom1504_raw_value": 3354
+    },
+    {
+      "remapped_token": 491,
+      "source_token": 10244,
+      "block": null,
+      "source": "rom1504_raw_int16_token",
+      "rom1504_raw_value": 5244
+    },
+    {
+      "remapped_token": 492,
+      "source_token": 6358,
+      "block": null,
+      "source": "rom1504_raw_int16_token",
+      "rom1504_raw_value": 1358
+    },
+    {
+      "remapped_token": 493,
+      "source_token": 12897,
+      "block": null,
+      "source": "rom1504_raw_int16_token",
+      "rom1504_raw_value": 7897
+    },
+    {
+      "remapped_token": 494,
+      "source_token": 5070,
+      "block": null,
+      "source": "rom1504_raw_int16_token",
+      "rom1504_raw_value": 70
+    },
+    {
+      "remapped_token": 495,
+      "source_token": 5249,
+      "block": null,
+      "source": "rom1504_raw_int16_token",
+      "rom1504_raw_value": 249
+    },
+    {
+      "remapped_token": 496,
+      "source_token": 6951,
+      "block": null,
+      "source": "rom1504_raw_int16_token",
+      "rom1504_raw_value": 1951
+    },
+    {
+      "remapped_token": 497,
+      "source_token": 11736,
+      "block": null,
+      "source": "rom1504_raw_int16_token",
+      "rom1504_raw_value": 6736
+    },
+    {
+      "remapped_token": 498,
+      "source_token": 5038,
+      "block": null,
+      "source": "rom1504_raw_int16_token",
+      "rom1504_raw_value": 38
+    },
+    {
+      "remapped_token": 499,
+      "source_token": 9159,
+      "block": null,
+      "source": "rom1504_raw_int16_token",
+      "rom1504_raw_value": 4159
+    },
+    {
+      "remapped_token": 500,
+      "source_token": 12459,
+      "block": null,
+      "source": "rom1504_raw_int16_token",
+      "rom1504_raw_value": 7459
+    },
+    {
+      "remapped_token": 501,
+      "source_token": 961,
+      "block": "minecraft:cyan_wool",
+      "source": "unified_minecraft_block_vocab"
+    },
+    {
+      "remapped_token": 502,
+      "source_token": 13324,
+      "block": null,
+      "source": "rom1504_raw_int16_token",
+      "rom1504_raw_value": 8324
+    },
+    {
+      "remapped_token": 503,
+      "source_token": 9127,
+      "block": null,
+      "source": "rom1504_raw_int16_token",
+      "rom1504_raw_value": 4127
+    },
+    {
+      "remapped_token": 504,
+      "source_token": 1466,
+      "block": "minecraft:gray_stained_glass_pane",
+      "source": "unified_minecraft_block_vocab"
+    },
+    {
+      "remapped_token": 505,
+      "source_token": 3765,
+      "block": "minecraft:white_terracotta",
+      "source": "unified_minecraft_block_vocab"
+    },
+    {
+      "remapped_token": 506,
+      "source_token": 9016,
+      "block": null,
+      "source": "rom1504_raw_int16_token",
+      "rom1504_raw_value": 4016
+    },
+    {
+      "remapped_token": 507,
+      "source_token": 12479,
+      "block": null,
+      "source": "rom1504_raw_int16_token",
+      "rom1504_raw_value": 7479
+    },
+    {
+      "remapped_token": 508,
+      "source_token": 693,
+      "block": "minecraft:coal_block",
+      "source": "unified_minecraft_block_vocab"
+    },
+    {
+      "remapped_token": 509,
+      "source_token": 8889,
+      "block": null,
+      "source": "rom1504_raw_int16_token",
+      "rom1504_raw_value": 3889
+    },
+    {
+      "remapped_token": 510,
+      "source_token": 10660,
+      "block": null,
+      "source": "rom1504_raw_int16_token",
+      "rom1504_raw_value": 5660
+    },
+    {
+      "remapped_token": 511,
+      "source_token": 112,
+      "block": "minecraft:andesite",
+      "source": "unified_minecraft_block_vocab"
+    },
+    {
+      "remapped_token": 512,
+      "source_token": 5067,
+      "block": null,
+      "source": "rom1504_raw_int16_token",
+      "rom1504_raw_value": 67
+    }
+  ]
+}

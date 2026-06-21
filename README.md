@@ -30,6 +30,9 @@ constraint-learnability/
 |   |-- scatter_predictor_data.json        # Data used to draw scatter_predictor
 |   |-- cfg_sensitivity.png                # CFG sensitivity visualization
 |   `-- condition_comparison.png           # Condition comparison visualization
+|-- metadata/
+|   |-- README.md                          # Notes on released metadata
+|   `-- remapped_vocab_513.json            # 513-class voxel vocabulary
 |-- models/
 |   |-- vqvae.py                           # VQ-VAE (3D conv encoder-decoder, 2048 codebook)
 |   `-- ar_transformer.py                  # AR Transformer with structural conditioning + CFG

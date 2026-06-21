@@ -82,9 +82,9 @@ def train(args):
         drop_last=True,
     )
 
-    # Vocab size from dataset's remapping (top-512 + air = 513)
+    # Vocab size from dataset's remapping (top-512 non-air source tokens + air = 513)
     vocab_size = dataset.vocab_size
-    print(f"Vocab size: {vocab_size} (remapped top-512 blocks)")
+    print(f"Vocab size: {vocab_size} (remapped top-512 non-air source tokens)")
 
     # Model
     model = VQVAE3D(

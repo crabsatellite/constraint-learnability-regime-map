@@ -365,6 +365,28 @@ def process_rom1504(block_to_token, min_blocks=20):
 
 # --- Save dataset ---
 
+def build_token_remap(all_builds, max_dim=32, min_blocks=20, vocab_limit=512):
+    """Build the compact voxel vocabulary used by VQ-VAE training.
+
+    Air is always token 0. Non-air tokens are the most frequent source tokens
+    among builds that pass the VQ-VAE training filters.
+    """
+    counts = Counter()
+    for build in all_builds:
+        if build["non_air_blocks"] < min_blocks:
+            continue
+        if max(build["shape"]) > max_dim:
+            continue
+        non_air = build["voxels"][build["voxels"] != 0]
+        vals, val_counts = np.unique(non_air, return_counts=True)
+        counts.update({int(v): int(c) for v, c in zip(vals, val_counts)})
+
+    remap = {0: 0}
+    for new_id, (old_id, _) in enumerate(counts.most_common(vocab_limit), start=1):
+        remap[int(old_id)] = new_id
+    return remap
+
+
 def save_dataset(all_builds, token_to_block):
     """Save all builds as individual .npz files + manifest CSV."""
     print(f"\n=== Saving {len(all_builds)} builds ===")
@@ -378,6 +400,12 @@ def save_dataset(all_builds, token_to_block):
     with open(vocab_path, "w") as f:
         json.dump({str(k): v for k, v in token_to_block.items()}, f, indent=2)
     print(f"  Saved vocabulary ({len(token_to_block)} tokens) to {vocab_path}")
+
+    remap = build_token_remap(all_builds)
+    remap_path = OUT_DIR / "token_remap.json"
+    with open(remap_path, "w") as f:
+        json.dump({str(k): v for k, v in remap.items()}, f, indent=2)
+    print(f"  Saved compact voxel vocabulary ({len(remap)} tokens) to {remap_path}")
 
     # Save each build
     manifest = []
