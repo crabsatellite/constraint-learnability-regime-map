@@ -182,6 +182,10 @@ def main():
     args = parser.parse_args()
 
     device = 'cuda' if torch.cuda.is_available() else 'cpu'
+    for label, path in [("VQ-VAE", args.vqvae_ckpt), ("AR", args.ar_ckpt)]:
+        ckpt = Path(path)
+        if not ckpt.exists():
+            raise SystemExit(f"Missing {label} checkpoint: {ckpt}")
 
     vqvae, ar, grid_size = load_models(args.vqvae_ckpt, args.ar_ckpt, device)
     voxels = generate_builds(vqvae, ar, grid_size, args.n_samples,

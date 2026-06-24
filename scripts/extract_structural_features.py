@@ -23,6 +23,16 @@ from concurrent.futures import ProcessPoolExecutor, as_completed
 PROJECT_ROOT = Path(__file__).parent.parent
 
 
+def require_file(path, purpose):
+    if not path.exists():
+        rel = path.relative_to(PROJECT_ROOT)
+        raise SystemExit(
+            f"Missing required input for {purpose}: {rel}\n"
+            "Run scripts/prepare_dataset.py after placing upstream raw data under "
+            "data/raw/, then rerun this step."
+        )
+
+
 def compute_enclosed_volume(voxels):
     """Flood fill from outside to find enclosed interior air.
 
@@ -219,6 +229,12 @@ def main():
     output_path = PROJECT_ROOT / "data" / "processed" / "structural_features.json"
 
     # Load manifest
+    require_file(manifest_path, "extracting structural features")
+    if not builds_dir.exists():
+        raise SystemExit(
+            "Missing processed builds directory: data/processed/builds\n"
+            "Run scripts/prepare_dataset.py after placing upstream raw data under data/raw/."
+        )
     with open(manifest_path, 'r', encoding='utf-8') as f:
         reader = csv.DictReader(f)
         entries = list(reader)

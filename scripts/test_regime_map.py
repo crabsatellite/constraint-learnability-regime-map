@@ -20,6 +20,17 @@ from models.vqvae import VQVAE3D
 from models.ar_transformer import ARTransformer3D
 
 
+def require_checkpoint(path, label):
+    path = Path(path)
+    if not path.exists():
+        rel = path.relative_to(PROJECT_ROOT) if path.is_relative_to(PROJECT_ROOT) else path
+        raise SystemExit(
+            f"Missing {label} checkpoint: {rel}\n"
+            "Run the training steps first, or place the release checkpoint assets "
+            "under checkpoints/vqvae/ and checkpoints/ar_cond/."
+        )
+
+
 def load_models(vqvae_ckpt, ar_ckpt, device='cuda'):
     vqvae_data = torch.load(vqvae_ckpt, map_location=device, weights_only=False)
     vqvae_args = vqvae_data['args']
@@ -345,6 +356,8 @@ def main():
     ar_ckpt = str(PROJECT_ROOT / "checkpoints" / "ar_cond" / "ar_cond_step80000.pt")
 
     print("Loading models...")
+    require_checkpoint(vqvae_ckpt, "VQ-VAE")
+    require_checkpoint(ar_ckpt, "conditioned AR")
     vqvae, ar, grid_size = load_models(vqvae_ckpt, ar_ckpt, device)
 
     seeds = [42, 123, 456, 789, 2026]

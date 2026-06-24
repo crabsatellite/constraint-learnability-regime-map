@@ -46,6 +46,9 @@ def main():
     ar_ckpt = str(PROJECT_ROOT / "checkpoints" / "ar_cond" / "ar_cond_step80000.pt")
 
     print("Loading models...")
+    from scripts.test_regime_map import require_checkpoint
+    require_checkpoint(vqvae_ckpt, "VQ-VAE")
+    require_checkpoint(ar_ckpt, "conditioned AR")
     vqvae, ar, grid_size = load_models(vqvae_ckpt, ar_ckpt, device)
 
     seeds = [42, 123, 456]

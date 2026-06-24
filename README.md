@@ -67,7 +67,9 @@ constraint-learnability/
 
 ### Option A: Reproduce analysis from saved results
 
-All saved experimental results are included in `outputs/`.
+All saved experimental results are included in `outputs/`. The
+`generate_scatter.py` script only rebuilds the predictor scatter plot from
+saved JSON results; it does not generate Minecraft structures.
 
 ```bash
 pip install -r requirements.txt
@@ -115,6 +117,23 @@ training data. The experiments combine third-party datasets, and some upstream
 sources do not provide clear redistribution licenses for repackaged data. To
 train from scratch, obtain the upstream data separately and place it under
 `data/raw/` before running `scripts/prepare_dataset.py`.
+
+Expected raw-data layout:
+
+```text
+data/raw/
+|-- text2mc/
+|   |-- tok2block.json                    # required vocabulary source
+|   `-- archive.zip                       # or processed_builds/processed_builds/*.h5
+|-- 3d-craft/
+|   `-- houses/*/schematic.npy
+`-- rom1504/
+    `-- data/good_small.tfrecord.gz
+```
+
+At least one structure source must be present. The Text2MC `tok2block.json`
+file is required to build the unified vocabulary used by the preprocessing
+script.
 
 Trained checkpoints are not committed to Git because the final VQ-VAE and AR
 Transformer checkpoints are large (~455 MB and ~464 MB). The saved JSON outputs

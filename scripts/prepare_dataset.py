@@ -26,6 +26,18 @@ RAW_DIR = PROJECT_ROOT / "data" / "raw"
 OUT_DIR = PROJECT_ROOT / "data" / "processed"
 OUT_DIR.mkdir(parents=True, exist_ok=True)
 
+
+def require_file(path, purpose):
+    """Fail with a release-friendly message when external data is absent."""
+    if not path.exists():
+        rel = path.relative_to(PROJECT_ROOT)
+        raise SystemExit(
+            f"Missing required input for {purpose}: {rel}\n"
+            "This public repository does not redistribute raw Minecraft datasets. "
+            "Place the upstream data under data/raw/ as described in README.md, "
+            "then rerun scripts/prepare_dataset.py."
+        )
+
 # --- Unified vocabulary ---
 
 def build_unified_vocab():
@@ -34,6 +46,7 @@ def build_unified_vocab():
 
     # Start with text2mc vocabulary (modern namespace, most complete)
     tok2block_path = RAW_DIR / "text2mc" / "tok2block.json"
+    require_file(tok2block_path, "building the unified block vocabulary")
     with open(tok2block_path, "r") as f:
         tok2block = json.load(f)
 

@@ -24,6 +24,16 @@ sys.path.insert(0, str(PROJECT_ROOT))
 from models.ar_transformer import ARTransformer3D
 
 
+def require_file(path, purpose, next_step):
+    path = Path(path)
+    if not path.exists():
+        rel = path.relative_to(PROJECT_ROOT) if path.is_relative_to(PROJECT_ROOT) else path
+        raise SystemExit(
+            f"Missing required input for {purpose}: {rel}\n"
+            f"{next_step}"
+        )
+
+
 class ConditionedLatentDataset(Dataset):
     """Dataset of VQ-VAE latent codes + structural features for conditioned AR training."""
 
@@ -137,17 +147,34 @@ class ConditionedLatentDataset(Dataset):
 
 
 def train(args):
+    # Load VQ-VAE config
+    vqvae_config_path = PROJECT_ROOT / "checkpoints" / "vqvae" / "config.json"
+    require_file(
+        vqvae_config_path,
+        "conditioned AR training",
+        "Run scripts/train_vqvae.py first, or place the VQ-VAE release assets under checkpoints/vqvae/.",
+    )
+
     device = torch.device('cuda' if torch.cuda.is_available() else 'cpu')
     print(f"Device: {device}")
 
-    # Load VQ-VAE config
-    vqvae_config_path = PROJECT_ROOT / "checkpoints" / "vqvae" / "config.json"
     with open(vqvae_config_path, 'r') as f:
         vqvae_config = json.load(f)
 
     num_codes = vqvae_config['num_codes']
     latent_path = args.latent_path or vqvae_config['latent_path']
     features_path = args.features_path or str(PROJECT_ROOT / "data" / "processed" / "structural_features.json")
+
+    require_file(
+        latent_path,
+        "conditioned AR training",
+        "Run scripts/train_vqvae.py first to encode latent codes.",
+    )
+    require_file(
+        features_path,
+        "conditioned AR training",
+        "Run scripts/extract_structural_features.py first.",
+    )
 
     print(f"Using {num_codes} codebook entries")
     print(f"Latent codes: {latent_path}")

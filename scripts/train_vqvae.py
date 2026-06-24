@@ -25,6 +25,16 @@ from models.vqvae import VQVAE3D
 from scripts.dataset_dense import DenseVoxelDataset
 
 
+def require_file(path, purpose):
+    path = Path(path)
+    if not path.exists():
+        rel = path.relative_to(PROJECT_ROOT) if path.is_relative_to(PROJECT_ROOT) else path
+        raise SystemExit(
+            f"Missing required input for {purpose}: {rel}\n"
+            "Run scripts/prepare_dataset.py after placing upstream raw data under data/raw/."
+        )
+
+
 def weighted_ce_loss(logits, targets, air_weight=0.05):
     """
     Cross-entropy with downweighted air tokens.
@@ -65,8 +75,11 @@ def train(args):
     print(f"Training VQ-VAE for {args.steps} steps")
 
     # Dataset
+    data_dir = Path(args.data_dir)
+    require_file(data_dir / "token_remap.json", "VQ-VAE training")
+    require_file(data_dir / "manifest.csv", "VQ-VAE training")
     dataset = DenseVoxelDataset(
-        args.data_dir,
+        data_dir,
         max_dim=32,
         min_blocks=20,
         augment=True,
