@@ -1,8 +1,17 @@
 # Which Structural Constraints Are Learnable?
 
-Code, saved experimental results, and [interactive explainer](https://crabsatellite.github.io/constraint-learnability-regime-map/) for *Which Structural Constraints Are Learnable? A Regime Map for a Minecraft Voxel Generator*.
+Companion repository for *Which Structural Constraints Are Learnable? A Regime
+Map for a Minecraft Voxel Generator*.
+
+This project is a diagnostic case study for learned PCG control: given a fixed
+neural generator and a set of structural constraints, which properties actually
+respond to conditioning? The released VQ-VAE + autoregressive Transformer is the
+experimental pipeline used to build and audit the map. It is not presented as a
+state-of-the-art Minecraft generator.
 
 ## Key Results
+
+Pipeline-specific results for the archived generator pipeline:
 
 | Regime | Properties | Ctrl% Range | Bottleneck |
 |--------|------------|-------------|------------|
@@ -10,15 +19,41 @@ Code, saved experimental results, and [interactive explainer](https://crabsatell
 | Approachable | 4 / 14 | 20--100% | Frequency floor (more data, stronger guidance, or fine-tuning may help) |
 | Unresponsive | 1 / 14 | <20% | Representation ceiling or insufficient learnable variation |
 
-Composite predictor: effective signal x min(CV, 1) correlates with controllability at **Spearman rho = 0.879** (permutation p = 0.002, n = 10 emergent properties). Neither signal alone (0.624) nor CV alone (0.636) reaches significance under the same permutation test; their product does. This is an association from one pipeline, not a validated general predictor.
+`Ctrl%` is a relative shift of generated-sample means, not a guarantee that
+every sample satisfies a hard constraint. The composite predictor, effective
+signal x min(CV, 1), correlates with controllability at **Spearman rho = 0.879**
+(permutation p = 0.002, n = 10 emergent properties). Neither signal alone
+(0.624) nor CV alone (0.636) reaches significance under the same permutation
+test; their product does. This is an association from one pipeline, not a
+validated general predictor.
 
-## What This Is
+## What This Repository Is
 
-- **Three-regime learnability map** across 14 structural properties of Minecraft buildings (10,310 filtered builds, 32^3 voxel grids, 513 remapped block tokens)
-- **VQ-VAE** (32^3 -> 8^3 latent, 2048 codebook, ~40M params) + **AR Transformer** (512d, 12 layers, 8 heads, ~40M params) with classifier-free guidance
-- **Dual bottleneck analysis**: CFG sensitivity (s=0,2,4) helps diagnose frequency floors versus representation ceilings
-- **Predictor analysis**: composite score (signal x min(CV, 1)) is tested against generated-sample responsiveness
+- **Regime-map evidence package**: saved samples, statistics, and scripts for a
+  three-regime constraint-learnability map across 14 structural properties.
+- **Diagnostic protocol implementation**: train a fixed generator, condition it
+  on structural tokens, generate samples, measure structural properties, and
+  compare conditional distributions against unconditioned generation.
+- **One Minecraft voxel case study**: 10,310 filtered builds, 32^3 voxel grids,
+  and a released 513-token voxel vocabulary.
+- **Fixed generator under test**: a VQ-VAE (32^3 -> 8^3 latent, 2048 codebook,
+  ~40M params) plus autoregressive Transformer (512d, 12 layers, 8 heads,
+  ~40M params) with classifier-free guidance.
+- **Bottleneck and predictor analyses**: CFG sensitivity (s=0,2,4) is used to
+  distinguish frequency floors from representation ceilings; the composite
+  predictor is reported as a hypothesis for future validation.
 - **[Interactive explainer](https://crabsatellite.github.io/constraint-learnability-regime-map/)**: bilingual (EN/ZH) step-by-step walkthrough of the paper for non-specialist audiences
+
+## What This Is Not
+
+- Not a claim that this generator is the best or most realistic Minecraft
+  building generator.
+- Not a universal table of which Minecraft constraints are always learnable.
+  The map is tied to this dataset, architecture, conditioning scheme, and
+  evaluation protocol.
+- Not a replacement for hard constraint satisfaction methods. The map identifies
+  where learned conditioning responds and where explicit constraints or
+  architectural changes may be needed.
 
 ## Repository Structure
 
@@ -153,16 +188,21 @@ checkpoints can be distributed separately as release assets if needed.
 
 Alex Chengyu Li, 2026
 
-[![DOI](https://zenodo.org/badge/DOI/10.5281/zenodo.20821894.svg)](https://doi.org/10.5281/zenodo.20821894)
+Accepted at Foundations of Digital Games (FDG '26).
+
+- Paper DOI: [10.1145/3815598.3815669](https://doi.org/10.1145/3815598.3815669)
+- Archived repository DOI: [10.5281/zenodo.20821894](https://doi.org/10.5281/zenodo.20821894)
 
 ## Citation
 
 ```bibtex
-@misc{li2026regimemap,
+@inproceedings{li2026learnable,
   author = {Li, Alex Chengyu},
   title = {Which Structural Constraints Are Learnable? A Regime Map for a Minecraft Voxel Generator},
+  booktitle = {Foundations of Digital Games (FDG '26)},
   year = {2026},
-  note = {Preprint}
+  publisher = {Association for Computing Machinery},
+  doi = {10.1145/3815598.3815669}
 }
 ```
 
