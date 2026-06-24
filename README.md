@@ -66,10 +66,7 @@ constraint-learnability/
 |   |-- cfg_sensitivity_results.json       # CFG sensitivity data
 |   |-- regime_predictor_results.json      # Predictor feature table and statistics
 |   |-- bootstrap_results.json             # Bootstrap 95% CI analysis
-|   |-- supplementary_results.json         # Permutation and per-seed diagnostics
-|   |-- composability_ood_results.json     # Composability experiment
-|   |-- sym_aug_composability_ood.json     # Symmetry-augmented composability
-|   `-- conditioned/                       # Per-condition generation results
+|   `-- supplementary_results.json         # Permutation and per-seed diagnostics
 `-- requirements.txt
 ```
 
