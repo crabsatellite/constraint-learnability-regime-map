@@ -139,7 +139,7 @@ checkpoints can be distributed separately as release assets if needed.
 
 Alex Chengyu Li, 2026
 
-[![DOI](https://zenodo.org/badge/DOI/10.5281/zenodo.20821895.svg)](https://doi.org/10.5281/zenodo.20821895)
+[![DOI](https://zenodo.org/badge/DOI/10.5281/zenodo.20821894.svg)](https://doi.org/10.5281/zenodo.20821894)
 
 ## Citation
 
