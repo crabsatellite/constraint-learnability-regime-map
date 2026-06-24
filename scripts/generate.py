@@ -50,6 +50,7 @@ def load_models(vqvae_ckpt, ar_ckpt, device='cuda'):
         max_seq_len=seq_len,
         num_tags=0,
         grid_size=grid_size,
+        struct_cond=ar_data.get('struct_cond', False),
     ).to(device)
     ar.load_state_dict(ar_data['model_state_dict'])
     ar.eval()

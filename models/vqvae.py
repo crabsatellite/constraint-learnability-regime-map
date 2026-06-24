@@ -5,9 +5,9 @@ Compresses 32x32x32 voxel grids into 8x8x8 discrete latent codes.
 Each code represents a 4x4x4 region of the build.
 
 Architecture:
-  Encoder: 32³ -> 16³ -> 8³ (strided conv3d)
-  Quantizer: 8³ continuous -> 8³ discrete (codebook lookup)
-  Decoder: 8³ -> 16³ -> 32³ (transposed conv3d)
+  Encoder: 32^3 -> 16^3 -> 8^3 (strided conv3d)
+  Quantizer: 8^3 continuous -> 8^3 discrete (codebook lookup)
+  Decoder: 8^3 -> 16^3 -> 32^3 (transposed conv3d)
 """
 
 import torch
@@ -38,7 +38,7 @@ class VectorQuantizer(nn.Module):
     Vector Quantization with EMA codebook updates and dead code revival.
     """
 
-    def __init__(self, num_codes=1024, code_dim=256, beta=0.25,
+    def __init__(self, num_codes=2048, code_dim=256, beta=0.25,
                  ema_decay=0.99, revival_threshold=2):
         super().__init__()
         self.num_codes = num_codes
@@ -151,17 +151,17 @@ class VectorQuantizer(nn.Module):
 
 class VQVAE3D(nn.Module):
     """
-    3D VQ-VAE: 32³ voxel grid -> latent³ discrete codes -> 32³ reconstruction.
+    3D VQ-VAE: 32^3 voxel grid -> latent^3 discrete codes -> 32^3 reconstruction.
 
     Input: (B, 32, 32, 32) int64 token grid (0 = air, 1+ = block types)
     Output: (B, vocab_size, 32, 32, 32) logits per voxel
 
-    n_downsample=2: 32->16->8 (8³ latent, 512 tokens) — recommended
-    n_downsample=3: 32->16->8->4 (4³ latent, 64 tokens) — legacy
+    n_downsample=2: 32->16->8 (8^3 latent, 512 tokens) - recommended
+    n_downsample=3: 32->16->8->4 (4^3 latent, 64 tokens) - legacy
     """
 
-    def __init__(self, vocab_size=513, embed_dim=32, hidden_dim=128,
-                 code_dim=256, num_codes=2048, latent_size=4, n_downsample=None):
+    def __init__(self, vocab_size=513, embed_dim=32, hidden_dim=256,
+                 code_dim=256, num_codes=2048, latent_size=8, n_downsample=None):
         super().__init__()
         self.vocab_size = vocab_size
         self.embed_dim = embed_dim
@@ -169,7 +169,11 @@ class VQVAE3D(nn.Module):
         # Infer n_downsample from latent_size if not provided (backwards compat)
         if n_downsample is None:
             import math
+            if latent_size <= 0 or 32 % latent_size != 0:
+                raise ValueError("latent_size must be a positive divisor of 32")
             n_downsample = int(math.log2(32 // latent_size))
+        if n_downsample not in (2, 3):
+            raise ValueError("n_downsample must be 2 (8^3 latent) or 3 (4^3 latent)")
         self.n_downsample = n_downsample
         self.latent_size = 32 // (2 ** n_downsample)
 
@@ -178,7 +182,7 @@ class VQVAE3D(nn.Module):
 
         # Build encoder and decoder dynamically
         if n_downsample == 2:
-            # Encoder: 32³ -> 16³ -> 8³
+            # Encoder: 32^3 -> 16^3 -> 8^3
             self.encoder = nn.Sequential(
                 nn.Conv3d(embed_dim, hidden_dim, 4, stride=2, padding=1),  # 32->16
                 nn.GroupNorm(8, hidden_dim),
@@ -191,7 +195,7 @@ class VQVAE3D(nn.Module):
                 ResBlock3D(code_dim),
                 ResBlock3D(code_dim),
             )
-            # Decoder: 8³ -> 16³ -> 32³
+            # Decoder: 8^3 -> 16^3 -> 32^3
             self.decoder = nn.Sequential(
                 ResBlock3D(code_dim),
                 ResBlock3D(code_dim),
@@ -204,7 +208,7 @@ class VQVAE3D(nn.Module):
             )
             head_ch = hidden_dim // 2
         else:
-            # Encoder: 32³ -> 16³ -> 8³ -> 4³ (legacy)
+            # Encoder: 32^3 -> 16^3 -> 8^3 -> 4^3 (legacy)
             self.encoder = nn.Sequential(
                 nn.Conv3d(embed_dim, hidden_dim // 2, 4, stride=2, padding=1),  # 32->16
                 nn.GroupNorm(8, hidden_dim // 2),
@@ -219,7 +223,7 @@ class VQVAE3D(nn.Module):
                 ResBlock3D(code_dim),
                 ResBlock3D(code_dim),
             )
-            # Decoder: 4³ -> 8³ -> 16³ -> 32³
+            # Decoder: 4^3 -> 8^3 -> 16^3 -> 32^3
             self.decoder = nn.Sequential(
                 ResBlock3D(code_dim),
                 ResBlock3D(code_dim),

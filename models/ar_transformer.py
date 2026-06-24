@@ -2,7 +2,7 @@
 Autoregressive Transformer for generating 8x8x8 VQ-VAE latent codes.
 
 Generates Minecraft buildings by predicting codebook indices in raster order
-(z-first, then y, then x) in the 8³ latent space.
+(z-first, then y, then x) in the 8^3 latent space.
 
 Supports optional tag conditioning via prefix tokens.
 """
@@ -92,7 +92,7 @@ class TransformerBlock(nn.Module):
 
 class ARTransformer3D(nn.Module):
     """
-    Autoregressive Transformer for 8³ VQ-VAE latent code generation.
+    Autoregressive Transformer for 8^3 VQ-VAE latent code generation.
 
     Input: sequence of codebook indices (0..num_codes-1)
     Output: next-token logits over codebook
@@ -109,9 +109,9 @@ class ARTransformer3D(nn.Module):
     STRUCT_FEATURE_NAMES = ['height', 'size', 'footprint', 'symmetry', 'enclosure', 'complexity']
     N_STRUCT_FEATURES = 6
 
-    def __init__(self, num_codes=1024, dim=512, n_layers=8, n_heads=8,
+    def __init__(self, num_codes=2048, dim=512, n_layers=12, n_heads=8,
                  dropout=0.1, max_seq_len=512, num_tags=0, grid_size=8,
-                 struct_cond=False):
+                 struct_cond=True):
         super().__init__()
         self.num_codes = num_codes
         self.dim = dim
@@ -251,7 +251,7 @@ class ARTransformer3D(nn.Module):
     def generate(self, tags=None, struct_features=None, temperature=1.0,
                  top_k=None, top_p=None, device='cuda'):
         """
-        Autoregressively generate 8³ = 512 codebook indices.
+        Autoregressively generate 8^3 = 512 codebook indices.
 
         Args:
             tags: (1, num_tag_slots) or None
@@ -389,7 +389,7 @@ class ARTransformer3D(nn.Module):
             k = torch.cat([prev_k, k], dim=2)
             v = torch.cat([prev_v, v], dim=2)
 
-        # Attention (no causal mask needed — cache only has past tokens)
+        # Attention over cached prefix/past tokens in the archived sampling path.
         out = F.scaled_dot_product_attention(q, k, v, is_causal=False)
         out = out.transpose(1, 2).reshape(B, T, C)
         attn_out = block.attn.proj(out)

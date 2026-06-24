@@ -93,6 +93,7 @@ def train(args):
         max_seq_len=seq_len,
         num_tags=0,
         grid_size=grid_size,
+        struct_cond=False,
     ).to(device)
 
     n_params = sum(p.numel() for p in model.parameters())
