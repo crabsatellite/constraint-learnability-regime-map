@@ -171,9 +171,15 @@ file is required to build the unified vocabulary used by the preprocessing
 script.
 
 Trained checkpoints are not committed to Git because the final VQ-VAE and AR
-Transformer checkpoints are large (~455 MB and ~464 MB). The saved JSON outputs
-needed to reproduce the paper's tables and figures are included in `outputs/`;
-checkpoints can be distributed separately as release assets if needed.
+Transformer checkpoints are large. They are attached to the
+[v1.0.1 GitHub release](https://github.com/crabsatellite/constraint-learnability-regime-map/releases/tag/v1.0.1):
+
+- `vqvae_step100000.pt` (477,353,957 bytes; SHA256 `c9caf9e76a1f1ef8512897cd2aafaa6099d4aa1e7a514cb5203707028e77e019`)
+- `ar_cond_step80000.pt` (486,868,067 bytes; SHA256 `919b0c1190f940c98cdcd0c58e52c86b3c66702ae8d35b3b7926b2fb8aaec1e7`)
+- `SHA256SUMS.txt`
+
+The saved JSON outputs needed to reproduce the paper's tables and figures are
+included in `outputs/`.
 
 ## Requirements
 
@@ -191,6 +197,8 @@ Alex Chengyu Li, 2026
 Accepted at Foundations of Digital Games (FDG '26).
 
 - Paper DOI: [10.1145/3815598.3815669](https://doi.org/10.1145/3815598.3815669)
+- ACM booktitle: Foundations of Digital Games (FDG '26), August 10--13, 2026, Copenhagen, Denmark
+- ACM ISBN: 979-8-4007-2495-4/2026/08
 - Archived repository DOI: [10.5281/zenodo.20821894](https://doi.org/10.5281/zenodo.20821894)
 
 ## Citation
@@ -199,8 +207,9 @@ Accepted at Foundations of Digital Games (FDG '26).
 @inproceedings{li2026learnable,
   author = {Li, Alex Chengyu},
   title = {Which Structural Constraints Are Learnable? A Regime Map for a Minecraft Voxel Generator},
-  booktitle = {Foundations of Digital Games (FDG '26)},
+  booktitle = {Foundations of Digital Games (FDG '26), August 10--13, 2026, Copenhagen, Denmark},
   year = {2026},
+  isbn = {979-8-4007-2495-4/2026/08},
   publisher = {Association for Computing Machinery},
   doi = {10.1145/3815598.3815669}
 }
