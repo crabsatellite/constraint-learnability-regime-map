@@ -89,6 +89,8 @@ python generate_scatter.py
 
 ### Option B: Train from scratch
 
+The training script defaults match the v1.0.1 paper configuration.
+
 ```bash
 pip install -r requirements.txt
 

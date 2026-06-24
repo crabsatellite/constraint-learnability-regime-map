@@ -310,18 +310,18 @@ if __name__ == "__main__":
     parser.add_argument('--data_dir', type=str,
                         default=str(PROJECT_ROOT / "data" / "processed"))
     parser.add_argument('--batch_size', type=int, default=8)
-    parser.add_argument('--steps', type=int, default=150000)
+    parser.add_argument('--steps', type=int, default=100000)
     parser.add_argument('--lr', type=float, default=3e-4)
     parser.add_argument('--weight_decay', type=float, default=0.01)
     parser.add_argument('--warmup_steps', type=int, default=2000)
     parser.add_argument('--embed_dim', type=int, default=32)
-    parser.add_argument('--hidden_dim', type=int, default=64)
-    parser.add_argument('--code_dim', type=int, default=128)
-    parser.add_argument('--num_codes', type=int, default=1024)
+    parser.add_argument('--hidden_dim', type=int, default=256)
+    parser.add_argument('--code_dim', type=int, default=256)
+    parser.add_argument('--num_codes', type=int, default=2048)
     parser.add_argument('--air_weight', type=float, default=0.05)
     parser.add_argument('--save_every', type=int, default=10000)
-    parser.add_argument('--n_downsample', type=int, default=3,
-                        help='Number of downsample stages (2=8³ latent, 3=4³ latent)')
+    parser.add_argument('--n_downsample', type=int, default=2,
+                        help='Number of downsample stages (2=8^3 latent, 3=4^3 latent)')
     parser.add_argument('--resume', type=str, default=None,
                         help='Path to checkpoint to resume from')
     args = parser.parse_args()
