@@ -25,11 +25,15 @@ Composite predictor: effective signal x min(CV, 1) correlates with controllabili
 ```text
 constraint-learnability/
 |-- index.html                             # Interactive paper explainer (bilingual EN/ZH)
+|-- generate_scatter.py                    # Rebuild scatter_predictor from saved results
 |-- figures/
 |   |-- scatter_predictor.png              # Composite score vs controllability
+|   |-- scatter_predictor.pdf              # Paper-ready vector version
 |   |-- scatter_predictor_data.json        # Data used to draw scatter_predictor
 |   |-- cfg_sensitivity.png                # CFG sensitivity visualization
-|   `-- condition_comparison.png           # Condition comparison visualization
+|   |-- cfg_sensitivity.pdf                # Paper-ready vector version
+|   |-- condition_comparison.png           # Condition comparison visualization
+|   `-- condition_comparison.pdf           # Paper-ready vector version
 |-- metadata/
 |   |-- README.md                          # Notes on released metadata
 |   `-- remapped_vocab_513.json            # 513-class voxel vocabulary
@@ -80,6 +84,7 @@ pip install -r requirements.txt
 python scripts/regime_predictor.py
 python scripts/bootstrap_regime_map.py
 python scripts/supplementary_analysis.py
+python generate_scatter.py
 ```
 
 ### Option B: Train from scratch
@@ -107,6 +112,19 @@ python scripts/regime_predictor.py
 python scripts/bootstrap_regime_map.py
 python scripts/supplementary_analysis.py
 ```
+
+## Data Availability
+
+This repository does not redistribute the raw or processed Minecraft structure
+training data. The experiments combine third-party datasets, and some upstream
+sources do not provide clear redistribution licenses for repackaged data. To
+train from scratch, obtain the upstream data separately and place it under
+`data/raw/` before running `scripts/prepare_dataset.py`.
+
+Trained checkpoints are not committed to Git because the final VQ-VAE and AR
+Transformer checkpoints are large (~455 MB and ~464 MB). The saved JSON outputs
+needed to reproduce the paper's tables and figures are included in `outputs/`;
+checkpoints can be distributed separately as release assets if needed.
 
 ## Requirements
 
