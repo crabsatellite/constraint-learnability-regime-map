@@ -1,8 +1,8 @@
 """
 Train 3D VQ-VAE on Minecraft builds.
 
-Phase A of the overnight pipeline:
-  - Trains VQ-VAE to reconstruct 32³ voxel grids
+VQ-VAE training stage:
+  - Trains VQ-VAE to reconstruct 32^3 voxel grids
   - Saves checkpoints every 30 minutes
   - After training, encodes all builds to latent indices
 """

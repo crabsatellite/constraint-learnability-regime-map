@@ -145,7 +145,7 @@ def measure_all_properties(voxels):
         floor_count = 0
 
     # Hollowness: interior air within bounding box / total bounding box volume
-    # Weaker than enclosure — doesn't require topological closure,
+    # Weaker than enclosure: does not require topological closure,
     # just measures how much of the bounding box is air
     if len(xs) > 0 and len(ys) > 0 and len(zs) > 0:
         bbox = filled[xs[0]:xs[-1]+1, ys[0]:ys[-1]+1, zs[0]:zs[-1]+1]
@@ -219,7 +219,7 @@ def measure_all_properties(voxels):
     z_symmetry_iou = float(z_sym_inter / max(z_sym_union, 1))
 
     # Layer consistency: average IoU between consecutive Y layers (SEMI-LOCAL)
-    # Measures vertical structural coherence — "how consistent are the floors?"
+    # Measures vertical structural coherence: "how consistent are the floors?"
     if len(ys) >= 2:
         y_min_l, y_max_l = int(ys[0]), int(ys[-1])
         layer_ious = []
@@ -406,7 +406,7 @@ def main():
         print(f"{cond_name:<25} {rates_str}")
 
     # ============================================================
-    # Part 4: New properties — regime placement
+    # Part 4: New properties and regime placement
     # ============================================================
     print(f"\n{'='*80}")
     print("PROPERTY REGIME MAP")

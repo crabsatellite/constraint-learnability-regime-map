@@ -110,7 +110,7 @@ def s2_per_seed_enclosed_ratio(regime):
     uncond = regime['conditions']['unconditioned']
     encl = regime['conditions']['enclosure=1']
 
-    # 5 seeds × 8 samples = 40 total
+    # 5 seeds x 8 samples = 40 total
     n_per_seed = 8
     seeds_used = len(uncond) // n_per_seed
 

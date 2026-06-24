@@ -35,7 +35,7 @@ def load_models(vqvae_ckpt, ar_ckpt, device='cuda'):
     vqvae.load_state_dict(vqvae_data['model_state_dict'])
     vqvae.eval()
 
-    # Load AR — infer grid_size from positional embedding shape
+    # Load AR and infer grid_size from positional embedding shape.
     ar_data = torch.load(ar_ckpt, map_location=device, weights_only=False)
     ar_args = ar_data['args']
     pe_shape = ar_data['model_state_dict']['pos_embed.pe'].shape[0]

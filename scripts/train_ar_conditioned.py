@@ -1,7 +1,7 @@
 """
 Train AR Transformer with structural constraint conditioning.
 
-Phase B of the v3 pipeline:
+Conditioned AR training stage:
   - Loads pre-encoded latent indices from VQ-VAE
   - Loads structural features extracted from training builds
   - Trains conditioned AR transformer with 10% classifier-free guidance dropout
@@ -189,12 +189,12 @@ def train(args):
     n_params = sum(p.numel() for p in model.parameters())
     print(f"Conditioned AR Transformer parameters: {n_params:,}")
 
-    # Resume from v2 AR checkpoint if available (transfer learning)
+    # Resume from a compatible AR checkpoint if provided.
     start_step = 0
     if args.resume:
         print(f"Resuming from {args.resume}")
         ckpt = torch.load(args.resume, map_location=device, weights_only=False)
-        # Load compatible weights (skip struct_* layers that don't exist in v2)
+        # Load compatible weights; skip structural-conditioning layers if absent.
         model_dict = model.state_dict()
         pretrained_dict = {k: v for k, v in ckpt['model_state_dict'].items()
                           if k in model_dict and v.shape == model_dict[k].shape}
@@ -356,9 +356,9 @@ if __name__ == "__main__":
     parser.add_argument('--resume', type=str, default=None)
     parser.add_argument('--resume_step', type=int, default=0)
     parser.add_argument('--latent_path', type=str, default=None,
-                        help="Override latent codes path (for augmentation experiments)")
+                        help="Override latent codes path")
     parser.add_argument('--features_path', type=str, default=None,
-                        help="Override features path (for augmentation experiments)")
+                        help="Override features path")
     parser.add_argument('--ckpt_dir', type=str, default=None,
                         help="Override checkpoint directory name")
     train(parser.parse_args())

@@ -42,23 +42,16 @@ constraint-learnability/
 |   `-- ar_transformer.py                  # AR Transformer with structural conditioning + CFG
 |-- scripts/
 |   |-- prepare_dataset.py                 # Unified dataset preparation (text2mc, 3D-Craft, rom1504)
-|   |-- dataset.py                         # PyTorch dataset for VQ-VAE training
 |   |-- dataset_dense.py                   # Dense latent code dataset for AR training
 |   |-- train_vqvae.py                     # VQ-VAE training (100K steps)
-|   |-- train_ar.py                        # Unconditional AR training
+|   |-- extract_structural_features.py     # Structural feature extraction for conditioning
 |   |-- train_ar_conditioned.py            # Conditioned AR training (80K steps, CFG)
-|   |-- extract_structural_features.py     # Extract structural conditioning features
 |   |-- test_regime_map.py                 # Full regime map evaluation (5 seeds x 8 samples)
 |   |-- test_cfg_sensitivity.py            # CFG sensitivity sweep (s=0,2,4)
-|   |-- test_conditioning.py               # Per-condition generation tests
-|   |-- test_composability_ood.py          # Composability and OOD experiments
 |   |-- regime_predictor.py                # Predictor statistics and association analysis
 |   |-- bootstrap_regime_map.py            # Bootstrap 95% CI computation
 |   |-- supplementary_analysis.py          # Permutation tests and robustness checks
 |   |-- generate.py                        # Generate builds from trained models
-|   |-- generate_conditioned.py            # Conditioned generation
-|   |-- augment_symmetry.py                # Symmetry data augmentation
-|   |-- run_symmetry_experiment.py         # Symmetry augmentation experiments
 |   |-- visualize_structures.py            # Visualization utilities
 |   `-- legacy_block_map.py                # Minecraft legacy block ID mapping
 |-- outputs/
@@ -97,16 +90,19 @@ python scripts/prepare_dataset.py
 # 2. Train VQ-VAE (100K steps)
 python scripts/train_vqvae.py
 
-# 3. Train conditioned AR transformer (80K steps)
+# 3. Extract structural features for conditioning
+python scripts/extract_structural_features.py
+
+# 4. Train conditioned AR transformer (80K steps)
 python scripts/train_ar_conditioned.py
 
-# 4. Run regime map evaluation
+# 5. Run regime map evaluation
 python scripts/test_regime_map.py
 
-# 5. Run CFG sensitivity analysis
+# 6. Run CFG sensitivity analysis
 python scripts/test_cfg_sensitivity.py
 
-# 6. Fit predictor and supplementary analyses
+# 7. Fit predictor and supplementary analyses
 python scripts/regime_predictor.py
 python scripts/bootstrap_regime_map.py
 python scripts/supplementary_analysis.py

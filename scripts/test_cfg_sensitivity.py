@@ -6,7 +6,7 @@ the classifier-free guidance scale. If higher CFG pushes APPROACHABLE
 properties toward CONTROLLABLE but UNRESPONSIVE remains fixed, this
 confirms the dual bottleneck: frequency vs representation ceiling.
 
-No retraining — only inference-time parameter change.
+No retraining; only an inference-time parameter change.
 """
 
 import sys

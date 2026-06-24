@@ -68,7 +68,7 @@ class DenseVoxelDataset(Dataset):
         data = np.load(path)
         voxels = data["voxels"]  # (X, Y, Z) uint16, variable shape
 
-        # Pad to max_dim³, centered in XZ, grounded in Y
+        # Pad to max_dim^3, centered in XZ, grounded in Y
         sx, sy, sz = voxels.shape
         padded = np.zeros((self.max_dim, self.max_dim, self.max_dim), dtype=np.int64)
         ox = (self.max_dim - sx) // 2

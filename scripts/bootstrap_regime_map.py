@@ -1,7 +1,7 @@
 """
 Bootstrap confidence intervals for regime map controllability scores.
 
-Resamples per-seed results (5 seeds × 8 samples = 40 total per condition)
+Resamples per-seed results (5 seeds x 8 samples = 40 total per condition)
 to compute 95% CIs for each property's controllability percentage.
 Also re-runs the regime predictor with CIs on correlation coefficients.
 
