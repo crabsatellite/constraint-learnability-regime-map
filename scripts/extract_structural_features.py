@@ -224,17 +224,11 @@ def process_build(args):
 
 
 def main():
-    builds_dir = PROJECT_ROOT / "data" / "processed" / "builds"
     manifest_path = PROJECT_ROOT / "data" / "processed" / "manifest.csv"
     output_path = PROJECT_ROOT / "data" / "processed" / "structural_features.json"
 
     # Load manifest
     require_file(manifest_path, "extracting structural features")
-    if not builds_dir.exists():
-        raise SystemExit(
-            "Missing processed builds directory: data/processed/builds\n"
-            "Run scripts/prepare_dataset.py after placing upstream raw data under data/raw/."
-        )
     with open(manifest_path, 'r', encoding='utf-8') as f:
         reader = csv.DictReader(f)
         entries = list(reader)
@@ -247,6 +241,18 @@ def main():
         path = PROJECT_ROOT / "data" / "processed" / m['path']
         name = Path(m['path']).name
         tasks.append((str(path), name))
+
+    missing = [Path(path) for path, _ in tasks if not Path(path).exists()]
+    if missing:
+        examples = "\n".join(
+            f"  - {p.relative_to(PROJECT_ROOT)}" if p.is_relative_to(PROJECT_ROOT) else f"  - {p}"
+            for p in missing[:5]
+        )
+        raise SystemExit(
+            f"Manifest references {len(missing)} missing processed build files.\n"
+            f"{examples}\n"
+            "Run scripts/prepare_dataset.py after placing upstream raw data under data/raw/."
+        )
 
     print(f"Processing {len(tasks)} builds...")
     start = time.time()

@@ -150,22 +150,27 @@ class ConditionedLatentDataset(Dataset):
 
 
 def train(args):
-    # Load VQ-VAE config
+    # Load VQ-VAE config when available. The config is produced by
+    # train_vqvae.py, but released checkpoints may be used without it.
     vqvae_config_path = PROJECT_ROOT / "checkpoints" / "vqvae" / "config.json"
-    require_file(
-        vqvae_config_path,
-        "conditioned AR training",
-        "Run scripts/train_vqvae.py first, or place the VQ-VAE release assets under checkpoints/vqvae/.",
-    )
 
     device = torch.device('cuda' if torch.cuda.is_available() else 'cpu')
     print(f"Device: {device}")
 
-    with open(vqvae_config_path, 'r') as f:
-        vqvae_config = json.load(f)
+    default_latent_path = PROJECT_ROOT / "data" / "processed" / "latent_codes.npz"
+    if vqvae_config_path.exists():
+        with open(vqvae_config_path, 'r') as f:
+            vqvae_config = json.load(f)
+        num_codes = args.num_codes or vqvae_config['num_codes']
+        latent_path = args.latent_path or vqvae_config['latent_path']
+    else:
+        num_codes = args.num_codes or 2048
+        latent_path = args.latent_path or str(default_latent_path)
+        print(
+            "VQ-VAE config not found; using "
+            f"num_codes={num_codes} and latent_path={latent_path}"
+        )
 
-    num_codes = vqvae_config['num_codes']
-    latent_path = args.latent_path or vqvae_config['latent_path']
     features_path = args.features_path or str(PROJECT_ROOT / "data" / "processed" / "structural_features.json")
 
     require_file(
@@ -391,6 +396,8 @@ if __name__ == "__main__":
                         help="Override latent codes path")
     parser.add_argument('--features_path', type=str, default=None,
                         help="Override features path")
+    parser.add_argument('--num_codes', type=int, default=None,
+                        help="Override VQ-VAE codebook size when config.json is unavailable")
     parser.add_argument('--ckpt_dir', type=str, default=None,
                         help="Override checkpoint directory name")
     train(parser.parse_args())

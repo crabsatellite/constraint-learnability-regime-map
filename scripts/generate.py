@@ -59,6 +59,17 @@ def load_models(vqvae_ckpt, ar_ckpt, device='cuda'):
     return vqvae, ar, grid_size
 
 
+def make_unconditioned_struct_features(ar, batch_size, device):
+    """Use the learned any-mask prefix for conditioned checkpoints."""
+    if not getattr(ar, "struct_cond", False):
+        return None
+    return torch.tensor(
+        [ar.struct_uncond_ids] * batch_size,
+        dtype=torch.long,
+        device=device,
+    )
+
+
 def generate_builds(vqvae, ar, grid_size=4, n_samples=50, temperature=0.9,
                     top_k=100, device='cuda'):
     """Generate builds: AR -> latent codes -> VQ-VAE decode -> voxels."""
@@ -72,8 +83,10 @@ def generate_builds(vqvae, ar, grid_size=4, n_samples=50, temperature=0.9,
         print(f"  Generating batch {start//batch_size + 1}...")
 
         # Generate latent codes
+        struct_features = make_unconditioned_struct_features(ar, bs, device)
         codes = ar.generate_batch(
             batch_size=bs,
+            struct_features=struct_features,
             temperature=temperature,
             top_k=top_k,
             device=device,
