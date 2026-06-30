@@ -173,15 +173,9 @@ def measure_all_properties(voxels):
 
     # Surface ratio: fraction of blocks with at least one air neighbor (SEMI-LOCAL)
     # Measures how "thin-walled" vs "solid" the structure is
-    surface_count = 0
     if n_blocks > 0:
         shape = voxels.shape
         padded_filled = np.pad(filled, 1, mode='constant', constant_values=False)
-        for dx, dy, dz in [(-1,0,0),(1,0,0),(0,-1,0),(0,1,0),(0,0,-1),(0,0,1)]:
-            shifted = padded_filled[1+dx:shape[0]+1+dx, 1+dy:shape[1]+1+dy, 1+dz:shape[2]+1+dz]
-            surface_count += (filled & ~shifted).sum()
-        surface_blocks = (surface_count > 0).item() if isinstance(surface_count, np.ndarray) else surface_count
-        # Actually compute it properly: count blocks that have at least 1 air neighbor
         has_air_neighbor = np.zeros_like(filled)
         for dx, dy, dz in [(-1,0,0),(1,0,0),(0,-1,0),(0,1,0),(0,0,-1),(0,0,1)]:
             shifted = padded_filled[1+dx:shape[0]+1+dx, 1+dy:shape[1]+1+dy, 1+dz:shape[2]+1+dz]
@@ -277,9 +271,9 @@ def generate_and_measure_all(ar, vqvae, grid_size, spec, seeds, n_per_seed=8, de
     """Generate across multiple seeds and measure all properties.
 
     cfg_scale: classifier-free guidance weight. Default 2.0 matches
-    inference default. Previous versions used 0.0 (conditioning-only,
-    no guidance amplification), which caused enclosed_ratio to read <1%
-    despite the model responding strongly at cfg>=2.
+    the paper's main regime-map setting. Use cfg_scale=0.0 only for the
+    guidance ablation, where the condition prefix remains present but guidance
+    amplification is disabled.
     """
     all_props = []
     for seed in seeds:

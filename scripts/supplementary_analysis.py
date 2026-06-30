@@ -132,7 +132,7 @@ def s2_per_seed_enclosed_ratio(regime):
         print(f"  {s+1:>6} {u_mean:>12.6f} {e_mean:>12.6f} {abs_diff:>10.6f} {ctrl_pct:>9.1f}%")
 
     print(f"\n  Mean ctrl%: {np.mean(seed_ctrls):.1f}%")
-    print(f"  Std ctrl%:  {np.std(seed_ctrls):.1f}%")
+    print(f"  Std ctrl%:  {np.std(seed_ctrls, ddof=1):.1f}%")
     print(f"  Min/Max:    {np.min(seed_ctrls):.1f}% / {np.max(seed_ctrls):.1f}%")
 
     # Also report absolute values for all properties with extreme %

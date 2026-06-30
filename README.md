@@ -29,8 +29,9 @@ validated general predictor.
 
 ## What This Repository Is
 
-- **Regime-map evidence package**: saved samples, statistics, and scripts for a
-  three-regime constraint-learnability map across 14 structural properties.
+- **Regime-map evidence package**: saved measurements and statistics for a
+  three-regime constraint-learnability map across 14 structural properties,
+  plus scripts that rebuild the analysis from those results.
 - **Diagnostic protocol implementation**: train a fixed generator, condition it
   on structural tokens, generate samples, measure structural properties, and
   compare conditional distributions against unconditioned generation.
@@ -145,6 +146,12 @@ python scripts/bootstrap_regime_map.py
 python scripts/supplementary_analysis.py
 ```
 
+Note on exact checkpoint provenance: the released conditioned AR checkpoint was
+initialized from a compatible unconditioned AR checkpoint before conditioned
+training. The command above trains the same conditioned architecture from
+scratch unless `--resume` is supplied; use the released checkpoint assets to
+reproduce the paper's generated outputs exactly.
+
 ## Data Availability
 
 This repository does not redistribute the raw or processed Minecraft structure
@@ -177,6 +184,8 @@ Transformer checkpoints are large. They are attached to the
 - `vqvae_step100000.pt` (477,353,957 bytes; SHA256 `c9caf9e76a1f1ef8512897cd2aafaa6099d4aa1e7a514cb5203707028e77e019`)
 - `ar_cond_step80000.pt` (486,868,067 bytes; SHA256 `919b0c1190f940c98cdcd0c58e52c86b3c66702ae8d35b3b7926b2fb8aaec1e7`)
 - `SHA256SUMS.txt`
+
+The same assets are also included in the Zenodo all-versions record cited below.
 
 The saved JSON outputs needed to reproduce the paper's tables and figures are
 included in `outputs/`.

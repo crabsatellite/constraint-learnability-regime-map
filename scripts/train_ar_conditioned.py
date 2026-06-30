@@ -129,7 +129,10 @@ class ConditionedLatentDataset(Dataset):
         grid = self.indices[idx].copy()  # (8, 8, 8)
         features = self.features_array[idx].copy()  # (6,)
 
-        # Data augmentation: random rotation in XZ plane
+        # Data augmentation: random rotation/flip in the XZ plane. These
+        # transforms preserve most structural buckets, but the X-axis symmetry
+        # flag is not remapped under 90-degree rotations; symmetry transfer
+        # should therefore be interpreted as partly augmentation-sensitive.
         if self.augment:
             k = np.random.randint(0, 4)
             if k > 0:
@@ -216,7 +219,9 @@ def train(args):
     n_params = sum(p.numel() for p in model.parameters())
     print(f"Conditioned AR Transformer parameters: {n_params:,}")
 
-    # Resume from a compatible AR checkpoint if provided.
+    # Optional transfer initialization from a compatible AR checkpoint. This
+    # loads matching non-structural weights; it only resumes the optimizer step
+    # counter when --resume_step is explicitly provided.
     start_step = 0
     if args.resume:
         print(f"Resuming from {args.resume}")
